@@ -28,7 +28,7 @@ import com.parse.ParseUser;
  */
 public class DashBoardActivity extends Activity {
     Button btnEmployeeManagement, btnStreetDivide, btnProductManagement, btnStoreManagement,
-           btnPromotionMangement, btnUserInformation, btnLogOut, btnViewReport;
+           btnPromotionMangement, btnUserInformation, btnLogOut, btnViewReport, btnAttendance,btnViewFeedBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,8 @@ public class DashBoardActivity extends Activity {
         btnUserInformation = (Button) findViewById(R.id.dashboard_btn_user_information);
         btnLogOut = (Button) findViewById(R.id.dashboard_btn_log_out);
         btnViewReport = (Button) findViewById(R.id.dashboard_btn_view_report);
+        btnAttendance = (Button) findViewById(R.id.dashboard_btn_employee_attendance);
+        btnViewFeedBack = (Button) findViewById(R.id.dashboard_btn_view_feedback);
 
         btnEmployeeManagement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +64,9 @@ public class DashBoardActivity extends Activity {
         btnProductManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigateIntent(ProductManagementActivity.class);
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
+                //NavigateIntent(ProductManagementActivity.class);
             }
         });
 
@@ -76,7 +80,9 @@ public class DashBoardActivity extends Activity {
         btnPromotionMangement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigateIntent(PromotionManagementActivity.class);
+                //NavigateIntent(PromotionManagementActivity.class);
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
@@ -111,7 +117,25 @@ public class DashBoardActivity extends Activity {
         btnViewReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigateIntent(StoreManagementActivity.class);
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
+                //NavigateIntent(StoreManagementActivity.class);
+            }
+        });
+
+        btnAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+
+        btnViewFeedBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
             }
         });
     }

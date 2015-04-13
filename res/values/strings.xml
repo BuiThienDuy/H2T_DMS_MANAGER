@@ -199,4 +199,5 @@
     <string name="addressLine">Địa chỉ đường : </string>
     <string name="hintUnit">Nhập đơn vị tính</string>
     <string name="hintProductName">Nhập tên sản phẩm</string>
+    <string name="currentFeatureNotImplement">Hiện tại chức năng này chưa được thực hiện</string>
 </resources>

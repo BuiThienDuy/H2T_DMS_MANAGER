@@ -347,14 +347,19 @@ public class StoreManagementActivity extends Activity {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                // if store point are selected then remove from list
                 if(selectedMarker.contains(marker)) {
                     if(pointInCircle(marker.getPosition(),circleOptionsList)) {
                         selectedMarker.remove(marker);
                         ShowMarkerSelected();
                     }
                 } else {
+                    // if store point are selected then add to list
                     if(pointInCircle(marker.getPosition(),circleOptionsList)) {
-                        selectedMarker.add(marker);
+                        // check status of store
+                        if(!myMapMarker.get(marker).getStatus().equals(Store.StoreStatus.BAN_HANG.name())) {
+                            selectedMarker.add(marker);
+                        }
                         ShowMarkerSelected();
                     }
                 }
