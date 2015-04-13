@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lvEmptyEmployee"
-            android:theme="?android:textAppearanceMedium"
+            style="?android:textAppearanceMedium"
             android:layout_gravity="center"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"

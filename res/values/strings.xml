@@ -200,4 +200,9 @@
     <string name="hintUnit">Nhập đơn vị tính</string>
     <string name="hintProductName">Nhập tên sản phẩm</string>
     <string name="currentFeatureNotImplement">Hiện tại chức năng này chưa được thực hiện</string>
+    <string name="fromDate">Từ ngày:</string>
+    <string name="fromDateHint">Từ ngày...</string>
+    <string name="toDate">Đến ngày:</string>
+    <string name="toDateHint">Đến ngày...</string>
+    <string name="employeeList">Danh sách nhân viên</string>
 </resources>

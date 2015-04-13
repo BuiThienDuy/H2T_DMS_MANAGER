@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.H2TFC.H2T_DMS_MANAGER.R;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management.AttendanceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.employee_management.EmployeeManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management.PromotionManagementActivity;
@@ -80,7 +81,7 @@ public class DashBoardActivity extends Activity {
         btnPromotionMangement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //NavigateIntent(PromotionManagementActivity.class);
+                NavigateIntent(PromotionManagementActivity.class);
                 Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
                         .show();
             }
@@ -126,8 +127,7 @@ public class DashBoardActivity extends Activity {
         btnAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
+                NavigateIntent(AttendanceManagementActivity.class);
             }
         });
 
