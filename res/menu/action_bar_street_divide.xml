@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_bar_street_divide_xoa"
+            android:title="@string/delete"
+            android:icon="@android:drawable/ic_delete"
+            android:showAsAction="withText"/>
+</menu>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingBottom="10dp"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
+              android:gravity="center"
+              android:layout_gravity="center"
+              >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                <com.larswerkman.holocolorpicker.ColorPicker
+                        android:id="@+id/dialog_colorpicker_picker_fill"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="start"
+                        android:layout_height="wrap_content"/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+                        <Button
+                                android:id="@+id/dialog_colorpicker_red"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="#FF0000"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Lime"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#00FF00"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Blue"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#0000FF"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Yellow"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#FFFF00"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Cyan"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="#00FFFF"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Magenta"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#FF00FF"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Maroon"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#9F0000"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Olive"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#9F9F00"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Green"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="#009F00"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Purple"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#9F009F"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Teal"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#009F9F"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+
+                        <Button
+                                android:id="@+id/dialog_colorpicker_Navy"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:background="#00009F"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginStart="25dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                    android:id="@+id/activity_street_divide_tvPreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preview"
+                    android:layout_marginTop="20dp"
+                    style="?android:textAppearanceLarge"
+                    />
+            <RelativeLayout
+                    android:id="@+id/layouttbbb"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+
+                    >
+                <Button
+                        android:id="@+id/dialog_colorpicker_btn_strokecolor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FF0000"/>
+                <Button
+                        android:id="@+id/dialog_colorpicker_btn_fillcolor"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="#00FF00"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/dialog_colorpicker_btnxong"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        bootstrap:bb_type="success"
+                        bootstrap:bb_roundedCorners="true"
+                        bootstrap:bb_icon_right="fa-check-circle"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="@string/done"/>
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/dialog_colorpicker_btnhuy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        bootstrap:bb_type="danger"
+
+                        bootstrap:bb_roundedCorners="true"
+                        bootstrap:bb_icon_right="fa-sign-out"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/cancel"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

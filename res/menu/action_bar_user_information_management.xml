@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/action_bar_user_information_management_change_password"
+            android:title="@string/changePassword"
+            android:icon="@drawable/ic_action_settings"
+            android:showAsAction="ifRoom|withText"/>
+    <item
+            android:id="@+id/action_bar_user_information_management_log_out"
+            android:title="@string/logOut"
+            android:showAsAction="never"/>
+</menu>

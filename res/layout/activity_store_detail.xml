@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+        >
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+        <!-- Tên cửa hàng -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_ten"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/storeName"
+                    android:id="@+id/activity_store_detail_tv_ten"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+        <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+        <LinearLayout
+                android:focusable="true" android:focusableInTouchMode="true"
+                android:layout_width="0px" android:layout_height="0px"/>
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_ten"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_ten"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_ten"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintStoreName"
+                    bootstrap:be_roundedCorners="true"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    bootstrap:be_state="default"/>
+        </LinearLayout>
+
+        <!-- Tên chủ cửa hàng -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_ten_chu_cua_hang"
+                android:layout_below="@+id/activity_store_detail_layout_edit_ten"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/storeOwner"
+                    android:id="@+id/activity_store_detail_tv_ten_chu_cua_hang"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_ten_chu_cua_hang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_ten_chu_cua_hang"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_ten_chu_cua_hang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintStoreOwner"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"/>
+        </LinearLayout>
+
+        <!-- Địa chỉ-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_dia_chi"
+                android:layout_below="@+id/activity_store_detail_layout_edit_ten_chu_cua_hang"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/address"
+                    android:id="@+id/activity_store_detail_tv_dia_chi"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_dia_chi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_dia_chi"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_dia_chi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintAddress"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"/>
+        </LinearLayout>
+
+        <!-- Số điện thoại -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_sdt"
+                android:layout_below="@+id/activity_store_detail_layout_edit_dia_chi"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/phoneNumber"
+                    android:id="@+id/activity_store_detail_tv_sdt"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_sdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_sdt"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_sdt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintPhoneNumber"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:inputType="number"/>
+        </LinearLayout>
+
+        <!-- Loại cửa hàng -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_loai_cua_hang"
+                android:layout_below="@+id/activity_store_detail_layout_edit_sdt"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/storeType"
+                    android:id="@+id/activity_store_detail_tv_loai_cua_hang"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_loai_cua_hang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_loai_cua_hang"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <Spinner
+                    android:id="@+id/activity_store_detail_spn_loai_cua_hang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
+                    />
+        </LinearLayout>
+
+        <!-- Chụp hình trưng bày quầy kệ -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_trung_bay"
+                android:layout_below="@+id/activity_store_detail_layout_edit_loai_cua_hang"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/trungBay"
+                    android:id="@+id/activity_store_detail_tv_trung_bay"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_trung_bay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_trung_bay"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_store_detail_btn_trung_bay_quay_ke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/viewAndCaptureImage"
+                    bootstrap:bb_type="primary"
+                    bootstrap:bb_roundedCorners="true"/>
+            <TextView
+                    android:id="@+id/activity_store_detail_tv_total_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/totalImageCapture"/>
+        </LinearLayout>
+
+        <!-- Doanh thu -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_doanh_thu"
+                android:layout_below="@+id/activity_store_detail_layout_edit_trung_bay"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/income"
+                    android:id="@+id/activity_store_detail_tv_doanh_thu"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_doanh_thu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_doanh_thu"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_doanh_thu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintIncome"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:inputType="number"/>
+        </LinearLayout>
+
+        <!-- Mặt hàng đối thủ cạnh tranh -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_mat_hang_doi_thu_canh_tranh"
+                android:layout_below="@+id/activity_store_detail_layout_edit_doanh_thu"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/competitiveProduct"
+                    android:id="@+id/activity_store_detail_tv_mat_hang_doi_thu_canh_tranh"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_mat_hang_doi_thu_canh_tranh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/activity_store_detail_layout_title_mat_hang_doi_thu_canh_tranh"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_mat_hang_doi_thu_canh_tranh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hintCompetitiveProduct"
+                    android:maxLines="3"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"/>
+        </LinearLayout>
+
+        <!-- Button đồng ý, hủy bỏ -->
+        <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/activity_store_detail_layout_edit_mat_hang_doi_thu_canh_tranh">
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_store_detail_btn_cap_nhat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/update"
+                    bootstrap:bb_type="success"
+                    bootstrap:bb_roundedCorners="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_store_detail_btn_quay_ve"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/previous"
+                    bootstrap:bb_type="danger"
+                    bootstrap:bb_roundedCorners="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"/>
+        </LinearLayout>-->
+
+
+
+    </RelativeLayout>
+</ScrollView>

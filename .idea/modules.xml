@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:/Android-Bootstrap-master/AndroidBootstrap/AndroidBootstrap.iml" filepath="C:/Android-Bootstrap-master/AndroidBootstrap/AndroidBootstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/H2T_DMS_MANAGER.iml" filepath="$PROJECT_DIR$/H2T_DMS_MANAGER.iml" />
+      <module fileurl="file://E:/[1]Capstone/HoloColorPicker-master/HoloColorPicker-master.iml" filepath="E:/[1]Capstone/HoloColorPicker-master/HoloColorPicker-master.iml" />
+      <module fileurl="file://E:/[1]Capstone/android-sliding-layer-lib-master/Library/SlidingPanel.iml" filepath="E:/[1]Capstone/android-sliding-layer-lib-master/Library/SlidingPanel.iml" />
+      <module fileurl="file://D:/adt-bundle-windows-x86_64-20140702/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="D:/adt-bundle-windows-x86_64-20140702/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
+    </modules>
+  </component>
+</project>

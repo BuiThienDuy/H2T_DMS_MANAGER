@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/activity_employee_management_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#4990CC"
+            >
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:paddingRight="20dp"
+                android:paddingEnd="20dp"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_employee_management_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/searchEmployeeName"
+                    bootstrap:bb_roundedCorners="true"
+                    bootstrap:bb_type="default"
+                    android:drawablePadding="10dp"
+                    android:layout_margin="5dp"
+                    android:singleLine="true"
+                    android:drawableStart="@drawable/ic_action_search"
+                    android:drawableLeft="@drawable/ic_action_search"
+                    />
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:text="@string/tvEmployeeManagementViewDetail"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_employee_management_body_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="true"
+            >
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                >
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/activity_employee_management_lvemployee"
+                    android:choiceMode="singleChoice"/>
+            <TextView
+                    android:id="@+id/activity_employee_management_tv_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lvEmployeeManagementEmpty"
+                    android:theme="?android:textAppearanceMedium"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"/>
+            <ProgressBar
+                    android:id="@+id/activity_employee_management_progressbar"
+                    style="@android:style/Widget.Holo.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    />
+        </RelativeLayout>
+
+
+
+
+        <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                >
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="invisible"
+                    android:id="@+id/activity_employee_management_employee_detail">
+
+                <com.parse.ParseImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_contact_empty"
+                        android:id="@+id/activity_employee_management_iv_photo"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/tvContactInfo"
+                        android:id="@+id/activity_employee_management_tv_thongtinlienlac"/>
+                <!-- Họ và tên -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_employee_new_layout_title_hovaten"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvLastNameFirstName"
+                            android:id="@+id/activity_employee_management_tv_hovaten"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_management_hovaten"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                    <com.beardedhen.androidbootstrap.BootstrapEditText
+                            android:id="@+id/activity_employee_management_et_hovaten"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/hintLastNameFirstName"
+                            bootstrap:bb_roundedCorners="true"
+                            bootstrap:bb_type="default"
+                            android:enabled="false"
+                            />
+
+                </LinearLayout>
+
+                <!-- Số điện thoại -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_employee_management_layout_title_sodienthoai"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvPhoneNumber"
+                            android:id="@+id/activity_employee_management_tv_sodienthoai"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_new_layout_edit_sodienthoai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                    <com.beardedhen.androidbootstrap.BootstrapEditText
+                            android:id="@+id/activity_employee_management_et_sodienthoai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tvPhoneNumber"
+
+                            bootstrap:bb_roundedCorners="true"
+                            bootstrap:bb_type="default"
+                            android:enabled="false"
+                            />
+                </LinearLayout>
+
+                <!-- Địa chỉ -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/activity_employee_management_layout_title_diachi"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvAddress"
+                            android:id="@+id/activity_employee_management_tv_diachi"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_management_layout_edit_diachi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        >
+
+                    <com.beardedhen.androidbootstrap.BootstrapEditText
+                            android:id="@+id/activity_employee_management_et_diachi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tvAddress"
+                            bootstrap:be_roundedCorners="true"
+                            bootstrap:be_state="default"
+                            android:enabled="false"
+                            />
+                </LinearLayout>
+
+                <!-- Giới tính -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_employee_management_layout_title_gioitinh"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvGender"
+                            android:id="@+id/activity_employee_management_tv_gioitinh"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_management_edit_gioitinh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                    <RadioGroup
+                            android:id="@+id/activity_employee_management_rg_gioitinh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tvGender"
+                            android:orientation="horizontal"
+                            android:checkedButton="@+id/activity_employee_management_rb_nam"
+                            android:clickable="false"
+                            >
+
+                        <RadioButton
+                                android:id="@+id/activity_employee_management_rb_nam"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:text="@string/male"/>
+
+                        <RadioButton
+                                android:id="@+id/activity_employee_management_rb_nu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:text="@string/female"/>
+                    </RadioGroup>
+                </LinearLayout>
+
+                <!-- Ngày sinh -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_employee_new_layout_title_ngaysinh"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvBirthDay"
+                            android:id="@+id/activity_employee_new_tv_ngaysinh"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_new_layout_edit_ngaysinh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                    <TextView
+                            android:id="@+id/activity_employee_management_et_ngaysinh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF"
+                            android:text="@string/tvDate"
+                            android:textColor="#454545"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:clickable="false"
+                            />
+                </LinearLayout>
+
+                <!-- CMND -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/activity_employee_new_layout_title_cmnd"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/tvIdentifyCardNumber"
+                            android:id="@+id/activity_employee_new_tv_cmnd"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#CCCCCC"
+                            android:layout_gravity="bottom"
+                            />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/activity_employee_management_layout_edit_cmnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        >
+
+                    <com.beardedhen.androidbootstrap.BootstrapEditText
+                            android:id="@+id/activity_employee_management_et_cmnd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tvIdentifyCardNumber"
+                            bootstrap:be_roundedCorners="true"
+                            bootstrap:be_state="default"
+                            android:enabled="false"
+                            />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

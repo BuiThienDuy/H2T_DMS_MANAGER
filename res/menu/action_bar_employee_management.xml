@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/actionbar_employee_add"
+            android:title="@string/addNewEmployee"
+            android:icon="@drawable/ic_action_new"
+            android:text="@string/addNewEmployee"
+            android:showAsAction="ifRoom|withText"/>
+
+    <item
+            android:id="@+id/actionbar_employee_lock_view"
+            android:icon="@drawable/ic_action_search"
+            android:title="@string/viewLockedEmployee"
+            android:showAsAction="never"
+            />
+
+    <item
+            android:id="@+id/actionbar_employee_lock"
+            android:icon="@drawable/ic_action_secure"
+            android:title="@string/lockEmployee"
+            android:showAsAction="never|withText"
+            />
+    <item
+            android:id="@+id/actionbar_employee_logout"
+            android:title="@string/logOut"
+            android:showAsAction="never|withText"
+            />
+</menu>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/activity_street_divide_relative_layout"
+        >
+
+    <fragment
+            android:id="@+id/activity_street_divide_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapFragment"/>
+
+    <ImageView
+            android:id="@+id/activity_street_iv_crosshair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_crosshair"
+            android:layout_gravity="center_vertical"
+            android:layout_centerInParent="true"
+            android:clickable="true"/>
+
+    <com.mobisys.android.autocompletetextviewcomponent.ClearableAutoTextView
+            android:id="@+id/activity_street_divide_tv_search"
+            android:drawableStart="@drawable/ic_action_search"
+            android:drawableLeft="@drawable/ic_action_search"
+            android:drawablePadding="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="68dp"
+            android:layout_marginEnd="68dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:hint="@string/search"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:background="#FFFFFF"
+            custom:google_places_api_key="AIzaSyAa68eeKmP-tWJfX-OuPc-GI9yJfwRO1Ew"
+            />
+
+
+    <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            >
+
+        <Button
+                android:id="@+id/activity_street_btn_strokecolor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FF0000"/>
+
+        <Button
+                android:id="@+id/activity_street_btn_fillcolor"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#7F00FF00"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:paddingRight="70dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="70dp"
+            android:paddingStart="0dp">
+
+        <ImageButton
+                android:id="@+id/activity_street_btn_undo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#9FFFFFFF"
+                android:src="@drawable/ic_action_undo"
+                android:layout_gravity="center"
+                />
+
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#CCCCCC"/>
+
+        <ImageButton
+                android:id="@+id/activity_street_btn_redo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_redo"
+                android:layout_gravity="center"
+                android:background="#9FFFFFFF"
+                android:contentDescription="@string/redo"
+                />
+
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#CCCCCC"/>
+
+        <ImageButton
+                android:id="@+id/activity_street_btn_discard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_discard"
+                android:layout_gravity="center"
+                android:background="#9FFFFFFF"
+                android:contentDescription="@string/delete"
+                />
+
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#CCCCCC"/>
+
+        <ImageButton
+                android:id="@+id/activity_street_divide_btn_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_search"
+                android:layout_gravity="center"
+                android:background="#9FFFFFFF"
+                android:contentDescription="@string/delete"/>
+
+        <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#CCCCCC"/>
+
+        <Button
+                android:id="@+id/activity_street_divide_btn_tao"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/btnCreate"
+                android:layout_weight="1"
+                android:background="#9FFFFFFF"/>
+    </LinearLayout>
+</RelativeLayout>

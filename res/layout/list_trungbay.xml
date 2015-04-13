@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="120dp">
+    <com.parse.ParseImageView
+            android:id="@+id/item_list_trungbay_iv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Hình ảnh trưng bày"
+            android:scaleType="centerCrop" />
+
+
+    <ProgressBar
+            android:id="@+id/item_list_trungbay_progressbar_wait"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:max="100"
+            android:layout_gravity="bottom"
+            style="@android:style/Widget.ProgressBar.Horizontal"/>
+</FrameLayout>

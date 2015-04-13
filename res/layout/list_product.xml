@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/list_product_swipe_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp">
+        <!-- Bottom View Start-->
+        <LinearLayout
+                android:background="#66ddff00"
+                android:id="@+id/list_product_bottom_wrapper"
+                android:layout_width="160dp"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <ImageButton
+                        android:id="@+id/list_product_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_action_edit"
+                        android:background="#66ddff00"
+                        />
+                <ImageButton
+                        android:id="@+id/list_product_delete"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_action_discard"
+                        android:background="#FF3E23"/>
+        </LinearLayout>
+        <!-- Bottom View End-->
+
+        <!-- Surface View Start -->
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rowselector"
+                android:padding="3dp"
+                android:divider="@drawable/list_divide"
+                >
+
+                <com.parse.ParseImageView
+                        android:id="@+id/list_product_iv_product"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/list_product_tv_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/list_product_ex_name"
+                                style="?android:textAppearanceLarge"
+                                android:textColor="#27657E"
+                                android:textStyle="bold"/>
+
+                        <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical">
+
+                                <TextView
+                                        android:id="@+id/list_product_tv_unit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:layout_toLeftOf="@+id/list_product_iv_next"
+                                        android:layout_toStartOf="@+id/list_product_iv_next"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_alignParentStart="true"
+                                        android:text="@string/list_product_ex_unit"/>
+
+                                <ImageView
+                                        android:id="@+id/list_product_iv_next"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/ic_action_next_item"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"/>
+                        </RelativeLayout>
+
+                        <TextView
+                                android:id="@+id/list_product_tv_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/list_product_ex_price"/>
+                </LinearLayout>
+        </LinearLayout>
+        <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>
+

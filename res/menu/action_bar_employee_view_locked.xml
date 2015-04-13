@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_bar_employee_view_locked_lock_unlock"
+          android:title="@string/lock_Unlocked"
+          android:icon="@drawable/ic_action_not_secure"
+            android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/action_bar_employee_view_locked_log_out"
+          android:title="@string/logOut"
+          android:showAsAction="never"/>
+</menu>

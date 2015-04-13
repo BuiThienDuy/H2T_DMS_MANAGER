@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="android-support-v44">
+    <CLASSES>
+      <root url="jar://C:/Android-Bootstrap-master/AndroidBootstrap/libs/android-support-v4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

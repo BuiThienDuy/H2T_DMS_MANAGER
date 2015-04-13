@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        android:padding="20dp">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/tvContactInformation"
+            android:layout_marginTop="10dp"
+            android:id="@+id/activity_user_information_management_tv_thongtinlienlac"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+    <!-- Họ và tên -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_user_information_management_layout_title_hovaten"
+            android:layout_below="@+id/activity_user_information_management_tv_thongtinlienlac"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvLastNameFirstName"
+                android:id="@+id/activity_user_information_management_tv_hovaten"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_edit_hovaten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/activity_user_information_management_layout_title_hovaten"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_user_information_management_et_hovaten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hintLastNameFirstName"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_type="default"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                />
+
+        <com.parse.ParseImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#CCCCCC"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:id="@+id/activity_user_information_management_iv_photome"/>
+    </LinearLayout>
+
+    <!-- Số điện thoại -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_user_information_management_layout_title_sodienthoai"
+            android:layout_below="@+id/activity_user_information_management_layout_edit_hovaten"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvPhoneNumber"
+                android:id="@+id/activity_user_information_management_tv_sodienthoai"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_edit_sodienthoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/activity_user_information_management_layout_title_sodienthoai"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_user_information_management_et_sodienthoai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tvPhoneNumber"
+                android:inputType="phone"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_type="default"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                />
+    </LinearLayout>
+
+    <!-- Địa chỉ -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/activity_user_information_management_layout_title_diachi"
+            android:layout_below="@+id/activity_user_information_management_layout_edit_sodienthoai"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvAddress"
+                android:id="@+id/activity_user_information_management_tv_diachi"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_edit_diachi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_user_information_management_layout_title_diachi"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            >
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_user_information_management_et_diachi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tvAddress"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_type="default"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                />
+    </LinearLayout>
+
+    <!-- Giới tính -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_user_information_management_layout_title_gioitinh"
+            android:layout_below="@+id/activity_user_information_management_layout_edit_diachi"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvAddress"
+                android:id="@+id/activity_user_information_management_tv_gioitinh"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+
+
+    <RadioGroup
+            android:id="@+id/activity_user_information_management_rg_gioitinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tvGender"
+            android:orientation="horizontal"
+            android:layout_below="@+id/activity_user_information_management_layout_title_gioitinh"
+            android:checkedButton="@+id/activity_user_information_management_rb_nam"
+            >
+
+        <RadioButton
+                android:id="@+id/activity_user_information_management_rb_nam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"/>
+
+        <RadioButton
+                android:id="@+id/activity_user_information_management_rb_nu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"/>
+    </RadioGroup>
+
+
+    <!-- Ngày sinh -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_user_information_management_layout_title_ngaysinh"
+            android:layout_below="@+id/activity_user_information_management_rg_gioitinh"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvBirthDay"
+                android:id="@+id/activity_user_information_management_tv_ngaysinh"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_edit_ngaysinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_user_information_management_layout_title_ngaysinh"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+        <TextView
+                android:id="@+id/activity_user_information_management_et_ngaysinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:text="@string/tvDate"
+                android:textColor="#454545"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                />
+    </LinearLayout>
+
+    <!-- CMND -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/activity_user_information_management_layout_title_cmnd"
+            android:layout_below="@+id/activity_user_information_management_layout_edit_ngaysinh"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/tvIdentifyCardNumber"
+                android:id="@+id/activity_user_information_management_tv_cmnd"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#CCCCCC"
+                android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_edit_cmnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_user_information_management_layout_title_cmnd"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            >
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_user_information_management_et_cmnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tvIdentifyCardNumber"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_type="default"
+                android:inputType="number"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                />
+    </LinearLayout>
+
+    <!-- Button -->
+    <LinearLayout
+            android:id="@+id/activity_user_information_management_layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/activity_user_information_management_layout_edit_cmnd">
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/activity_user_information_management_btn_done"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                bootstrap:bb_type="success"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_icon_left="fa-plus-square"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/done"/>
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/activity_user_information_management_btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                bootstrap:bb_type="danger"
+                bootstrap:bb_roundedCorners="true"
+                bootstrap:bb_icon_left="fa-sign-out"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/cancel"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context=".LoginActivity"
+        >
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/activity_employee_new_iv_photo"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/H2TDMS"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:background="#4990CC"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/login_et_tendangnhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tvUsername"
+            bootstrap:be_roundedCorners="true"
+            bootstrap:be_state="default"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="@dimen/com_parse_ui_vertical_spacing"
+            android:layout_below="@+id/activity_employee_new_iv_photo"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_username"
+            android:drawableStart="@drawable/ic_username"
+            />
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/login_et_matkhau"
+            android:layout_below="@+id/login_et_tendangnhap"
+            bootstrap:be_roundedCorners="true"
+            bootstrap:be_state="default"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="@dimen/com_parse_ui_vertical_spacing"
+            android:hint="@string/tvPassword"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_password"
+            android:drawableStart="@drawable/ic_password"
+            android:singleLine="true"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tvSignIn"
+            android:id="@+id/login_btn_dangnhap"
+            android:layout_below="@+id/login_et_matkhau"
+            bootstrap:bb_type="primary"
+            bootstrap:bb_roundedCorners="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:textSize="20sp"
+            />
+
+</RelativeLayout>
+
