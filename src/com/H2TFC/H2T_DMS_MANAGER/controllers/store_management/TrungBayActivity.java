@@ -21,8 +21,12 @@ import com.parse.*;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-/**
- * Created by c4sau on 28/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class TrungBayActivity extends Activity {
     GridView gv_StoreImage;

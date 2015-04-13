@@ -7,8 +7,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by c4sau on 30/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class CircleView extends View {
 

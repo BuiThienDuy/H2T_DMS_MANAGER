@@ -17,8 +17,12 @@ import java.util.List;
 import java.util.Locale;
 
 
-/**
- * Created by c4sau on 06/04/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class GPSTracker extends Service implements LocationListener
 {

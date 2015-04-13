@@ -33,8 +33,12 @@ import java.util.Locale;
 
 import static com.H2TFC.H2T_DMS_MANAGER.utils.ImageUtils.getResizedBitmap;
 
-/**
- * Created by User on 23/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class UserInformationManagementActivity extends Activity {
     BootstrapEditText etHoVaTen,etDiaChi,etCMND,etSoDienThoai;

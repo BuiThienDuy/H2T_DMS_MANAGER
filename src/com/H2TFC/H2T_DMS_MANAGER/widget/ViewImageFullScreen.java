@@ -8,8 +8,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 
-/**
- * Created by User on 02/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class ViewImageFullScreen extends Activity {
     String imageId;

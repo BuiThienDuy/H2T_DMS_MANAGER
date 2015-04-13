@@ -7,8 +7,12 @@ import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.parse.*;
 
-/**
- * Created by c4sau on 26/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class EmployeeViewLockedListAdapter extends ParseQueryAdapter<ParseUser> {
     public EmployeeViewLockedListAdapter(Context context, ParseQueryAdapter.QueryFactory<ParseUser> queryFactory) {

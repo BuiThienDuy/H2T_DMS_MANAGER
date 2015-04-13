@@ -20,8 +20,12 @@ import com.parse.*;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by c4sau on 25/03/2015.
+/*
+ * Copyright (C) 2015 H2TFC Team, LLC
+ * thanhduongpham4293@gmail.com
+ * nhatnang93@gmail.com
+ * buithienduy93@gmail.com
+ * All rights reserved
  */
 public class EmployeeViewLockedActivity extends Activity {
     EmployeeViewLockedListAdapter employeeListViewLockedAdapter;
