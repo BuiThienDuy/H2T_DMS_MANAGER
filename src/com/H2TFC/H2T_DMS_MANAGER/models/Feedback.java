@@ -13,9 +13,9 @@ import com.parse.ParseQuery;
  */
 @ParseClassName("Feedback")
 public class Feedback extends ParseObject {
-    public static final String MOI_TAO = "Mới tạo";
-    public static final String DANG_XEM_XET = "Đang xem xét";
-    public static final String DA_XU_LY = "Đã xử lý";
+    public static final String MOI_TAO = "MOI_TAO";
+    public static final String DANG_XEM_XET = "DANG_XEM_XET";
+    public static final String DA_XU_LY = "DA_XU_LY";
 
     public void setTitle(String title) {
         put("title",title);

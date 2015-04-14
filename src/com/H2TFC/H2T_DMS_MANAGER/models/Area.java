@@ -17,36 +17,31 @@ import java.util.List;
  */
 @ParseClassName("Area")
 public class Area extends ParseObject {
-    static int Red = Color.argb(128, 255, 0, 0);
-    static int Lime = Color.argb(128, 0, 255, 0);
-    static int Blue = Color.argb(128, 0, 0, 255);
-    static int Yellow = Color.argb(128, 255, 255, 0);
-    static int Cyan = Color.argb(128, 0, 255, 255);
-    static int Magenta = Color.argb(128, 255, 0, 255);
-    static int Maroon = Color.argb(128, 128, 0, 0);
-    static int Olive = Color.argb(128, 128, 128, 0);
-    static int Green = Color.argb(128, 0, 128, 0);
-    static int Purple = Color.argb(128, 128, 0, 128);
-    static int Teal = Color.argb(128, 0, 128, 128);
-    static int Navy = Color.argb(128, 0, 0, 128);
-
-
-    public static int[] ColorSet = {Red, Lime, Blue, Yellow,
-            Cyan, Magenta, Maroon, Olive,
-            Green, Purple, Teal, Navy};
+    static int Red = Color.argb(64, 255, 0, 0);
+    static int Lime = Color.argb(64, 0, 255, 0);
+    static int Blue = Color.argb(64, 0, 0, 255);
+    static int Yellow = Color.argb(64, 255, 255, 0);
+    static int Cyan = Color.argb(64, 0, 255, 255);
+    static int Magenta = Color.argb(64, 255, 0, 255);
+    static int Maroon = Color.argb(64, 128, 0, 0);
+    static int Olive = Color.argb(64, 128, 128, 0);
+    static int Green = Color.argb(64, 0, 128, 0);
+    static int Purple = Color.argb(64, 128, 0, 128);
+    static int Teal = Color.argb(64, 0, 128, 128);
+    static int Navy = Color.argb(64, 0, 0, 128);
 
     public static int getStatusColor(AreaStatus status) {
         switch (status) {
             case MOI_TAO: {
-                return Color.RED;
+                return Red;
             }
 
             case DANG_KHAO_SAT: {
-                return Color.YELLOW;
+                return Yellow;
             }
 
             case HOAN_THANH: {
-                return Color.GREEN;
+                return Green;
             }
         }
         return 0;

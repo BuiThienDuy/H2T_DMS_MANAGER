@@ -34,6 +34,7 @@ public class MyApplication extends Application {
         ParseObject.registerSubclass(Invoice.class);
         ParseObject.registerSubclass(Invoice_Detail.class);
         ParseObject.registerSubclass(Promotion.class);
+        ParseObject.registerSubclass(Attendance.class);
 
         // Parse local data store
         Parse.enableLocalDatastore(this);

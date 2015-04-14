@@ -15,9 +15,9 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Invoice")
 public class Invoice extends ParseObject {
-    public static final String MOI_TAO = "Mới tạo";
-    public static final String DANG_XU_LY = "Đang xử lý";
-    public static final String DUYET = "Duyệt";
+    public static final String MOI_TAO = "MOI_TAO";
+    public static final String DANG_XU_LY = "DANG_XU_LY";
+    public static final String DA_THANH_TOAN = "DA_THANH_TOAN";
 
     public static int getStatusColor(String status) {
         if (status.equals(MOI_TAO)) {
@@ -26,7 +26,7 @@ public class Invoice extends ParseObject {
         if (status.equals(DANG_XU_LY)) {
             return Color.YELLOW;
         }
-        if (status.equals(DUYET)) {
+        if (status.equals(DA_THANH_TOAN)) {
             return Color.GREEN;
         }
         return 0;

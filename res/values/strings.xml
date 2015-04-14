@@ -45,7 +45,7 @@
     <string name="transparentLevel">Độ đậm nhạt</string>
     <string name="chooseStrokeColor">Chọn màu viền</string>
     <string name="preview">Xem trước</string>
-    <string name="notFoundError">#Không tim thấy#</string>
+    <string name="notFoundError">#Không tìm thấy#</string>
     <string name="list_product_ex_price">Price</string>
     <string name="list_product_ex_unit">Unit</string>
     <string name="list_product_ex_name">Name</string>
@@ -205,4 +205,6 @@
     <string name="toDate">Đến ngày:</string>
     <string name="toDateHint">Đến ngày...</string>
     <string name="employeeList">Danh sách nhân viên</string>
+    <string name="amountOfImageCapture">"Số ảnh đã chụp: "</string>
+    <string name="amountOfVisitedStore">"Số cửa hàng đã viếng thăm: "</string>
 </resources>

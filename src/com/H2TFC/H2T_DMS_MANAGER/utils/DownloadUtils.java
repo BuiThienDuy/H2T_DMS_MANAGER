@@ -25,6 +25,8 @@ public class DownloadUtils {
     public static final String PIN_STORE_TYPE = "PIN_STORE_TYPE_DOWNLOAD";
     public static final String PIN_PRODUCT = "PIN_PRODUCT_DOWNLOAD";
     public static final String PIN_INVOICE = "PIN_INVOICE_DOWNLOAD";
+    public static final String PIN_ATTENDANCE = "PIN_ATTENDANCE_DOWNLOAD";
+    public static final String PIN_FEEDBACK = "PIN_FEEDBACK_DOWNLOAD";
 
     public static void DownloadParseArea(final Context context, final SaveCallback saveCallback) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -126,6 +128,33 @@ public class DownloadUtils {
                     ParseObject.pinAllInBackground(PIN_INVOICE, list, saveCallback);
                 }
                 }
+        });
+    }
+
+
+    public static void DownloadParseAttendance(final SaveCallback saveCallback) {
+        ParseQuery<Attendance> query = Attendance.getQuery();
+        query.findInBackground(new FindCallback<Attendance>() {
+            @Override
+            public void done(List<Attendance> list, ParseException e) {
+                if(e==null) {
+                    ParseObject.unpinAllInBackground(PIN_ATTENDANCE);
+                    ParseObject.pinAllInBackground(PIN_ATTENDANCE, list, saveCallback);
+                }
+            }
+        });
+    }
+
+    public static void DownloadParseFeedback(final SaveCallback saveCallback) {
+        ParseQuery<Feedback> query = Feedback.getQuery();
+        query.findInBackground(new FindCallback<Feedback>() {
+            @Override
+            public void done(List<Feedback> list, ParseException e) {
+                if(e==null) {
+                    ParseObject.unpinAllInBackground(PIN_FEEDBACK);
+                    ParseObject.pinAllInBackground(PIN_FEEDBACK, list, saveCallback);
+                }
+            }
         });
     }
 }
