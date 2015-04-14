@@ -81,7 +81,7 @@ public class DashBoardActivity extends Activity {
         btnPromotionMangement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigateIntent(PromotionManagementActivity.class);
+                //NavigateIntent(PromotionManagementActivity.class);
                 Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
                         .show();
             }
@@ -127,7 +127,9 @@ public class DashBoardActivity extends Activity {
         btnAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigateIntent(AttendanceManagementActivity.class);
+                //NavigateIntent(AttendanceManagementActivity.class);
+                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
