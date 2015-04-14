@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -37,10 +38,14 @@ public class AttendanceManagementActivity extends Activity {
     TextView tvEmptyView;
 
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_management);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(getString(R.string.attendanceManagementTitle));
 
         if(ConnectUtils.hasConnectToInternet(AttendanceManagementActivity.this)) {
             DownloadUtils.DownloadParseAttendance(new SaveCallback() {
@@ -94,9 +99,15 @@ public class AttendanceManagementActivity extends Activity {
         lvEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(AttendanceManagementActivity.this,AttendanceDetailActivity.class);
-                intent.putExtra("EXTRAS_EMPLOYEE_ID", attendanceAdapter.getItem(position).getObjectId());
-                startActivity(intent);
+
+                    Intent intent = new Intent(AttendanceManagementActivity.this, AttendanceDetailActivity.class);
+                    intent.putExtra("EXTRAS_EMPLOYEE_ID", attendanceAdapter.getItem(position).getObjectId());
+                    intent.putExtra("EXTRAS_FROM_DATE", etFromDate.getText().toString());
+                    intent.putExtra("EXTRAS_TO_DATE", etToDate.getText().toString());
+                    startActivity(intent);
+
+
+
             }
         });
     }
@@ -155,9 +166,24 @@ public class AttendanceManagementActivity extends Activity {
 
             @Override
             public void onLoaded(List<ParseUser> list, Exception e) {
+                if(list.size() == 0) {
+                    tvEmptyView.setText(getString(R.string.lvEmptyEmployee));
+                }
                 progressBar.setVisibility(View.GONE);
+
             }
         });
         lvEmployee.setAdapter(attendanceAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

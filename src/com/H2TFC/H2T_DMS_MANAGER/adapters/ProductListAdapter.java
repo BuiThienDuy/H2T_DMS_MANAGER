@@ -43,13 +43,13 @@ public class ProductListAdapter extends ParseQueryAdapter<Product> {
         tvUnit.setText(v.getContext().getString(R.string.unitDesciption) + object.getUnit());
         TextView tvPrice = (TextView) v.findViewById(R.id.list_product_tv_price);
 
-        tvPrice.setText(v.getContext().getString(R.string.proceDescripti) + object.getPrice() + " " + v.getContext().getString(R.string.VND));
+        tvPrice.setText(v.getContext().getString(R.string.proceDescripti) + String.format(Locale.CHINESE, "%1$,.0f", object.getPrice()) + " " + v.getContext().getString(R.string.VND));
 
 
         ParseImageView productPhoto = (ParseImageView) v.findViewById(R.id.list_product_iv_product);
         ParseFile photoFile = object.getParseFile("photo");
 
-        productPhoto.setPlaceholder(getContext().getResources().getDrawable(R.drawable.ic_contact_empty));
+        productPhoto.setPlaceholder(getContext().getResources().getDrawable(R.drawable.ic_action_picture));
 
         if (photoFile != null) {
             productPhoto.setParseFile(photoFile);

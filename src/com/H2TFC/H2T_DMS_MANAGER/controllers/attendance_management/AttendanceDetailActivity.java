@@ -2,6 +2,7 @@ package com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.H2TFC.H2T_DMS_MANAGER.R;
@@ -13,6 +14,9 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -28,14 +32,32 @@ public class AttendanceDetailActivity extends Activity {
     ProgressBar progressBar;
     AttendanceDetailAdapter attendanceAdapter;
     private String employeeId;
+    Date FromDate,ToDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_detail);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(getString(R.string.employeeAttendanceDetail));
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         if(getIntent().hasExtra("EXTRAS_EMPLOYEE_ID")) {
             employeeId = getIntent().getStringExtra("EXTRAS_EMPLOYEE_ID");
+        }
+        if(getIntent().hasExtra("EXTRAS_FROM_DATE")) {
+            try {
+                FromDate = dateFormat.parse(getIntent().getStringExtra("EXTRAS_FROM_DATE"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        if(getIntent().hasExtra("EXTRAS_TO_DATE")) {
+            try {
+                ToDate = dateFormat.parse(getIntent().getStringExtra("EXTRAS_TO_DATE"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         InitializeComponent();
@@ -55,6 +77,8 @@ public class AttendanceDetailActivity extends Activity {
             public ParseQuery<Attendance> create() {
                 ParseQuery<Attendance> query = Attendance.getQuery();
                 query.whereEqualTo("employee_id", employeeId);
+                query.whereGreaterThan("createdAt", FromDate);
+                query.whereLessThan("createdAt", ToDate);
                 query.orderByDescending("createdAt");
                 query.fromPin(DownloadUtils.PIN_ATTENDANCE);
                 return query;
@@ -77,9 +101,23 @@ public class AttendanceDetailActivity extends Activity {
 
             @Override
             public void onLoaded(List<Attendance> list, Exception e) {
+                if(list.size() == 0) {
+                    tvEmptyView.setText(getString(R.string.noAttendancePictureFoundOnListView));
+                }
                 progressBar.setVisibility(View.GONE);
             }
         });
         gvAttendance.setAdapter(attendanceAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

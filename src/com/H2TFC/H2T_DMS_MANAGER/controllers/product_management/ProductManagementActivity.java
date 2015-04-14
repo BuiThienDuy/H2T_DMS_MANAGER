@@ -98,6 +98,7 @@ public class ProductManagementActivity extends Activity {
                         public ParseQuery<Product> create() {
                             ParseQuery<Product> query = Product.getQuery();
                             query.whereNotEqualTo("status", Product.ProductStatus.KHOA.name());
+                            //query.whereMatches("name","/" + editTextSearch.getText().toString() + "/");
                             query.whereContains("name", editTextSearch.getText().toString());
                             query.orderByDescending("createdAt");
                             query.fromPin(DownloadUtils.PIN_PRODUCT);

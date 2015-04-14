@@ -10,6 +10,8 @@ import com.H2TFC.H2T_DMS_MANAGER.models.Store;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -50,7 +52,7 @@ public class AttendanceDetailAdapter extends ParseQueryAdapter<Attendance> {
         // Set store name, photo created date
         final TextView tvStoreName = (TextView) v.findViewById(R.id.list_attendance_detail_tv_store_name);
         ParseQuery<Store> storeParseQuery = Store.getQuery();
-        storeParseQuery.whereEqualTo("objectId", object.getObjectId());
+        storeParseQuery.whereEqualTo("objectId", object.getStoreId());
         storeParseQuery.fromPin(DownloadUtils.PIN_STORE);
         final View finalV = v;
         storeParseQuery.getFirstInBackground(new GetCallback<Store>() {
@@ -63,7 +65,9 @@ public class AttendanceDetailAdapter extends ParseQueryAdapter<Attendance> {
         });
 
         TextView tvCreatedDate = (TextView) v.findViewById(R.id.list_attendance_detail_tv_created_date);
-        tvCreatedDate.setText(object.getCreatedAt().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        tvCreatedDate.setText(v.getContext().getString(R.string.takePhotoAt) +": " + dateFormat.format(object.getCreatedAt()) );
+                
         return v;
 
 

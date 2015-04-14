@@ -24,6 +24,8 @@ import java.util.List;
  * All rights reserved
  */
 public class EmployeeListAttendanceAdapter extends ParseQueryAdapter<ParseUser> {
+    public  int imageCount = 0;
+
     public EmployeeListAttendanceAdapter(Context context, ParseQueryAdapter.QueryFactory<ParseUser> queryFactory) {
         super(context, queryFactory);
     }
@@ -80,7 +82,7 @@ public class EmployeeListAttendanceAdapter extends ParseQueryAdapter<ParseUser> 
                                 distinctStoreList.add(attendance.getStoreId());
                             }
                         }
-
+                        imageCount = list.size();
                         tvSoAnhChup.setText(finalV.getContext().getString(R.string.amountOfImageCapture) + list.size());
                         tvSoCuaHang.setText(finalV.getContext().getString(R.string.amountOfVisitedStore) + distinctStoreList.size());
                     }

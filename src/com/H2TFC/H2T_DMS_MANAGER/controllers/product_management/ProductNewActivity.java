@@ -3,6 +3,7 @@ package com.H2TFC.H2T_DMS_MANAGER.controllers.product_management;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -103,6 +104,33 @@ public class ProductNewActivity extends Activity {
             }
         });
 
+        ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence[] items;
+                if (mImageToBeAttached != null)
+                    items = new CharSequence[]{getString(R.string.takePhoto), getString(R.string.choosePhoto), getString(R.string.removePhoto)};
+                else
+                    items = new CharSequence[]{getString(R.string.takePhoto), getString(R.string.choosePhoto)};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductNewActivity.this);
+                builder.setTitle(getString(R.string.addPhoto));
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if (item == 0) {
+                            dispatchTakePhotoIntent();
+                        } else if (item == 1) {
+                            dispatchChoosePhotoIntent();
+                        } else {
+                            deleteCurrentPhoto();
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
+
         final String finalProductId = productId;
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +142,13 @@ public class ProductNewActivity extends Activity {
                 ParseQuery<Product> productParseQuery = Product.getQuery()
                         .whereEqualTo("objectId", finalProductId)
                         .fromPin(DownloadUtils.PIN_PRODUCT);
-                Product product;
+                final Product product;
+
+                final ProgressDialog progressDialog = new ProgressDialog(ProductNewActivity.this);
+                progressDialog.setCancelable(false);
+                progressDialog.setTitle(getString(R.string.productNewUpdateTitle));
+                progressDialog.setMessage(getString(R.string.PleaseWait));
+                progressDialog.show();
                 try {
                     product = productParseQuery.getFirst();
                     product.setName(name);
@@ -122,18 +156,59 @@ public class ProductNewActivity extends Activity {
                     product.setPrice(Double.parseDouble(price));
                     product.setStatus("");
 
+                    if(hasImage) {
+                        byte[] bitmapdata  = ImageUtils.bitmapToByteArray(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
 
-                    product.saveEventually();
-                    product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
-                                    .show();
-                            finish();
-                        }
-                    });
+                        final ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo"  + "" +
+                                ".png",bitmapdata);
+                        file.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    product.setPhoto(file);
+                                    product.saveEventually();
+                                    progressDialog.dismiss();
+                                    product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
+                                                    .show();
+                                            finish();
+                                        }
+                                    });
+                                } else {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new ProgressCallback() {
+                            @Override
+                            public void done(Integer integer) {
+                               if(integer == 100) {
+                                   progressDialog.dismiss();
+                               } else {
+                                   progressDialog.setMessage("Ðang t?i: " + integer);
+                               }
+                            }
+                        });
+
+
+                    } else {
+                        product.saveEventually();
+                        progressDialog.dismiss();
+                        product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
+                                        .show();
+                                finish();
+                            }
+                        });
+                    }
+
 
                 } catch (ParseException e) {
+                    progressDialog.dismiss();
                     e.printStackTrace();
                 }
 
@@ -207,7 +282,7 @@ public class ProductNewActivity extends Activity {
 
                 byte[] bitmapdata  = ImageUtils.bitmapToByteArray(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
 
-                ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "_" + name + ".png",bitmapdata);
+                ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo" + ".png",bitmapdata);
                 try {
                     file.save();
                     productToAdd.setPhoto(file);

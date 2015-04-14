@@ -65,9 +65,9 @@ public class DashBoardActivity extends Activity {
         btnProductManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
-                //NavigateIntent(ProductManagementActivity.class);
+//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+//                        .show();
+                NavigateIntent(ProductManagementActivity.class);
             }
         });
 
@@ -81,9 +81,9 @@ public class DashBoardActivity extends Activity {
         btnPromotionMangement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //NavigateIntent(PromotionManagementActivity.class);
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
+                NavigateIntent(PromotionManagementActivity.class);
+//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+//                        .show();
             }
         });
 
@@ -118,18 +118,18 @@ public class DashBoardActivity extends Activity {
         btnViewReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
-                //NavigateIntent(StoreManagementActivity.class);
+//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+//                        .show();
+                NavigateIntent(StoreManagementActivity.class);
             }
         });
 
         btnAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //NavigateIntent(AttendanceManagementActivity.class);
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
+                NavigateIntent(AttendanceManagementActivity.class);
+//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+//                        .show();
             }
         });
 

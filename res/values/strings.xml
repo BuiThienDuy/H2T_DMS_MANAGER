@@ -207,4 +207,8 @@
     <string name="employeeList">Danh sách nhân viên</string>
     <string name="amountOfImageCapture">"Số ảnh đã chụp: "</string>
     <string name="amountOfVisitedStore">"Số cửa hàng đã viếng thăm: "</string>
+    <string name="takePhotoAt">Chụp ngày</string>
+    <string name="employeeAttendanceDetail">Chi tiết chấm công nhân viên</string>
+    <string name="attendanceManagementTitle">Quản lý chấm công</string>
+    <string name="noAttendancePictureFoundOnListView">Hiện không có hình ảnh chấm công nào trong danh sách</string>
 </resources>
