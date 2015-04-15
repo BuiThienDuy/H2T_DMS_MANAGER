@@ -155,6 +155,15 @@ public class Store extends ParseObject {
         put("location_point", locationPoint);
     }
 
+    // 12. Debt
+    public double getMaxDebt() {
+        return getDouble("max_debt");
+    }
+
+    public void setMaxDebt(double maxDebt) {
+        put("max_debt",maxDebt);
+    }
+
     // 12. Query
     public static ParseQuery<Store> getQuery() {
         return ParseQuery.getQuery(Store.class);

@@ -6,6 +6,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.List;
+
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
  * thanhduongpham4293@gmail.com
@@ -70,5 +72,23 @@ public class Invoice extends ParseObject {
 
     public void setStoreId(String storeId) {
         put("storeId", storeId);
+    }
+
+    // 5. Product Purchase
+    public List<Product> getProductPurchases() {
+        return getList("productPurchase");
+    }
+
+    public void setProductPurchases(List<Product> productList) {
+        put("productPurchase",productList);
+    }
+
+    // 6. Promotion
+    public Promotion getPromotion() {
+        return (Promotion) getParseObject("promotion");
+    }
+
+    public void setPromotion(Promotion promotion) {
+        put("promotion",promotion);
     }
 }

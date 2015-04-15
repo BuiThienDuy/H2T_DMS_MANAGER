@@ -24,4 +24,12 @@ public class StoreType extends ParseObject {
     public void setStoreTypeName(String storeTypeName) {
         put("store_type_name", storeTypeName);
     }
+
+    public Double getDefaultDebt() {
+        return getDouble("default_debt");
+    }
+
+    public void setDefaultDebt(Double defaultDebt) {
+        put("default_debt",defaultDebt);
+    }
 }
