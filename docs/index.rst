@@ -8,7 +8,7 @@ Hướng dẫn dành cho developers
 ---------------------
 * `Android-Bootstrap`_
 * `Android Google map Utils`_ 0.3.3+
-*
+
 
  .. _Android-Bootstrap: https://github.com/Bearded-Hen/Android-Bootstrap
  .. _Android Google map Utils: https://github.com/googlemaps/android-maps-utils
@@ -17,4 +17,12 @@ Hướng dẫn dành cho developers
  ---------------------
  * `Parse`_ : là backend server
  
- .. _Parse: https:Parse.com
+ .. _Parse: https: Parse.com
+
+Thông tin nhóm phát triển
+=========================
+
+
+Liên hệ hỗ trợ
+===============
+Nếu có bất kỳ thắc mắc gì liên quan đến dự án, vui lòng gửi email tới địa chỉ thanhduongpham4293@gmail.com để được hỗ trợ.
