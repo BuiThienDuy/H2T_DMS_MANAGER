@@ -15,6 +15,6 @@ Hướng dẫn dành cho developers
  
  2. Phần mềm bên thứ 3 sử dụng
  ---------------------
- * `Parse` : là backend server
+ * `Parse`_ : là backend server
  
  .. _Parse: https:Parse.com
