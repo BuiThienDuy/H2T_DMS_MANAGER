@@ -2,6 +2,13 @@ H2T DMS Manager
 ===============
 H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng được thiết kế dành riêng cho nhân viên quản lý.
 
+.. toctree::
+   :maxdepth: 2
+
+   install
+   usage
+   contributing
+
 Gồm những chức năng
 ===================
 
