@@ -66,7 +66,7 @@ Dự án Capstone của khóa K17T trường đại học Văn Lang dưới sự
 	 * Lai Thanh Phuong:            
 	 * Lương Yến Nhi:                
 	 * Lê Nguyễn Thanh Thanh:  
- * Mentor: Trần công Thanh
+ * **Mentor:** Trần công Thanh
 
 
 
