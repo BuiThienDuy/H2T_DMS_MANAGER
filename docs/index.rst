@@ -6,7 +6,7 @@ Hướng dẫn dành cho developers
 ====================
 1. Thư viện sử dụng
 ---------------------
-* `Android-Bootstrap`_
+* `Android-Bootstrap`_ 20/03/2015+
 * `Android Google map Utils`_ 0.3.3+
 
 
@@ -15,7 +15,7 @@ Hướng dẫn dành cho developers
  
  2. Phần mềm bên thứ 3 sử dụng
  ---------------------
- * `Parse`_ : là backend server
+ * `Parse`_ : là backend server, do đó nếu muốn sử dụng 1 database mới thì vui lòng tạo một tài khoản trên trang này.
  
  .. _Parse: https: Parse.com
 
