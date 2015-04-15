@@ -21,7 +21,8 @@ Hướng dẫn cài đặt
  1. **Với bản demo thì tải về link dưới đây:**
 
     https://github.com/BuiThienDuy/H2T_DMS_MANAGER/releases
-    Hướng dẫn cài ứng dụng bằng file apk: [Nhấn vào đây](http://dvms.vn/tin-tuc/tin-nganh/77-huong-dan-cai-ung-dung,-phan-mem-cho-android-truc-tiep-bang-tap-tin-apk.html)
+    
+    Hướng dẫn cài ứng dụng bằng file apk: http://dvms.vn/tin-tuc/tin-nganh/77-huong-dan-cai-ung-dung,-phan-mem-cho-android-truc-tiep-bang-tap-tin-apk.html
 
  2. **Với database riêng thì vui lòng liên hệ nhóm phát triển để biết thêm chi tiết.** 
 
