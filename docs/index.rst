@@ -8,7 +8,8 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
 
 1. Công cụ phát triển
 ---------------------
-* `IntelliJ Idea 14.1.1+
+* `IntelliJ Idea`_ 14.1.1+
+.. _IntelliJ Idea: https://www.jetbrains.com/idea/
 
 2. Thư viện sử dụng
 -------------------
@@ -18,10 +19,23 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
  .. _Android-Bootstrap: https://github.com/Bearded-Hen/Android-Bootstrap
  .. _Android Google map Utils: https://github.com/googlemaps/android-maps-utils
 
+3. Dịch vụ bên thứ 3
+-------------------
+* `Parse`_ : dùng để làm backend server
 
+ .. _Parse: https://parse.com/
 
 Thông tin nhóm phát triển
-=========================
+-------------------------
+Dự án Capstone của khóa K17T trường đại học Văn Lang dưới sự tham gia của:
+- Nhóm H2TFC gồm:
+ +Bùi Thiện Duy 
+ + Nguyễn Hà Nhật Năng
+ + Phạm Thành Dương
+ + Lai Thanh Phong
+ + Lương Yến Nhi
+ + Lê Nguyễn Thanh Thanh
+- Mentor: Trần công Thanh
 
 
 Liên hệ hỗ trợ
