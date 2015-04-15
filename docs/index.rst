@@ -28,14 +28,17 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
 Thông tin nhóm phát triển
 -------------------------
 Dự án Capstone của khóa K17T trường đại học Văn Lang dưới sự tham gia của:
-- Nhóm H2TFC gồm:
- +Bùi Thiện Duy 
- + Nguyễn Hà Nhật Năng
- + Phạm Thành Dương
- + Lai Thanh Phong
- + Lương Yến Nhi
- + Lê Nguyễn Thanh Thanh
-- Mentor: Trần công Thanh
+
+ - Nhóm H2TFC gồm:
+	 + Bùi Thiện Duy 
+	 + Nguyễn Hà Nhật Năng
+	 + Phạm Thành Dương
+	 + Lai Thanh Phuong
+	 + Lương Yến Nhi
+	 + Lê Nguyễn Thanh Thanh
+ - Mentor: Trần công Thanh
+
+
 
 
 Liên hệ hỗ trợ
