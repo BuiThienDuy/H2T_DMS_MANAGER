@@ -33,6 +33,7 @@ H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng đư
 Dưới đây là một số thông tin về các tài nguyên,công cụ mà nhóm dùng để phát triển, ngoài ra còn có 1 số hướng dẫn cơ bản để các developers của nhóm có thể dễ dàng thêm dự án vào trong công cụ phát triển của mình.
 
 1. Yêu cầu:
+-----------
 
 * Google Maps Android API v2
 * Google Places API
