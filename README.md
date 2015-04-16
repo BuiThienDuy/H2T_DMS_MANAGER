@@ -40,6 +40,7 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
 -------------------
 * [Android-Bootstrap](https://github.com/Bearded-Hen/Android-Bootstrap) 
 * [Android Google map Utils](https://github.com/googlemaps/android-maps-utils) 0.3.3+
+* [Wunderlist sliding panel](https://github.com/wunderlist/android-sliding-layer-lib) 1.1.1+
 
 
 Liên hệ hỗ trợ
