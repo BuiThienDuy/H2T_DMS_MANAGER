@@ -41,7 +41,7 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
         TextView tvCreatedDate = (TextView) v.findViewById(R.id.list_feedback_tv_created_date);
         TextView tvContent = (TextView) v.findViewById(R.id.list_feedback_tv_content);
 
-        tvTitle.setText(object.getTitle());
+        tvTitle.setText(" "+object.getTitle());
 
         String status = object.getStatus();
         if(status.equals(Feedback.MOI_TAO)) {
@@ -54,7 +54,7 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
             status = v.getContext().getString(R.string.feedbackCompleted);
         }
 
-        tvStatus.setText(object.getStatus());
+        tvStatus.setText(" "+status);
 
         ParseQuery<Store> query = Store.getQuery()
                                        .whereEqualTo("objectId", object.getStoreId());
@@ -62,13 +62,13 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
             @Override
             public void done(Store store, ParseException e) {
                 if (e == null) {
-                    tvStore.setText(store.getName());
+                    tvStore.setText(" "+store.getName());
                 }
             }
         });
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        tvCreatedDate.setText(dateFormat.format(object.getCreatedAt()));
+        tvCreatedDate.setText(" "+dateFormat.format(object.getCreatedAt()));
 
         tvContent.setText(object.getDescription());
 

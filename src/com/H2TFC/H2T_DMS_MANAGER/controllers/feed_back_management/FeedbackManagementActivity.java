@@ -69,7 +69,7 @@ public class FeedbackManagementActivity extends Activity {
                 ParseQuery<Feedback> query = Feedback.getQuery();
                 query.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
                 query.orderByDescending("createdAt");
-                query.fromPin(DownloadUtils.PIN_EMPLOYEE);
+                query.fromPin(DownloadUtils.PIN_FEEDBACK);
                 return query;
             }
         };

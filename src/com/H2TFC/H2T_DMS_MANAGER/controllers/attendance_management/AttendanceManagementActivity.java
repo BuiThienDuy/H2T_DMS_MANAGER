@@ -21,6 +21,7 @@ import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -127,8 +128,9 @@ public class AttendanceManagementActivity extends Activity {
                 .activity_attendance_management_et_from_date,day,month,
                 year);
         MyEditDatePicker edpToDate =new MyEditDatePicker(AttendanceManagementActivity.this, R.id
-                .activity_attendance_management_et_to_date,day,month,
+                .activity_attendance_management_et_to_date,day+1,month,
                 year);
+
         edpFromDate.updateDisplay();
         edpToDate.updateDisplay();
 
@@ -142,7 +144,7 @@ public class AttendanceManagementActivity extends Activity {
                 ParseQuery<ParseUser> query = ParseUser.getQuery();
                 query.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
                 query.orderByDescending("createdAt");
-                query.whereEqualTo("locked",false);
+                query.whereEqualTo("locked", false);
                 query.fromPin(DownloadUtils.PIN_EMPLOYEE);
                 return query;
             }
