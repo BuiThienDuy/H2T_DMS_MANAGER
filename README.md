@@ -34,16 +34,13 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
 
 1. Công cụ phát triển
 ---------------------
-* `IntelliJ Idea`_ 14.1.1+
-.. _IntelliJ Idea: https://www.jetbrains.com/idea/
+* [IntelliJ Idea](https://www.jetbrains.com/idea/) 14.1.1+
 
 2. Thư viện sử dụng
 -------------------
-* `Android-Bootstrap`_ 
-* `Android Google map Utils`_ 0.3.3+
+* [Android-Bootstrap](https://github.com/Bearded-Hen/Android-Bootstrap) 
+* [Android Google map Utils](https://github.com/googlemaps/android-maps-utils) 0.3.3+
 
- .. _Android-Bootstrap: https://github.com/Bearded-Hen/Android-Bootstrap
- .. _Android Google map Utils: https://github.com/googlemaps/android-maps-utils
 
 Liên hệ hỗ trợ
 ===============
