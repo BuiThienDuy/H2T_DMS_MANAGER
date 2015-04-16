@@ -4,16 +4,16 @@ H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng đư
 
 ## Gồm những chức năng
 
- 1. Phân chia tuyến đường/khu vực
- 2. Quản lý điểm bán hàng
- 3. Quản lý nhân viên
- 4. Quản lý thông tin cá nhân
- 5. Quản lý sản phẩm
- 6. Quản lý khuyến mãi
- 7. Quản lý chấm công
- 8. Xem Phản hồi điểm bán hàng
- 9. Xem báo cáo
- 10. Đăng nhập/đăng xuất
+- [x] Phân chia tuyến đường/khu vực
+- [x] Quản lý điểm bán hàng
+- [x] Quản lý nhân viên
+- [x] Quản lý thông tin cá nhân
+- [x] Quản lý sản phẩm
+- [ ] Quản lý khuyến mãi
+- [x] Quản lý chấm công
+- [ ] Xem Phản hồi điểm bán hàng
+- [ ] Xem báo cáo
+- [x] Đăng nhập/đăng xuất
 
 ## Hình ảnh chương trình
 ![2015_04_16_13 26 26](https://cloud.githubusercontent.com/assets/11812919/7176642/6a07142e-e44a-11e4-8915-9c61dcf73c05.png)
