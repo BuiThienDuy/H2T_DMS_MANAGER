@@ -32,16 +32,20 @@ H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng đư
 ## Hướng dẫn dành cho developers
 Dưới đây là một số thông tin về các tài nguyên,công cụ mà nhóm dùng để phát triển, ngoài ra còn có 1 số hướng dẫn cơ bản để các developers của nhóm có thể dễ dàng thêm dự án vào trong công cụ phát triển của mình.
 
-1. Công cụ phát triển
+1. Yêu cầu:
+ 
+
+2. Công cụ phát triển
 ---------------------
 * [IntelliJ Idea](https://www.jetbrains.com/idea/) 14.1.1+
 
-2. Thư viện sử dụng
+3. Thư viện sử dụng
 -------------------
 * [Android-Bootstrap](https://github.com/Bearded-Hen/Android-Bootstrap) 
 * [Android Google map Utils](https://github.com/googlemaps/android-maps-utils) 0.3.3+
-* [Wunderlist sliding panel](https://github.com/wunderlist/android-sliding-layer-lib) 1.1.1+
-
+* [Wunderlist Sliding Panel](https://github.com/wunderlist/android-sliding-layer-lib) 1.1.1+
+* [Holo ColorPicker](https://github.com/LarsWerkman/HoloColorPicker)
+* [Mobisys autocompletetextview](https://github.com/mobisystech/autocompletetextview)
 
 Liên hệ hỗ trợ
 ===============
