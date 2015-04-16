@@ -126,6 +126,7 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".controllers.attendance_management.AttendanceManagementActivity"/>
         <activity android:name=".controllers.attendance_management.AttendanceDetailActivity"/>
+        <activity android:name=".controllers.feed_back_management.FeedbackManagementActivity"/>
 
         <!-- replace @drawable/push_icon with your push icon identifier -->
         <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_notification"/>

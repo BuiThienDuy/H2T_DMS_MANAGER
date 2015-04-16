@@ -106,8 +106,6 @@ public class AttendanceManagementActivity extends Activity {
                     intent.putExtra("EXTRAS_TO_DATE", etToDate.getText().toString());
                     startActivity(intent);
 
-
-
             }
         });
     }

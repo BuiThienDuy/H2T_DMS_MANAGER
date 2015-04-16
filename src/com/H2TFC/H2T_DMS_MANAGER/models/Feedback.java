@@ -52,4 +52,20 @@ public class Feedback extends ParseObject {
     public static ParseQuery<Feedback> getQuery() {
         return ParseQuery.getQuery(Feedback.class);
     }
+
+    public String getEmployeeId() {
+        return getString("employee_id");
+    }
+
+    public void setEmployeeId(String employeeId) {
+        put("employee_id",employeeId);
+    }
+
+    public String getManagerId() {
+        return getString("manager_id");
+    }
+
+    public void setManagerId(String managerId) {
+        put("manager_id",managerId);
+    }
 }

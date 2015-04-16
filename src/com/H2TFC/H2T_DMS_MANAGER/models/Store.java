@@ -164,7 +164,7 @@ public class Store extends ParseObject {
         put("max_debt",maxDebt);
     }
 
-    // 12. Query
+    // 13. Query
     public static ParseQuery<Store> getQuery() {
         return ParseQuery.getQuery(Store.class);
     }

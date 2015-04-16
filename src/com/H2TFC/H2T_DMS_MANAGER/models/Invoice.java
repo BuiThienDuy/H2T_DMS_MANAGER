@@ -91,4 +91,20 @@ public class Invoice extends ParseObject {
     public void setPromotion(Promotion promotion) {
         put("promotion",promotion);
     }
+
+    public String getEmployeeId() {
+        return getString("employee_id");
+    }
+
+    public void setEmployeeId(String employeeId) {
+        put("employee_id",employeeId);
+    }
+
+    public String getManagerId() {
+        return getString("manager_id");
+    }
+
+    public void setManagerId(String managerId) {
+        put("manager_id",managerId);
+    }
 }

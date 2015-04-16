@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management.AttendanceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.employee_management.EmployeeManagementActivity;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.feed_back_management.FeedbackManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management.PromotionManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementActivity;
@@ -136,8 +137,9 @@ public class DashBoardActivity extends Activity {
         btnViewFeedBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-                        .show();
+//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
+//                        .show();
+                NavigateIntent(FeedbackManagementActivity.class);
             }
         });
     }

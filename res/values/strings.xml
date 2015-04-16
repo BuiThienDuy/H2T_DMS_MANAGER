@@ -211,4 +211,13 @@
     <string name="employeeAttendanceDetail">Chi tiết chấm công nhân viên</string>
     <string name="attendanceManagementTitle">Quản lý chấm công</string>
     <string name="noAttendancePictureFoundOnListView">Hiện không có hình ảnh chấm công nào trong danh sách</string>
+    <string name="employeeSentDescription">Nhân viên gửi:</string>
+    <string name="storeNameDescription">Cửa hàng:</string>
+    <string name="titleDescription">Tiêu đề:</string>
+    <string name="statusDescription">Trạng thái:</string>
+    <string name="haveCreated">Mới tạo</string>
+    <string name="onPending">Đang xem xét</string>
+    <string name="feedbackCompleted">Đã xử lý</string>
+    <string name="emptyFeedback">Hiện không có phản hồi nào trong danh sách</string>
+    <string name="viewFeedbackTitle">Xem thông tin phản hồi điểm cửa hàng</string>
 </resources>
