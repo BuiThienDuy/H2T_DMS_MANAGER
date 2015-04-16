@@ -33,6 +33,7 @@ H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng đư
 Dưới đây là một số thông tin về các tài nguyên,công cụ mà nhóm dùng để phát triển, ngoài ra còn có 1 số hướng dẫn cơ bản để các developers của nhóm có thể dễ dàng thêm dự án vào trong công cụ phát triển của mình.
 
 1. Yêu cầu:
+
 * Google Maps Android API v2
 * Google Places API
 
@@ -48,6 +49,7 @@ Dưới đây là một số thông tin về các tài nguyên,công cụ mà nh
 * [Holo ColorPicker](https://github.com/LarsWerkman/HoloColorPicker)
 * [Mobisys autocompletetextview](https://github.com/mobisystech/autocompletetextview)
 * [Android Swipe Layout](https://github.com/daimajia/AndroidSwipeLayout) 1.1.7+
+* [Parse Android SDK](https://www.parse.com/docs/downloads) 1.8.8+
 
 Liên hệ hỗ trợ
 ===============
