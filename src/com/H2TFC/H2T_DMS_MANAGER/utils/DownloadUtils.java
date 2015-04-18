@@ -27,6 +27,7 @@ public class DownloadUtils {
     public static final String PIN_INVOICE = "PIN_INVOICE_DOWNLOAD";
     public static final String PIN_ATTENDANCE = "PIN_ATTENDANCE_DOWNLOAD";
     public static final String PIN_FEEDBACK = "PIN_FEEDBACK_DOWNLOAD";
+    public static final String PIN_PROMOTION = "PIN_PROMOTION_DOWNLOAD";
 
     public static void DownloadParseArea(final Context context, final SaveCallback saveCallback) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -153,6 +154,19 @@ public class DownloadUtils {
                 if(e==null) {
                     ParseObject.unpinAllInBackground(PIN_FEEDBACK);
                     ParseObject.pinAllInBackground(PIN_FEEDBACK, list, saveCallback);
+                }
+            }
+        });
+    }
+
+    public static void DownloadParsePromotion(final SaveCallback saveCallback) {
+        ParseQuery<Promotion> query = Promotion.getQuery();
+        query.findInBackground(new FindCallback<Promotion>() {
+            @Override
+            public void done(List<Promotion> list, ParseException e) {
+                if(e==null) {
+                    ParseObject.unpinAllInBackground(PIN_PROMOTION);
+                    ParseObject.pinAllInBackground(PIN_PROMOTION, list, saveCallback);
                 }
             }
         });

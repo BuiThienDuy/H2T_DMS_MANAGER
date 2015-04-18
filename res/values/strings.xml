@@ -220,4 +220,17 @@
     <string name="feedbackCompleted">Đã xử lý</string>
     <string name="emptyFeedback">Hiện không có phản hồi nào trong danh sách</string>
     <string name="viewFeedbackTitle">Xem thông tin phản hồi điểm cửa hàng</string>
+    <string name="promotionTitle">Tiêu đề:</string>
+    <string name="promotionType">Loại hình khuyến mãi</string>
+    <string name="productPromotion1">1. Sản phẩm được khuyến mãi</string>
+    <string name="productName1">Tên sản phẩm:</string>
+    <string name="productAmount1">Số lượng:</string>
+    <string name="productPromotion2">2. Sản phẩm khuyến mãi</string>
+    <string name="productNamePromotion2">Tên sản phẩm:</string>
+    <string name="productAmountPromotion2">Số lượng:</string>
+    <string name="tangPham">Tặng phẩm</string>
+    <string name="chietKhau">Chiết khấu</string>
+    <string name="chietKhautv">Chiết khấu:</string>
+    <string name="promotionChietKhau">2.Khuyến mãi chiết khấu</string>
+    <string name="addNewPromotionSuccess">Thêm thông tin khuyến mãi thành công</string>
 </resources>
