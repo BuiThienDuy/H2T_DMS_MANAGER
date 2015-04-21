@@ -38,6 +38,9 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_username"
             android:drawableStart="@drawable/ic_username"
+            android:singleLine="true"
+            android:lines="1"
+            android:maxLines="1"
             />
 
     <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -56,6 +59,8 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_password"
             android:drawableStart="@drawable/ic_password"
+            android:lines="1"
+            android:maxLines="1"
             android:singleLine="true"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton

@@ -2,16 +2,22 @@ package com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
 import com.H2TFC.H2T_DMS_MANAGER.models.Promotion;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
+import com.H2TFC.H2T_DMS_MANAGER.widget.MyEditDatePicker;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
+import com.parse.ParseException;
 
+import java.text.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -23,7 +29,7 @@ import java.util.List;
  */
 public class PromotionNewActivity extends Activity {
     BootstrapButton btnOk, btnCancel;
-    BootstrapEditText etTitle, etAmount1, etAmount2, etDiscount;
+    BootstrapEditText etTitle, etAmount1, etAmount2, etDiscount, etApplyFromDate, etApplyToDate;
     Spinner spnProductName1, spnProductName2, spnPromotionType;
 
     int selectedPromotiontypePosition = 0;
@@ -36,6 +42,9 @@ public class PromotionNewActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotion_new);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(getString(R.string.addNewPromotionTitle));
+
 
         InitializeComponent();
 
@@ -50,6 +59,15 @@ public class PromotionNewActivity extends Activity {
                 final String productName1 = spnProductName1.getSelectedItem().toString();
                 final String productName2 = spnProductName2.getSelectedItem().toString();
                 int amount1 = Integer.parseInt(etAmount1.getText().toString());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date applyFromDate = null;
+                Date applyToDate = null;
+                try {
+                    applyFromDate = simpleDateFormat.parse(etApplyFromDate.getText().toString());
+                    applyToDate = simpleDateFormat.parse(etApplyToDate.getText().toString());
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
 
                 if (selectedPromotiontypePosition == 0) {
                     int amount2 = Integer.parseInt(etAmount2.getText().toString());
@@ -57,6 +75,8 @@ public class PromotionNewActivity extends Activity {
                     promotion.setPromotionName(title);
                     promotion.setQuantityGift(amount1);
                     promotion.setQuantityGifted(amount2);
+                    promotion.setPromotionApplyFrom(applyFromDate);
+                    promotion.setPromotionApplyTo(applyToDate);
 
                     final ParseQuery<Product> productParseQuery = Product.getQuery();
                     productParseQuery.whereEqualTo("name", productName1);
@@ -172,6 +192,9 @@ public class PromotionNewActivity extends Activity {
         spnProductName2 = (Spinner) findViewById(R.id.activity_promotion_new_spn_2_product_name);
         spnPromotionType = (Spinner) findViewById(R.id.activity_promotion_new_spn_promotion_type);
 
+        etApplyFromDate = (BootstrapEditText) findViewById(R.id.activity_promotion_management_et_from_date);
+        etApplyToDate = (BootstrapEditText) findViewById(R.id.activity_promotion_management_et_to_date);
+
         // Hideable component
         llChietKhau = (LinearLayout) findViewById(R.id.activity_promotion_new_ll_chiet_khau);
         llSanPham = (LinearLayout) findViewById(R.id.activity_promotion_new_ll_san_pham_khuyen_mai);
@@ -180,6 +203,21 @@ public class PromotionNewActivity extends Activity {
 
         llChietKhau.setVisibility(View.GONE);
         tvChietKhau.setVisibility(View.GONE);
+
+        // Set up calendar
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DATE);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        MyEditDatePicker edpFromDate = new MyEditDatePicker(PromotionNewActivity.this, R.id
+                .activity_promotion_management_et_from_date,day,month,
+                year);
+        MyEditDatePicker edpToDate =new MyEditDatePicker(PromotionNewActivity.this, R.id
+                .activity_promotion_management_et_to_date,day+10,month,
+                year);
+
+        edpFromDate.updateDisplay();
+        edpToDate.updateDisplay();
 
         // Set up spinner
         String[] items = new String[]{
@@ -214,5 +252,15 @@ public class PromotionNewActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

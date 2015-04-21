@@ -1,13 +1,14 @@
 package com.H2TFC.H2T_DMS_MANAGER.controllers.store_management;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.Store;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreImage;
@@ -29,7 +30,7 @@ import java.util.Locale;
  * All rights reserved
  */
 public class StoreDetailActivity extends Activity {
-    BootstrapButton btnTrungBay, btnCapNhat, btnQuayVe;
+    BootstrapButton btnTrungBay, btnGiaHan, btnQuayVe;
 
     BootstrapEditText etTenCuaHang, etTenChuCuaHang, etDiaChi, etSDT, etDoanhThu, etMatHangDoiThu;
 
@@ -88,6 +89,11 @@ public class StoreDetailActivity extends Activity {
         InitializeComponent();
         GetAndShowStoreDetail();
         SetupEvent();
+
+        if(getIntent().hasExtra("EXTRAS_STORE_POINT")) {
+            btnGiaHan.setVisibility(View.VISIBLE);
+            btnQuayVe.setVisibility(View.VISIBLE);
+        }
     }
 
     private void GetAndShowStoreDetail() {
@@ -169,7 +175,7 @@ public class StoreDetailActivity extends Activity {
         });
 
 
-/*        btnCapNhat.setOnClickListener(new View.OnClickListener() {
+        btnGiaHan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseQuery<Store> storeParseQuery = Store.getQuery();
@@ -177,44 +183,44 @@ public class StoreDetailActivity extends Activity {
                 storeParseQuery.whereEqualTo("objectId",storeID);
                 storeParseQuery.getFirstInBackground(new GetCallback<Store>() {
                     @Override
-                    public void done(Store store, ParseException e) {
-                         //
-                        String tenCuaHang = etTenCuaHang.getText().toString();
-                        String tenChuCuaHang = etTenChuCuaHang.getText().toString();
-                        String diaChi = etDiaChi.getText().toString();
-                        String sdt = etSDT.getText().toString();
-                        String matHangDoiThuCanhTranh = etMatHangDoiThu.getText().toString();
-                        String sDoanhThu = etDoanhThu.getText().toString().replace(",","").replace(".","");
+                    public void done(final Store store, ParseException e) {
+                         if(e == null) {
+                             AlertDialog.Builder alert = new AlertDialog.Builder(StoreDetailActivity.this);
 
+                             alert.setTitle(getString(R.string.modifiedDebtTitle));
+                             alert.setMessage(getString(R.string.modifiedDebtMessage));
 
-                        String error_msg = ValidateInput();
-                        boolean error_existed = !error_msg.equals("");
+                             // Set an EditText view to get user input
+                             final EditText input = new EditText(StoreDetailActivity.this);
+                             input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                             alert.setView(input);
 
-                        if(error_existed) {
-                            Toast.makeText(StoreDetailActivity.this, error_msg, Toast.LENGTH_LONG).show();
-                        } else {
-                            double doanhThu = Double.parseDouble(sDoanhThu);
-                            // Update store info
-                            store.setName(tenCuaHang);
-                            store.setStoreOwner(tenChuCuaHang);
-                            store.setAddress(diaChi);
-                            store.setIncome(doanhThu);
-                            store.setPhoneNumber(sdt);
-                            store.setCompetitor(matHangDoiThuCanhTranh);
-                            store.setStoreType(spnLoaiCuaHang.getSelectedItem().toString());
-                            // Pin in background
-                            store.pinInBackground(DownloadUtils.PIN_STORE, new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
+                             alert.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
+                                 public void onClick(DialogInterface dialog, int whichButton) {
+                                     double value = Double.parseDouble(input.getText().toString());
+                                     store.setMaxDebt(value);
+                                     store.saveEventually();
+                                     store.pinInBackground(DownloadUtils.PIN_STORE,new SaveCallback() {
+                                         @Override
+                                         public void done(ParseException e) {
+                                             if (e == null) {
+                                                 Toast.makeText(StoreDetailActivity.this,getString(R.string
+                                                         .modifyDebtSuccess),Toast.LENGTH_LONG).show();
+                                             }
+                                         }
+                                     });
+                                 }
+                             });
 
-                                }
-                            });
-                            // save
-                            store.saveEventually();
-                            Toast.makeText(StoreDetailActivity.this,getString(R.string.updateSuccess),Toast
-                                    .LENGTH_LONG).show();
-                            finish();
-                        }
+                             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                 public void onClick(DialogInterface dialog, int whichButton) {
+                                     // Canceled.
+                                 }
+                             });
+
+                             alert.show();
+
+                         }
                     }
                 });
             }
@@ -225,7 +231,7 @@ public class StoreDetailActivity extends Activity {
             public void onClick(View v) {
                 finish();
             }
-        });*/
+        });
     }
 
     private void InitializeComponent() {
@@ -237,8 +243,8 @@ public class StoreDetailActivity extends Activity {
         etMatHangDoiThu = (BootstrapEditText) findViewById(R.id.activity_store_detail_et_mat_hang_doi_thu_canh_tranh);
 
         btnTrungBay = (BootstrapButton) findViewById(R.id.activity_store_detail_btn_trung_bay_quay_ke);
-//        btnCapNhat = (BootstrapButton) findViewById(R.id.activity_store_detail_btn_cap_nhat);
-//        btnQuayVe = (BootstrapButton) findViewById(R.id.activity_store_detail_btn_quay_ve);
+        btnGiaHan = (BootstrapButton) findViewById(R.id.activity_store_detail_btn_modifiy_debt);
+        btnQuayVe = (BootstrapButton) findViewById(R.id.activity_store_detail_btn_quay_ve);
 
         tvBucAnhDaChup = (TextView) findViewById(R.id.activity_store_detail_tv_total_image);
 

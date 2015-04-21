@@ -4,26 +4,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:bootstrap="http://schemas.android.com/apk/res-auto">
-    <EditText
-            android:layout_marginTop="10dp"
-            android:id="@+id/activity_promotion_management_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintSearchPromotionTitle"
-            android:drawablePadding="10dp"
-            android:layout_margin="5dp"
-            android:singleLine="true"
-            android:drawableStart="@drawable/ic_action_search"
-            android:drawableLeft="@drawable/ic_action_search"
-            />
     <ListView
-            android:layout_below="@id/activity_promotion_management_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/activity_promotion_management_listview">
+            android:id="@+id/activity_store_type_management_listview">
     </ListView>
     <TextView
-            android:id="@+id/activity_promotion_management_tv_empty"
+            android:id="@+id/activity_store_type_management_tv_empty"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:padding="10dp"
@@ -31,7 +18,7 @@
             android:gravity="center"
             style="?android:textAppearanceLarge"/>
     <ProgressBar
-            android:id="@+id/activity_promotion_management_progressbar"
+            android:id="@+id/activity_store_type_management_progressbar"
             style="@android:style/Widget.Holo.ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

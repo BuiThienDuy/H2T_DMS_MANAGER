@@ -2,18 +2,20 @@
 
         <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
                      android:layout_width="match_parent"
-                     android:layout_height="match_parent">
+                     android:layout_height="match_parent"
+        android:background="#FFFFFF">
 <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:layout_weight="1"
+              android:background="#FFFFFF"
         >
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             >
 
         <Button
@@ -24,7 +26,7 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_street_divide"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
         <Button
                 android:layout_width="0dp"
@@ -34,12 +36,13 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_store_management"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         >
 
     <Button
@@ -50,7 +53,7 @@
             android:layout_weight="1"
             android:id="@+id/dashboard_btn_product_management"
             android:background="#FFFFFF"
-            style="?android:buttonBarButtonStyle"/>
+            style="@style/DashboardButton"/>
         <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -59,13 +62,14 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_promotion_management"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
 </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             >
         <Button
                 android:layout_width="0dp"
@@ -75,7 +79,7 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_employee_management"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
         <Button
                 android:layout_width="0dp"
@@ -85,14 +89,15 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_view_report"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
     </LinearLayout>
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             >
         <Button
                 android:layout_width="0dp"
@@ -102,7 +107,7 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_employee_attendance"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
         <Button
                 android:layout_width="0dp"
@@ -112,14 +117,14 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_view_feedback"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
     </LinearLayout>
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             >
         <Button
                 android:layout_width="0dp"
@@ -129,7 +134,7 @@
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_user_information"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
 
 
         <Button
@@ -140,7 +145,7 @@
                 android:text="@string/logOut"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                style="?android:buttonBarButtonStyle"/>
+                style="@style/DashboardButton"/>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>

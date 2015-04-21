@@ -92,6 +92,7 @@ public class Invoice extends ParseObject {
         put("promotion",promotion);
     }
 
+    // 7. Employee Id
     public String getEmployeeId() {
         return getString("employee_id");
     }
@@ -100,6 +101,7 @@ public class Invoice extends ParseObject {
         put("employee_id",employeeId);
     }
 
+    // 8. Manager Id
     public String getManagerId() {
         return getString("manager_id");
     }
@@ -107,4 +109,5 @@ public class Invoice extends ParseObject {
     public void setManagerId(String managerId) {
         put("manager_id",managerId);
     }
+
 }

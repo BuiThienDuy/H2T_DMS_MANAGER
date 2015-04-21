@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_bar_store_type_management_add"
+          android:title="@string/add"
+          android:icon="@drawable/ic_action_new"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_bar_store_type_management_edit"
+          android:title="@string/update"
+          android:icon="@drawable/ic_action_edit"
+          android:showAsAction="ifRoom"
+          />
+    <item android:id="@+id/action_bar_store_type_management_delete"
+          android:title="@string/delete"
+          android:showAsAction="never|withText"
+          android:icon="@drawable/ic_action_discard"/>
+    <item android:id="@+id/action_bar_store_type_management_log_out"
+          android:title="@string/logOut"
+          android:showAsAction="never"
+          />
+</menu>

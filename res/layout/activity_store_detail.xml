@@ -386,21 +386,22 @@
         </LinearLayout>
 
         <!-- Button đồng ý, hủy bỏ -->
-        <!--<LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/activity_store_detail_layout_edit_mat_hang_doi_thu_canh_tranh">
             <com.beardedhen.androidbootstrap.BootstrapButton
-                    android:id="@+id/activity_store_detail_btn_cap_nhat"
+                    android:id="@+id/activity_store_detail_btn_modifiy_debt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/update"
+                    android:text="@string/modifiedDebt"
                     bootstrap:bb_type="success"
                     bootstrap:bb_roundedCorners="true"
                     android:layout_marginRight="5dp"
-                    android:layout_marginEnd="5dp"/>
+                    android:layout_marginEnd="5dp"
+                    android:visibility="gone"/>
             <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/activity_store_detail_btn_quay_ve"
                     android:layout_width="0dp"
@@ -410,8 +411,9 @@
                     bootstrap:bb_type="danger"
                     bootstrap:bb_roundedCorners="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"/>
-        </LinearLayout>-->
+                    android:layout_marginStart="5dp"
+                    android:visibility="gone"/>
+        </LinearLayout>
 
 
 

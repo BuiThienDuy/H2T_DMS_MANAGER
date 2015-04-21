@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.*;
 import bolts.Task;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Area;
 import com.H2TFC.H2T_DMS_MANAGER.models.Store;
 import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
@@ -347,20 +349,20 @@ public class StoreManagementActivity extends Activity {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                // if store point are selected then remove from list
-                if(selectedMarker.contains(marker)) {
-                    if(pointInCircle(marker.getPosition(),circleOptionsList)) {
-                        selectedMarker.remove(marker);
-                        ShowMarkerSelected();
-                    }
-                } else {
-                    // if store point are selected then add to list
-                    if(pointInCircle(marker.getPosition(),circleOptionsList)) {
-                        // check status of store
-                        if(!myMapMarker.get(marker).getStatus().equals(Store.StoreStatus.BAN_HANG.name())) {
-                            selectedMarker.add(marker);
+                if(!myMapMarker.get(marker).getStatus().equals(Store.StoreStatus.BAN_HANG.name())) {
+                    // if store point are selected then remove from list
+                    if (selectedMarker.contains(marker)) {
+                        if (pointInCircle(marker.getPosition(), circleOptionsList)) {
+                            selectedMarker.remove(marker);
+                            ShowMarkerSelected();
                         }
-                        ShowMarkerSelected();
+                    } else {
+                        // if store point are selected then add to list
+                        if (pointInCircle(marker.getPosition(), circleOptionsList)) {
+                            // check status of store
+                            selectedMarker.add(marker);
+                            ShowMarkerSelected();
+                        }
                     }
                 }
 
@@ -376,6 +378,9 @@ public class StoreManagementActivity extends Activity {
                 Store store = myMapMarker.get(marker);
                 intent.putExtra("EXTRAS_STORE_ID", store.getObjectId());
                 intent.putExtra("EXTRAS_STORE_IMAGE_ID", store.getStoreImageId());
+                if(store.getStatus().equals(Store.StoreStatus.BAN_HANG.name())) {
+                    intent.putExtra("EXTRAS_STORE_POINT",true);
+                }
                 startActivity(intent);
             }
         });
@@ -723,7 +728,7 @@ public class StoreManagementActivity extends Activity {
 
                             for(Marker marker : myMapMarker.keySet()) {
                                 if(pointInCircle(marker.getPosition(),circleOptionsList) && !selectedMarker.contains
-                                        (marker))
+                                        (marker) && !myMapMarker.get(marker).getStatus().equals(Store.StoreStatus.BAN_HANG.name()))
                                 selectedMarker.add(marker);
                             }
                             ShowMarkerSelected();
@@ -888,10 +893,41 @@ public class StoreManagementActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_store_management,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
                 finish();
+                break;
+            }
+
+            case R.id.action_bar_store_management_store_type: {
+                Intent intent = new Intent(StoreManagementActivity.this,StoreTypeManagementActivity.class);
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.action_bar_store_management_log_out: {
+                AlertDialog.Builder confirmDialog = new AlertDialog.Builder(StoreManagementActivity.this);
+                confirmDialog.setMessage(getString(R.string.confirmLogOut));
+                confirmDialog.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ParseUser.logOut();
+                        Intent intent = new Intent(StoreManagementActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+                confirmDialog.setNegativeButton(getString(R.string.cancel),null);
+
+                confirmDialog.show();
                 break;
             }
         }

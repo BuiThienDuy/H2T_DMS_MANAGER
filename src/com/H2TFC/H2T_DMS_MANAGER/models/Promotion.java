@@ -46,16 +46,8 @@ public class Promotion extends ParseObject {
         put("promotion_apply_to", toDate);
     }
 
-    // 4. Product Id
-    public String getProductId() {
-        return getString("promotion_product_id");
-    }
 
-    public void setProductId(String productId) {
-        put("promotion_product_id", productId);
-    }
-
-    // 5. Discount
+    // 4. Discount
     public int getDiscount() {
         return getInt("promotion_discount");
     }
@@ -64,7 +56,7 @@ public class Promotion extends ParseObject {
         put("promotion_discount", discount);
     }
 
-    // 6. Product gift
+    // 5. Product gift
     public Product getProductGift() {
         return (Product) getParseObject("promotion_product_gift");
     }
@@ -73,7 +65,7 @@ public class Promotion extends ParseObject {
         put("promotion_product_gift", productGift);
     }
 
-    // 7. Quantity gift
+    // 6. Quantity gift
     public int getQuantityGift() {
         return getInt("promotion_quantity_gift");
     }
@@ -81,7 +73,7 @@ public class Promotion extends ParseObject {
         put("promotion_quantity_gift", quantity);
     }
 
-    // 8. Product gifted
+    // 7. Product gifted
     public Product getProductGifted() {
         return (Product) getParseObject("promotion_product_gifted");
     }
@@ -90,7 +82,7 @@ public class Promotion extends ParseObject {
         put("promotion_product_gifted", productGifted);
     }
 
-    // 9. Quantity gifted
+    // 8. Quantity gifted
     public int getQuantityGifted() {
         return getInt("promotion_quantity_gifted");
     }

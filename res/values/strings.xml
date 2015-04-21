@@ -231,6 +231,28 @@
     <string name="tangPham">Tặng phẩm</string>
     <string name="chietKhau">Chiết khấu</string>
     <string name="chietKhautv">Chiết khấu:</string>
-    <string name="promotionChietKhau">2.Khuyến mãi chiết khấu</string>
+    <string name="promotionChietKhau">2. Khuyến mãi chiết khấu</string>
     <string name="addNewPromotionSuccess">Thêm thông tin khuyến mãi thành công</string>
+    <string name="hintSearchPromotionTitle">Tìm tên thông tin khuyến mãi</string>
+    <string name="applyFromDateDescription">- Áp dụng từ ngày:</string>
+    <string name="appyToDateDescription">- Áp dụng tới ngày:</string>
+    <string name="addNewPromotionTitle">Thêm thông tin khuyến mãi</string>
+    <string name="emptyPromotionList">Hiện không có thông tin khuyến mãi trong danh sách, vui lòng nhấn nút \'+\'
+    để thêm mới thông tin khuyến mãi</string>
+    <string name="modifiedDebt">Gia hạn công nợ</string>
+    <string name="modifyDebtSuccess">Gia hạn công nợ thành công</string>
+    <string name="modifiedDebtTitle">Gia hạn công nợ</string>
+    <string name="modifiedDebtMessage">Vui lòng nhập số công nợ muốn gia hạn</string>
+    <string name="thongTinLoaiCuaHang">Thông tin loại cửa hàng</string>
+    <string name="defaultDebt">Công nợ mặc định</string>
+    <string name="errorBlankStoreTypeName">Vui lòng nhập tên loại cửa hàng</string>
+    <string name="errorBlankDefaultDebt">Vui lòng nhập số công nợ mặc định</string>
+    <string name="addNewStoreTypeSuccess">Thêm loại cửa hàng thành công</string>
+    <string name="addNewStoreTypeFailed">Thên loại cửa hàng thất bại\n</string>
+    <string name="storeTypeManagementTitle">Quản lý thông tin loại cửa hàng</string>
+    <string name="confirmDeleteStoreTypeTitle">Xác nhận xóa loại cửa hàng</string>
+    <string name="confirmDeleteStoreTypeMessage">Bạn có chắc là bạn muốn xóa loại cửa hàng này không?</string>
+    <string name="errorNoSelectStoreTypeToEdit">Vui lòng chọn loại cửa hàng để chỉnh sửa</string>
+    <string name="errorNoSelectStoreTypeToDelete">Vui lòng chọn loại cửa hàng để xóa</string>
+    <string name="removeStoreTypeSuccess">Xoá loại cửa hàng thành công</string>
 </resources>
