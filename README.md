@@ -11,7 +11,7 @@ H2T DMS Manager là ứng dụng quản lý điểm phân phối bán hàng đư
 - [x] Quản lý sản phẩm
 - [ ] Quản lý khuyến mãi
 - [x] Quản lý chấm công
-- [ ] Xem Phản hồi điểm bán hàng
+- [x] Xem Phản hồi điểm bán hàng
 - [ ] Xem báo cáo
 - [x] Đăng nhập/đăng xuất
 
