@@ -21,6 +21,9 @@
                 android:id="@+id/activity_promotion_new_et_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
                 android:layout_weight="1"/>
     </LinearLayout>
 
@@ -78,6 +81,10 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
                 />
     </LinearLayout>
 
@@ -120,6 +127,10 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
                 />
     </LinearLayout>
 
@@ -149,8 +160,12 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:inputType="number">
-
         </com.beardedhen.androidbootstrap.BootstrapEditText>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                />
     </LinearLayout>
 
     <TextView
@@ -180,6 +195,7 @@
                 android:drawableLeft="@drawable/ic_action_go_to_today"
                 android:drawableStart="@drawable/ic_action_go_to_today"
                 android:layout_weight="1"
+                android:inputType="none"
                 android:hint="@string/fromDateHint"/>
         <TextView
                 android:layout_width="wrap_content"
@@ -195,6 +211,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_action_go_to_today"
                 android:drawableStart="@drawable/ic_action_go_to_today"
+                android:inputType="none"
                 android:hint="@string/toDateHint"/>
     </LinearLayout>
 

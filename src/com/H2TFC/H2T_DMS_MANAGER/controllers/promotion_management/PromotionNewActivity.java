@@ -2,6 +2,7 @@ package com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
@@ -16,9 +17,7 @@ import com.parse.*;
 import com.parse.ParseException;
 
 import java.text.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -38,6 +37,9 @@ public class PromotionNewActivity extends Activity {
     LinearLayout llSanPham, llChietKhau;
     TextView tvSanPham, tvChietKhau;
 
+    String promotionIdEdit;
+    Promotion promotionToEdit;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +47,48 @@ public class PromotionNewActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.addNewPromotionTitle));
 
-
         InitializeComponent();
+
+        if(getIntent().hasExtra("EXTRAS_PROMOTION_ID")) {
+            setTitle(getString(R.string.updatePromotionTitle));
+            promotionIdEdit = getIntent().getStringExtra("EXTRAS_PROMOTION_ID");
+            btnOk.setText(getString(R.string.update));
+
+            ParseQuery<Promotion> promotionParseQuery = Promotion.getQuery();
+            promotionParseQuery.whereEqualTo("objectId", promotionIdEdit);
+            promotionParseQuery.fromPin(DownloadUtils.PIN_PROMOTION);
+            try {
+                promotionToEdit = promotionParseQuery.getFirst();
+                int discount = 0;
+                try {
+                    discount = promotionToEdit.getDiscount();
+                } catch(Exception ex) {
+
+                }
+                int amount1 = 0;
+                try {
+                    amount1 = promotionToEdit.getQuantityGift();
+                } catch(Exception ex) {
+
+                }
+                int amount2 = 0;
+                try {
+                    amount2 = promotionToEdit.getQuantityGifted();
+                } catch(Exception ex) {
+
+                }
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                etApplyFromDate.setText(dateFormat.format(promotionToEdit.getPromotionApplyFrom()));
+                etApplyToDate.setText(dateFormat.format(promotionToEdit.getPromotionApplyTo()));
+                etDiscount.setText("" + discount);
+                etAmount1.setText("" + amount1);
+                etAmount2.setText("" + amount2);
+                etTitle.setText(promotionToEdit.getPromotionName());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         SetupEvent();
     }
@@ -59,19 +101,26 @@ public class PromotionNewActivity extends Activity {
                 final String productName1 = spnProductName1.getSelectedItem().toString();
                 final String productName2 = spnProductName2.getSelectedItem().toString();
                 int amount1 = Integer.parseInt(etAmount1.getText().toString());
+                int amount2 = 0;
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date applyFromDate = null;
                 Date applyToDate = null;
                 try {
                     applyFromDate = simpleDateFormat.parse(etApplyFromDate.getText().toString());
                     applyToDate = simpleDateFormat.parse(etApplyToDate.getText().toString());
-                } catch (java.text.ParseException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 if (selectedPromotiontypePosition == 0) {
-                    int amount2 = Integer.parseInt(etAmount2.getText().toString());
-                    final Promotion promotion = new Promotion();
+                    amount2 = Integer.parseInt(etAmount2.getText().toString());
+                    Promotion promotion = null;
+                    if(promotionIdEdit == null) {
+                        promotion = new Promotion();
+                    } else {
+                        promotion = promotionToEdit;
+                    }
+                    assert promotion != null;
                     promotion.setPromotionName(title);
                     promotion.setQuantityGift(amount1);
                     promotion.setQuantityGifted(amount2);
@@ -81,21 +130,22 @@ public class PromotionNewActivity extends Activity {
                     final ParseQuery<Product> productParseQuery = Product.getQuery();
                     productParseQuery.whereEqualTo("name", productName1);
                     productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
+                    final Promotion finalPromotion = promotion;
                     productParseQuery.getFirstInBackground(new GetCallback<Product>() {
                         @Override
                         public void done(Product product, ParseException e) {
                             if (e == null) {
-                                promotion.setProductGift(product);
+                                finalPromotion.setProductGift(product);
                                 ParseQuery<Product> productParseQuery2 = Product.getQuery();
                                 productParseQuery2.whereEqualTo("name", productName2);
                                 productParseQuery2.fromPin(DownloadUtils.PIN_PRODUCT);
                                 productParseQuery2.getFirstInBackground(new GetCallback<Product>() {
                                     @Override
                                     public void done(Product product, ParseException e) {
-                                        promotion.setProductGifted(product);
+                                        finalPromotion.setProductGifted(product);
 
-                                        promotion.saveEventually();
-                                        promotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
+                                        finalPromotion.saveEventually();
+                                        finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
                                             @Override
                                             public void done(ParseException e) {
                                                 if (e == null) {
@@ -113,22 +163,30 @@ public class PromotionNewActivity extends Activity {
                 } else {
                     int discount = Integer.parseInt(etDiscount.getText().toString());
 
-                    final Promotion promotion = new Promotion();
+                    Promotion promotion = null;
+                    if(promotionIdEdit == null) {
+                        promotion = new Promotion();
+                    } else {
+                        promotion = promotionToEdit;
+                    }
                     promotion.setPromotionName(title);
                     promotion.setQuantityGift(amount1);
                     promotion.setDiscount(discount);
+                    promotion.setPromotionApplyFrom(applyFromDate);
+                    promotion.setPromotionApplyTo(applyToDate);
 
                     final ParseQuery<Product> productParseQuery = Product.getQuery();
                     productParseQuery.whereEqualTo("name", productName1);
                     productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
+                    final Promotion finalPromotion = promotion;
                     productParseQuery.getFirstInBackground(new GetCallback<Product>() {
                         @Override
                         public void done(Product product, ParseException e) {
                             if (e == null) {
-                                promotion.setProductGift(product);
+                                finalPromotion.setProductGift(product);
 
-                                promotion.saveEventually();
-                                promotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
+                                finalPromotion.saveEventually();
+                                finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
                                     @Override
                                     public void done(ParseException e) {
                                         if (e == null) {
@@ -212,8 +270,13 @@ public class PromotionNewActivity extends Activity {
         MyEditDatePicker edpFromDate = new MyEditDatePicker(PromotionNewActivity.this, R.id
                 .activity_promotion_management_et_from_date,day,month,
                 year);
+
+        c.add(Calendar.DATE,10);
+        day = c.get(Calendar.DATE);
+        month = c.get(Calendar.MONTH);
+        year = c.get(Calendar.YEAR);
         MyEditDatePicker edpToDate =new MyEditDatePicker(PromotionNewActivity.this, R.id
-                .activity_promotion_management_et_to_date,day+10,month,
+                .activity_promotion_management_et_to_date,day,month,
                 year);
 
         edpFromDate.updateDisplay();

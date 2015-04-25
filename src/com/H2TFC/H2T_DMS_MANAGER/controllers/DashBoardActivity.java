@@ -19,6 +19,7 @@ import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementAct
 import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.EmployeeChooseActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.StreetDivideActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.user_information_management.UserInformationManagementActivity;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.view_report.ViewReportActivity;
 import com.parse.ParseUser;
 
 /*
@@ -121,7 +122,7 @@ public class DashBoardActivity extends Activity {
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
 //                        .show();
-                NavigateIntent(StoreManagementActivity.class);
+                NavigateIntent(ViewReportActivity.class);
             }
         });
 

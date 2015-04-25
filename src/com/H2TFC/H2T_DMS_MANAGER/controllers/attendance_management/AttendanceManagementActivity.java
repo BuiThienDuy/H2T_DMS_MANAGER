@@ -127,9 +127,16 @@ public class AttendanceManagementActivity extends Activity {
         MyEditDatePicker edpFromDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
                 .activity_attendance_management_et_from_date,day,month,
                 year);
+
+        c.add(Calendar.DATE,1);
+        day = c.get(Calendar.DATE);
+        month = c.get(Calendar.MONTH);
+        year = c.get(Calendar.YEAR);
         MyEditDatePicker edpToDate =new MyEditDatePicker(AttendanceManagementActivity.this, R.id
-                .activity_attendance_management_et_to_date,day+1,month,
+                .activity_attendance_management_et_to_date,day,month,
                 year);
+
+
 
         edpFromDate.updateDisplay();
         edpToDate.updateDisplay();

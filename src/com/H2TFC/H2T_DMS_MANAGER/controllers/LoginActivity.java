@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
                 final String matKhau = etMatKhau.getText().toString();                              //password
 
                 boolean loiXuatHien = false;                                                        //error_exist
-                StringBuilder noiDungLoi = new StringBuilder(getString(R.string.errorPrefix));     //error_msg
+                StringBuilder noiDungLoi = new StringBuilder("");     //error_msg
 
                 final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setMessage(getString(R.string.PleaseWait));
@@ -73,11 +73,10 @@ public class LoginActivity extends Activity {
 
                 // if password blank
                 if (matKhau.trim().equals("")) {
-                    if (loiXuatHien) {
-                        noiDungLoi.append(getString(R.string.errorJoin));
+                    if (!loiXuatHien) {
+                        loiXuatHien = true;
+                        noiDungLoi.append(getString(R.string.errorBlankPassword));
                     }
-                    loiXuatHien = true;
-                    noiDungLoi.append(getString(R.string.errorBlankPassword));
                 }
 
                 noiDungLoi.append(".");
@@ -146,7 +145,7 @@ public class LoginActivity extends Activity {
                                 } else {
                                     // Oops something went wrong
                                     progressDialog.dismiss();
-                                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, getString(R.string.userNameOrPasswordIncorrect), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

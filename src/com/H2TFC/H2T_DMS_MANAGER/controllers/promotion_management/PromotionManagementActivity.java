@@ -108,7 +108,9 @@ public class PromotionManagementActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position >=0 ) {
-
+                    Intent intent = new Intent(PromotionManagementActivity.this,PromotionNewActivity.class);
+                    intent.putExtra("EXTRAS_PROMOTION_ID",promotionAdapter.getItem(position).getObjectId());
+                    startActivityForResult(intent,MyApplication.REQUEST_EDIT);
                 }
             }
         });

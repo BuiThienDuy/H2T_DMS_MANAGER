@@ -130,6 +130,7 @@
         <activity android:name=".controllers.promotion_management.PromotionNewActivity"/>
         <activity android:name=".controllers.store_management.StoreTypeManagementActivity"/>
         <activity android:name=".controllers.store_management.StoreTypeNewDialog"/>
+        <activity android:name=".controllers.view_report.ViewReportActivity"/>
 
         <!-- replace @drawable/push_icon with your push icon identifier -->
         <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_notification"/>

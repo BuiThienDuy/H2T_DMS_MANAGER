@@ -255,4 +255,19 @@
     <string name="errorNoSelectStoreTypeToEdit">Vui lòng chọn loại cửa hàng để chỉnh sửa</string>
     <string name="errorNoSelectStoreTypeToDelete">Vui lòng chọn loại cửa hàng để xóa</string>
     <string name="removeStoreTypeSuccess">Xoá loại cửa hàng thành công</string>
+    <string name="updatePromotionTitle">Cập nhật thông tin khuyến mãi</string>
+    <string name="realIncome">Thực thu</string>
+    <string name="employeeIncomeChart">2. Biểu đồ doanh thu từng nhân viên</string>
+    <string name="totalIncomeChart">1. Biểu đồ tổng thu nhập</string>
+    <string name="BAN_HANG">Bán hàng</string>
+    <string name="TIEM_NANG">Tiềm năng</string>
+    <string name="KHAO_SAT">Khảo sát</string>
+    <string name="KHONG_DU_TIEU_CHUAN">Không đủ tiêu chuẩn</string>
+    <string name="CHO_CAP_TREN">Chờ cấp trên</string>
+    <string name="DANG_THOA_THUAN">Đang thỏa thuận</string>
+    <string name="storePointChart">3. Biểu đồ điểm cửa hàng</string>
+    <string name="MOI_TAO">Mới tạo</string>
+    <string name="DANG_XU_LY">Đang xử lý</string>
+    <string name="DA_THANH_TOAN">Đã thanh toán</string>
+    <string name="invoiceStatusChart">Biểu đồ tình trạng đơn hàng</string>
 </resources>

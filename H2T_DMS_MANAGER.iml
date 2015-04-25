@@ -47,5 +47,16 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/mpandroidchartlibrary-2-0-9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://E:/mpandroidchartlibrary-2-0-9.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

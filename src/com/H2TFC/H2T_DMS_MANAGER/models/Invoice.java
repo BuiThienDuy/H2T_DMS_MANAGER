@@ -23,7 +23,7 @@ public class Invoice extends ParseObject {
 
     public static int getStatusColor(String status) {
         if (status.equals(MOI_TAO)) {
-            return Color.RED;
+            return Color.CYAN;
         }
         if (status.equals(DANG_XU_LY)) {
             return Color.YELLOW;
@@ -75,11 +75,11 @@ public class Invoice extends ParseObject {
     }
 
     // 5. Product Purchase
-    public List<Product> getProductPurchases() {
+    public List<ProductPurchase> getProductPurchases() {
         return getList("productPurchase");
     }
 
-    public void setProductPurchases(List<Product> productList) {
+    public void setProductPurchases(List<ProductPurchase> productList) {
         put("productPurchase",productList);
     }
 
@@ -92,7 +92,6 @@ public class Invoice extends ParseObject {
         put("promotion",promotion);
     }
 
-    // 7. Employee Id
     public String getEmployeeId() {
         return getString("employee_id");
     }
@@ -101,7 +100,6 @@ public class Invoice extends ParseObject {
         put("employee_id",employeeId);
     }
 
-    // 8. Manager Id
     public String getManagerId() {
         return getString("manager_id");
     }
@@ -109,5 +107,4 @@ public class Invoice extends ParseObject {
     public void setManagerId(String managerId) {
         put("manager_id",managerId);
     }
-
 }
