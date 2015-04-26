@@ -13,15 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAttendanceAdapter;
-import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeViewLockedListAdapter;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.H2TFC.H2T_DMS_MANAGER.widget.MyEditDatePicker;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /*
@@ -32,13 +29,11 @@ import java.util.List;
  * All rights reserved
  */
 public class AttendanceManagementActivity extends Activity {
-    public BootstrapEditText etFromDate,etToDate;
+    public BootstrapEditText etFromDate, etToDate;
     EmployeeListAttendanceAdapter attendanceAdapter;
     ListView lvEmployee;
     ProgressBar progressBar;
     TextView tvEmptyView;
-
-
 
 
     @Override
@@ -48,14 +43,34 @@ public class AttendanceManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.attendanceManagementTitle));
 
-        if(ConnectUtils.hasConnectToInternet(AttendanceManagementActivity.this)) {
-            DownloadUtils.DownloadParseAttendance(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    attendanceAdapter.loadObjects();
-                }
-            });
+        ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+        userQuery.fromPin(DownloadUtils.PIN_EMPLOYEE);
+        try {
+            if(userQuery.count() == 0) {
+                DownloadUtils.DownloadParseEmployee(AttendanceManagementActivity.this, new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        DownloadUtils.DownloadParseAttendance(AttendanceManagementActivity.this, new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                attendanceAdapter.loadObjects();
+                            }
+                        });
+                    }
+                });
+            } else {
+                DownloadUtils.DownloadParseAttendance(AttendanceManagementActivity.this, new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        attendanceAdapter.loadObjects();
+                    }
+                });
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
+
 
         InitializeComponent();
         SetupListView();
@@ -101,11 +116,11 @@ public class AttendanceManagementActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Intent intent = new Intent(AttendanceManagementActivity.this, AttendanceDetailActivity.class);
-                    intent.putExtra("EXTRAS_EMPLOYEE_ID", attendanceAdapter.getItem(position).getObjectId());
-                    intent.putExtra("EXTRAS_FROM_DATE", etFromDate.getText().toString());
-                    intent.putExtra("EXTRAS_TO_DATE", etToDate.getText().toString());
-                    startActivity(intent);
+                Intent intent = new Intent(AttendanceManagementActivity.this, AttendanceDetailActivity.class);
+                intent.putExtra("EXTRAS_EMPLOYEE_ID", attendanceAdapter.getItem(position).getObjectId());
+                intent.putExtra("EXTRAS_FROM_DATE", etFromDate.getText().toString());
+                intent.putExtra("EXTRAS_TO_DATE", etToDate.getText().toString());
+                startActivity(intent);
 
             }
         });
@@ -125,17 +140,16 @@ public class AttendanceManagementActivity extends Activity {
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
         MyEditDatePicker edpFromDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
-                .activity_attendance_management_et_from_date,day,month,
+                .activity_attendance_management_et_from_date, day, month,
                 year);
 
-        c.add(Calendar.DATE,1);
+        c.add(Calendar.DATE, 1);
         day = c.get(Calendar.DATE);
         month = c.get(Calendar.MONTH);
         year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpToDate =new MyEditDatePicker(AttendanceManagementActivity.this, R.id
-                .activity_attendance_management_et_to_date,day,month,
+        MyEditDatePicker edpToDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
+                .activity_attendance_management_et_to_date, day, month,
                 year);
-
 
 
         edpFromDate.updateDisplay();
@@ -173,7 +187,7 @@ public class AttendanceManagementActivity extends Activity {
 
             @Override
             public void onLoaded(List<ParseUser> list, Exception e) {
-                if(list.size() == 0) {
+                if (list.size() == 0) {
                     tvEmptyView.setText(getString(R.string.lvEmptyEmployee));
                 }
                 progressBar.setVisibility(View.GONE);

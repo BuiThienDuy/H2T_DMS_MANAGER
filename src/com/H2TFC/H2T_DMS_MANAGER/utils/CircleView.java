@@ -156,12 +156,8 @@ public class CircleView extends View {
     }
 
     private Boolean getTouchedCircle(final int xTouch, final int yTouch) {
-        if ((circle.centerX - xTouch) * (circle.centerX - xTouch) +
-                (circle.centerY - yTouch) * (circle.centerY - yTouch)   <= circle.radius * circle.radius) {
-            return true;
-        } else {
-            return false;
-        }
+        return (circle.centerX - xTouch) * (circle.centerX - xTouch) +
+                (circle.centerY - yTouch) * (circle.centerY - yTouch) <= circle.radius * circle.radius;
 
     }
 

@@ -11,8 +11,6 @@ import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -58,16 +56,16 @@ public class AttendanceDetailAdapter extends ParseQueryAdapter<Attendance> {
         storeParseQuery.getFirstInBackground(new GetCallback<Store>() {
             @Override
             public void done(Store store, ParseException e) {
-                if( e == null) {
-                    tvStoreName.setText(finalV.getContext().getString(R.string.store)+ ": " + store.getName());
+                if (e == null) {
+                    tvStoreName.setText(finalV.getContext().getString(R.string.store) + ": " + store.getName());
                 }
             }
         });
 
         TextView tvCreatedDate = (TextView) v.findViewById(R.id.list_attendance_detail_tv_created_date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        tvCreatedDate.setText(v.getContext().getString(R.string.takePhotoAt) +": " + dateFormat.format(object.getCreatedAt()) );
-                
+        tvCreatedDate.setText(v.getContext().getString(R.string.takePhotoAt) + ": " + dateFormat.format(object.getCreatedAt()));
+
         return v;
 
 

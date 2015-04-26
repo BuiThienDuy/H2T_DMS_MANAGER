@@ -1,7 +1,6 @@
 package com.H2TFC.H2T_DMS_MANAGER.adapters;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -41,34 +39,34 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
         TextView tvCreatedDate = (TextView) v.findViewById(R.id.list_feedback_tv_created_date);
         TextView tvContent = (TextView) v.findViewById(R.id.list_feedback_tv_content);
 
-        tvTitle.setText(" "+object.getTitle());
+        tvTitle.setText(" " + object.getTitle());
 
         String status = object.getStatus();
-        if(status.equals(Feedback.MOI_TAO)) {
+        if (status.equals(Feedback.MOI_TAO)) {
             status = v.getContext().getString(R.string.haveCreated);
         }
-        if(status.equals(Feedback.DANG_XEM_XET)) {
+        if (status.equals(Feedback.DANG_XEM_XET)) {
             status = v.getContext().getString(R.string.onPending);
         }
-        if(status.equals(Feedback.DA_XU_LY)) {
+        if (status.equals(Feedback.DA_XU_LY)) {
             status = v.getContext().getString(R.string.feedbackCompleted);
         }
 
-        tvStatus.setText(" "+status);
+        tvStatus.setText(" " + status);
 
         ParseQuery<Store> query = Store.getQuery()
-                                       .whereEqualTo("objectId", object.getStoreId());
+                .whereEqualTo("objectId", object.getStoreId());
         query.getFirstInBackground(new GetCallback<Store>() {
             @Override
             public void done(Store store, ParseException e) {
                 if (e == null) {
-                    tvStore.setText(" "+store.getName());
+                    tvStore.setText(" " + store.getName());
                 }
             }
         });
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        tvCreatedDate.setText(" "+dateFormat.format(object.getCreatedAt()));
+        tvCreatedDate.setText(" " + dateFormat.format(object.getCreatedAt()));
 
         tvContent.setText(object.getDescription());
 

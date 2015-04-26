@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import bolts.Task;
+import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
@@ -28,6 +29,10 @@ import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.CustomPushUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.GPSTracker;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.google.maps.android.ui.IconGenerator;
@@ -61,7 +66,7 @@ public class StoreManagementActivity extends Activity {
     ListView lvEmployee;
     TextView tvEmptyView;
     ProgressBar progressBar;
-    ImageButton btn_undo, btn_redo, btn_discard;
+    ImageButton btn_undo, btn_redo, btn_discard, btn_search;
     Button btn_tao;
     Polygon polygonStore;
     ImageView ivCrosshair;
@@ -104,11 +109,11 @@ public class StoreManagementActivity extends Activity {
                     }
                 }
             });
-
-            DownloadUtils.DownloadParseEmployee(new SaveCallback() {
+        }
+            DownloadUtils.DownloadParseEmployee(StoreManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    DownloadUtils.DownloadParseStore(new SaveCallback() {
+                    DownloadUtils.DownloadParseStore(StoreManagementActivity.this,new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
                             DrawStorePoint();
@@ -117,7 +122,7 @@ public class StoreManagementActivity extends Activity {
                 }
             });
 
-            DownloadUtils.DownloadParseStoreType(new SaveCallback() {
+            DownloadUtils.DownloadParseStoreType(StoreManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
 
@@ -125,7 +130,7 @@ public class StoreManagementActivity extends Activity {
             });
 
 
-        }
+
         InitializeComponent();
         SetupListView();
         SetupEvent();
@@ -251,6 +256,7 @@ public class StoreManagementActivity extends Activity {
         btn_discard = (ImageButton) findViewById(R.id.activity_store_management_btn_discard);
         btn_redo = (ImageButton) findViewById(R.id.activity_store_management_btn_redo);
         btn_undo = (ImageButton) findViewById(R.id.activity_store_management_btn_undo);
+        btn_search = (ImageButton) findViewById(R.id.activity_store_management_btn_search);
 
         // Other
         myMapMarker = new HashMap<Marker, Store>();
@@ -322,7 +328,7 @@ public class StoreManagementActivity extends Activity {
                                 if(e == null) {
                                     String title = "";
                                     if(selectedMarker.contains(marker)) {
-                                        title = (String) employee.get("name") + " - " + getString(R.string.selecting);
+                                        title = employee.get("name") + " - " + getString(R.string.selecting);
                                     } else {
                                         title = (String) employee.get("name");
                                     }
@@ -346,6 +352,22 @@ public class StoreManagementActivity extends Activity {
     }
 
     public void SetupEvent() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                Context context = getApplicationContext();
+                try {
+                    startActivityForResult(builder.build(context), MyApplication.REQUEST_GOOGLE_PLACES);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -932,5 +954,23 @@ public class StoreManagementActivity extends Activity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MyApplication.REQUEST_GOOGLE_PLACES) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        place.getLatLng(), 13));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(place.getLatLng())      // Sets the center of the map to location user
+                        .zoom(17)                                                                 // Sets the zoom
+                        .build();                                                                 // Creates a CameraPosition from the builder
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        }
     }
 }

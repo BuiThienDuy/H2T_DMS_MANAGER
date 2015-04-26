@@ -57,14 +57,13 @@ public class EmployeeManagementActivity extends Activity {
         setTitle(getString(R.string.employeeManagementTitle));
 
         // Download and save to local datastore
-        if (ConnectUtils.hasConnectToInternet(EmployeeManagementActivity.this)) {
-            DownloadUtils.DownloadParseEmployee(new SaveCallback() {
+            DownloadUtils.DownloadParseEmployee(EmployeeManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     employeeListAdapter.loadObjects();
                 }
             });
-        }
+
         SetupListView();
         SetupEvent();
     }

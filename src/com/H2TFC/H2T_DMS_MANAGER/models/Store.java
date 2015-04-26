@@ -43,7 +43,7 @@ public class Store extends ParseObject {
         return 0;
     }
 
-    public static enum StoreStatus {
+    public enum StoreStatus {
         KHAO_SAT,
 
         TIEM_NANG,

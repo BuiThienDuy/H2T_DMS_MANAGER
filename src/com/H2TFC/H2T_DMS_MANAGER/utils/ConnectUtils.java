@@ -22,8 +22,6 @@ public class ConnectUtils {
             return false;
         if (networkInfo.isConnected() == false)
             return false;
-        if (networkInfo.isAvailable() == false)
-            return false;
-        return true;
+        return networkInfo.isAvailable() != false;
     }
 }

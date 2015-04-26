@@ -38,15 +38,15 @@ public class EmployeeChooseActivity extends Activity {
         setContentView(R.layout.activity_employee_choose);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(ConnectUtils.hasConnectToInternet(EmployeeChooseActivity.this)) {
-            DownloadUtils.DownloadParseEmployee(new SaveCallback() {
+
+            DownloadUtils.DownloadParseEmployee(getApplicationContext(),new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     employeeListAdapter.notifyDataSetChanged();
                     employeeListAdapter.loadObjects();
                 }
             });
-        }
+
 
 
         InitializeComponent();

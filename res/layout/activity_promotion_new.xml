@@ -196,6 +196,7 @@
                 android:drawableStart="@drawable/ic_action_go_to_today"
                 android:layout_weight="1"
                 android:inputType="none"
+                android:focusable="false"
                 android:hint="@string/fromDateHint"/>
         <TextView
                 android:layout_width="wrap_content"
@@ -212,6 +213,7 @@
                 android:drawableLeft="@drawable/ic_action_go_to_today"
                 android:drawableStart="@drawable/ic_action_go_to_today"
                 android:inputType="none"
+                android:focusable="false"
                 android:hint="@string/toDateHint"/>
     </LinearLayout>
 
@@ -239,6 +241,7 @@
                 bootstrap:bb_type="danger"
                 bootstrap:bb_roundedCorners="true"
                 android:text="@string/cancel"
+                android:focusable="false"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp">
         </com.beardedhen.androidbootstrap.BootstrapButton>

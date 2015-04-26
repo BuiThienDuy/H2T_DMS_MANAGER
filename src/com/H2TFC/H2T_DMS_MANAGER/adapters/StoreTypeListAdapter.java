@@ -5,11 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.models.Promotion;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreType;
 import com.parse.ParseQueryAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /*

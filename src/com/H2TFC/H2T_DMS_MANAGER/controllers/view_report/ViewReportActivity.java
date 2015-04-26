@@ -63,14 +63,18 @@ public class ViewReportActivity extends Activity {
         InitializeComponent();
         LoadReport();
 
-        if(ConnectUtils.hasConnectToInternet(ViewReportActivity.this)) {
-            DownloadUtils.DownloadParseInvoice(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    LoadReport();
-                }
-            });
-        }
+        DownloadUtils.DownloadParseInvoice(ViewReportActivity.this,new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                DownloadUtils.DownloadParseStore(getApplicationContext(), new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        LoadReport();
+                    }
+                });
+
+            }
+        });
 
         SetupEvent();
     }
@@ -230,7 +234,7 @@ public class ViewReportActivity extends Activity {
 
         // space between slices
         d.setSliceSpace(2f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setColors(ColorTemplate.JOYFUL_COLORS);
 
         ArrayList<String> q = new ArrayList<String>();
         q.add(getString(R.string.income));
@@ -408,7 +412,7 @@ public class ViewReportActivity extends Activity {
 
         // space between slices
         d.setSliceSpace(2f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData cd = new PieData(q, d);
         return cd;
@@ -466,7 +470,7 @@ public class ViewReportActivity extends Activity {
 
         // space between slices
         d.setSliceSpace(2f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData cd = new PieData(q, d);
         return cd;
@@ -528,7 +532,7 @@ public class ViewReportActivity extends Activity {
 
         BarDataSet d = new BarDataSet(entries, "New DataSet " + cnt);
         d.setBarSpacePercent(20f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setColors(ColorTemplate.JOYFUL_COLORS);
         d.setHighLightAlpha(255);
 
         BarData cd = new BarData(getMonths(), d);
@@ -552,7 +556,7 @@ public class ViewReportActivity extends Activity {
 
         // space between slices
         d.setSliceSpace(2f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData cd = new PieData(getQuarters(), d);
         return cd;

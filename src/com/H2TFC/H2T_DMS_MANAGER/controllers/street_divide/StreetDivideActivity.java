@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.dialogs.ColorPickerDialog;
 import com.H2TFC.H2T_DMS_MANAGER.models.Area;
@@ -23,6 +25,7 @@ import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.GPSTracker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
@@ -408,12 +411,11 @@ public class StreetDivideActivity extends Activity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int PLACE_PICKER_REQUEST = 1;
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
                 Context context = getApplicationContext();
                 try {
-                    startActivityForResult(builder.build(context), PLACE_PICKER_REQUEST);
+                    startActivityForResult(builder.build(context), MyApplication.REQUEST_GOOGLE_PLACES);
                 } catch (GooglePlayServicesRepairableException e) {
                     e.printStackTrace();
                 } catch (GooglePlayServicesNotAvailableException e) {
@@ -606,5 +608,23 @@ public class StreetDivideActivity extends Activity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MyApplication.REQUEST_GOOGLE_PLACES) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        place.getLatLng(), 13));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(place.getLatLng())      // Sets the center of the map to location user
+                        .zoom(17)                                                                 // Sets the zoom
+                        .build();                                                                 // Creates a CameraPosition from the builder
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        }
     }
 }

@@ -1,6 +1,11 @@
 package com.H2TFC.H2T_DMS_MANAGER.adapters;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Status;
@@ -10,25 +15,16 @@ import com.google.android.gms.location.places.AutocompletePredictionBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-
-import android.content.Context;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
-
-import java.util.ArrayList;
 
 /**
  * Adapter that handles Autocomplete requests from the Places Geo Data API.
  * Results are encoded as
  * objects
  * that contain both the Place ID and the text description from the autocomplete query.
- * <p>
+ * <p/>
  * Note that this adapter requires a valid {@link com.google.android.gms.common.api.GoogleApiClient}.
  * The API client must be maintained in the encapsulating Activity, including all lifecycle and
  * connection states. When the API client is not available (for example because it has been

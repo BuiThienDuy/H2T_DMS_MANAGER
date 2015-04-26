@@ -41,14 +41,13 @@ public class StoreTypeManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.storeTypeManagementTitle));
 
-        if(ConnectUtils.hasConnectToInternet(StoreTypeManagementActivity.this)) {
-            DownloadUtils.DownloadParseStoreType(new SaveCallback() {
+            DownloadUtils.DownloadParseStoreType(StoreTypeManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     storeTypeAdapter.loadObjects();
                 }
             });
-        }
+
         InitializeComponent();
         SetupListView();
         SetupEvent();

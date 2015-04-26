@@ -14,10 +14,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.ChartData;
 
 public class BarChartItem extends ChartItem {
-    
+
     private Typeface mTf;
     private String description = "";
-    
+
     public BarChartItem(ChartData<?> cd, Context c) {
         super(cd);
 
@@ -66,22 +66,22 @@ public class BarChartItem extends ChartItem {
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
         xAxis.setSpaceBetweenLabels(10);
-        
+
         YAxis leftAxis = holder.chart.getAxisLeft();
         leftAxis.setTypeface(mTf);
         leftAxis.setLabelCount(5);
         leftAxis.setSpaceTop(20f);
-       
+
         YAxis rightAxis = holder.chart.getAxisRight();
         rightAxis.setTypeface(mTf);
         rightAxis.setLabelCount(5);
         rightAxis.setSpaceTop(20f);
 
         mChartData.setValueTypeface(mTf);
-        
+
         // set data
         holder.chart.setData((BarData) mChartData);
-        
+
         // do not forget to refresh the chart
 //        holder.chart.invalidate();
         holder.chart.animateY(700);
@@ -91,7 +91,7 @@ public class BarChartItem extends ChartItem {
 
         return convertView;
     }
-    
+
     private static class ViewHolder {
         BarChart chart;
         TextView title;

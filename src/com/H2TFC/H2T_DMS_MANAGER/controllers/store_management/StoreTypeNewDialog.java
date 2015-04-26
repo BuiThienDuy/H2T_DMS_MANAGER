@@ -15,6 +15,7 @@ import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 
 
@@ -100,46 +101,59 @@ public class StoreTypeNewDialog extends Dialog {
             });
         } else {
             etName.setText(MyStoreType.getStoreTypeName());
-            etDefaultDebt.setText(String.format(Locale.CHINESE, "%1$,.0f", MyStoreType.getDefaultDebt()) + " " +
-                    context.getString(R.string.VND));
-            String error_msg = "";
-            boolean error_exist = false;
+            etDefaultDebt.setText(new BigDecimal(MyStoreType.getDefaultDebt()).toPlainString());
 
-            String name = etName.getText().toString().trim();
-            String sDefaultDebt = etDefaultDebt.getText().toString().trim();
 
-            if (name.length() == 0) {
-                error_exist = true;
-                error_msg = context.getString(R.string.errorBlankStoreTypeName);
-            }
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String error_msg = "";
+                    boolean error_exist = false;
 
-            if (sDefaultDebt.length() == 0) {
-                error_exist = true;
-                error_msg = context.getString(R.string.errorBlankDefaultDebt);
-            }
-
-            if (error_exist) {
-                Toast.makeText(context, error_msg, Toast.LENGTH_LONG).show();
-            } else {
-                MyStoreType.setStoreTypeName(name);
-                MyStoreType.setDefaultDebt(Double.parseDouble(sDefaultDebt));
-
-                MyStoreType.saveEventually();
-                MyStoreType.pinInBackground(DownloadUtils.PIN_STORE_TYPE, new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(context, context.getString(R.string.addNewStoreTypeSuccess), Toast.LENGTH_LONG).show();
-                            StoreTypeManagementActivity activity = (StoreTypeManagementActivity) context;
-                            activity.storeTypeAdapter.loadObjects();
-                            dismiss();
-                        } else {
-                            Toast.makeText(context, context.getString(R.string.addNewStoreTypeFailed) + e.getMessage(), Toast.LENGTH_LONG)
-                                    .show();
-                        }
+                    String name = etName.getText().toString().trim();
+                    String sDefaultDebt = etDefaultDebt.getText().toString().trim();
+                    if (name.length() == 0) {
+                        error_exist = true;
+                        error_msg = context.getString(R.string.errorBlankStoreTypeName);
                     }
-                });
-            }
+
+                    if (sDefaultDebt.length() == 0) {
+                        error_exist = true;
+                        error_msg = context.getString(R.string.errorBlankDefaultDebt);
+                    }
+
+                    if (error_exist) {
+                        Toast.makeText(context, error_msg, Toast.LENGTH_LONG).show();
+                    } else {
+                        MyStoreType.setStoreTypeName(name);
+                        MyStoreType.setDefaultDebt(Double.parseDouble(sDefaultDebt));
+
+                        MyStoreType.saveEventually();
+                        MyStoreType.pinInBackground(DownloadUtils.PIN_STORE_TYPE, new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(context, context.getString(R.string.updateStoreTypeSuccess), Toast
+                                            .LENGTH_LONG)
+                                            .show();
+                                    StoreTypeManagementActivity activity = (StoreTypeManagementActivity) context;
+                                    activity.storeTypeAdapter.loadObjects();
+                                    dismiss();
+                                } else {
+                                    Toast.makeText(context, context.getString(R.string.updateStoreTypeFailed) + e
+                                                    .getMessage
+                                                    (), 
+                                            Toast
+                                            .LENGTH_LONG)
+                                            .show();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+
 
 
         }

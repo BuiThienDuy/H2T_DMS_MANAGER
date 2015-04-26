@@ -72,14 +72,13 @@ public class UserInformationManagementActivity extends Activity {
         InitializeComponent();
         SetupEvent();
 
-        if(!ConnectUtils.hasConnectToInternet(UserInformationManagementActivity.this)) {
-            DownloadUtils.DownloadParseEmployee(new SaveCallback() {
+            DownloadUtils.DownloadParseEmployee(getApplicationContext(),new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
 
                 }
             });
-        }
+
     }
 
     private void SetupEvent() {

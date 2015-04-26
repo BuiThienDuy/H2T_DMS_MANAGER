@@ -6,10 +6,10 @@ public interface SelectionListener {
 	/*
 	 * Called when user selects an item from autocomplete view
 	 */
-	public void onItemSelection(DisplayStringInterface selectedItem);
+	void onItemSelection(DisplayStringInterface selectedItem);
 	
 	/*
 	 * Called only in case of Google Places API (autocomplete_url = null)
 	 */
-	public void onReceiveLocationInformation(double lat, double lng);
+	void onReceiveLocationInformation(double lat, double lng);
 }

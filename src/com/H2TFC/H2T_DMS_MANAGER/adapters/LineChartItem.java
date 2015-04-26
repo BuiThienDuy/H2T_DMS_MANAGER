@@ -1,4 +1,3 @@
-
 package com.H2TFC.H2T_DMS_MANAGER.adapters;
 
 import android.content.Context;
@@ -24,7 +23,7 @@ public class LineChartItem extends ChartItem {
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
     }
 
-    public LineChartItem(ChartData<?> cd, Context c,String description) {
+    public LineChartItem(ChartData<?> cd, Context c, String description) {
         super(cd);
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
         this.description = description;
@@ -68,7 +67,7 @@ public class LineChartItem extends ChartItem {
         YAxis leftAxis = holder.chart.getAxisLeft();
         leftAxis.setTypeface(mTf);
         leftAxis.setLabelCount(5);
-        
+
         YAxis rightAxis = holder.chart.getAxisRight();
         rightAxis.setTypeface(mTf);
         rightAxis.setLabelCount(5);

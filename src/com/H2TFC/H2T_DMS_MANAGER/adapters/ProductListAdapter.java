@@ -10,13 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductNewActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.*;
 
-import java.text.NumberFormat;
 import java.util.Locale;
 
 /*
@@ -71,7 +69,7 @@ public class ProductListAdapter extends ParseQueryAdapter<Product> {
                 object.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        Toast.makeText(v.getContext(),v.getContext().getString(R.string.deleteProductSuccess),Toast
+                        Toast.makeText(v.getContext(), v.getContext().getString(R.string.deleteProductSuccess), Toast
                                 .LENGTH_LONG)
                                 .show();
                     }
@@ -87,7 +85,7 @@ public class ProductListAdapter extends ParseQueryAdapter<Product> {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProductNewActivity.class);
                 intent.putExtra("EDIT", object.getObjectId());
-                ((Activity)v.getContext()).startActivityForResult(intent, MyApplication.REQUEST_EDIT);
+                ((Activity) v.getContext()).startActivityForResult(intent, MyApplication.REQUEST_EDIT);
             }
         });
         return v;

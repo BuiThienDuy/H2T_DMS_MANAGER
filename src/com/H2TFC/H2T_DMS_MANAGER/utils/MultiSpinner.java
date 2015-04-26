@@ -38,10 +38,7 @@ public class MultiSpinner extends Spinner implements
 
     @Override
     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-        if (isChecked)
-            selected[which] = true;
-        else
-            selected[which] = false;
+        selected[which] = isChecked;
     }
 
     @Override
@@ -75,7 +72,7 @@ public class MultiSpinner extends Spinner implements
     @Override
     public boolean performClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMultiChoiceItems(items.toArray(new CharSequence[items.size()]), selected, (DialogInterface.OnMultiChoiceClickListener) this);
+        builder.setMultiChoiceItems(items.toArray(new CharSequence[items.size()]), selected, this);
         builder.setPositiveButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
 
@@ -107,6 +104,6 @@ public class MultiSpinner extends Spinner implements
     }
 
     public interface MultiSpinnerListener {
-        public void onItemsSelected(boolean[] selected);
+        void onItemsSelected(boolean[] selected);
     }
 }

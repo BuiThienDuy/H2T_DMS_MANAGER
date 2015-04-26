@@ -6,10 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.Promotion;
-import com.H2TFC.H2T_DMS_MANAGER.models.Store;
-import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
-import com.parse.*;
-import org.apache.http.impl.cookie.DateParseException;
+import com.parse.ParseQueryAdapter;
 
 import java.text.SimpleDateFormat;
 
@@ -44,9 +41,9 @@ public class PromotionListAdapter extends ParseQueryAdapter<Promotion> {
             tvToDate.setText(v.getContext().getString(R.string.applyFromDateDescription) + " " + dateFormat.format(object
                     .getPromotionApplyTo
                             ()));
-            tvFromDate.setText(v.getContext().getString(R.string.appyToDateDescription)+ " " + dateFormat.format
+            tvFromDate.setText(v.getContext().getString(R.string.appyToDateDescription) + " " + dateFormat.format
                     (object.getPromotionApplyFrom()));
-        } catch(NullPointerException ex) {
+        } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
         return v;

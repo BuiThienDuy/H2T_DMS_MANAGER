@@ -270,4 +270,6 @@
     <string name="DANG_XU_LY">Đang xử lý</string>
     <string name="DA_THANH_TOAN">Đã thanh toán</string>
     <string name="invoiceStatusChart">Biểu đồ tình trạng đơn hàng</string>
+    <string name="updateStoreTypeSuccess">Cập nhật thông tin loại cửa hàng thành công</string>
+    <string name="updateStoreTypeFailed">Cập nhật thông tin loại cửa hàng thất bại:\n</string>
 </resources>

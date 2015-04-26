@@ -47,7 +47,7 @@ public class EmployeeViewLockedListAdapter extends ParseQueryAdapter<ParseUser> 
         }
 
         ParseImageView userPhotoLocked = (ParseImageView) v.findViewById(R.id.list_employee_locked_iv_locked);
-        if(object.getBoolean("locked")) {
+        if (object.getBoolean("locked")) {
             userPhotoLocked.setPlaceholder(getContext().getResources().getDrawable(R.drawable.ic_action_secure));
         } else {
             userPhotoLocked.setPlaceholder(getContext().getResources().getDrawable(R.drawable.ic_action_not_secure));

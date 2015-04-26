@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class PointQuadTree<T extends PointQuadTree.Item> {
     public interface Item {
-        public Point getPoint();
+        Point getPoint();
     }
     /**
      * The bounds of this quad.

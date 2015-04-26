@@ -41,14 +41,12 @@ public class FeedbackManagementActivity extends Activity {
         setTitle(getString(R.string.viewFeedbackTitle));
 
 
-        if(ConnectUtils.hasConnectToInternet(FeedbackManagementActivity.this)) {
-            DownloadUtils.DownloadParseFeedback(new SaveCallback() {
+            DownloadUtils.DownloadParseFeedback(FeedbackManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     feedbackAdapter.loadObjects();
                 }
             });
-        }
 
         InitializeComponent();
         SetupListView();

@@ -12,9 +12,9 @@ import com.google.android.maps.GeoPoint;
 
 public class GetLatLngUtil {
 
-	public static interface GetLatLngResult {
-		public void onLatLngReceive(double lat, double lng);
-		public void onError(String message);
+	public interface GetLatLngResult {
+		void onLatLngReceive(double lat, double lng);
+		void onError(String message);
 	}
 	
 	public static void getLatLng(Context context, String address, GetLatLngResult resultListener){

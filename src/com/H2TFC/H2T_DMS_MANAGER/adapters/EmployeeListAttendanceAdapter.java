@@ -9,9 +9,8 @@ import com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management.AttendanceMan
 import com.H2TFC.H2T_DMS_MANAGER.models.Attendance;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.*;
-import com.parse.ParseException;
 
-import java.text.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.List;
  * All rights reserved
  */
 public class EmployeeListAttendanceAdapter extends ParseQueryAdapter<ParseUser> {
-    public  int imageCount = 0;
+    public int imageCount = 0;
 
     public EmployeeListAttendanceAdapter(Context context, ParseQueryAdapter.QueryFactory<ParseUser> queryFactory) {
         super(context, queryFactory);

@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.widget.ViewImageFullScreen;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreImage;
+import com.H2TFC.H2T_DMS_MANAGER.widget.ViewImageFullScreen;
 import com.parse.*;
 
 /*
@@ -39,9 +39,9 @@ public class TrungBayAdapter extends ParseQueryAdapter<StoreImage> {
         final ParseImageView storePhoto = (ParseImageView) v.findViewById(R.id.item_list_trungbay_iv_photo);
         ParseFile photoFile = object.getPhoto();
 
-        storePhoto.setPlaceholder(v.getContext().getResources().getDrawable(R.drawable.ic_action_picture) );
+        storePhoto.setPlaceholder(v.getContext().getResources().getDrawable(R.drawable.ic_action_picture));
 
-        if(photoFile != null) {
+        if (photoFile != null) {
             storePhoto.setParseFile(photoFile);
             storePhoto.loadInBackground(new GetDataCallback() {
                 @Override
@@ -50,8 +50,8 @@ public class TrungBayAdapter extends ParseQueryAdapter<StoreImage> {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(context, ViewImageFullScreen.class);
-                            intent.putExtra("EXTRA_IMAGE",((BitmapDrawable)storePhoto.getDrawable()).getBitmap());
-                            intent.putExtra("EXTRA_IMAGE_ID",object.getObjectId());
+                            intent.putExtra("EXTRA_IMAGE", ((BitmapDrawable) storePhoto.getDrawable()).getBitmap());
+                            intent.putExtra("EXTRA_IMAGE_ID", object.getObjectId());
                             ((Activity) context).startActivityForResult(intent, MyApplication.REQUEST_DELETE);
                         }
                     });

@@ -48,6 +48,7 @@ public class PromotionNewActivity extends Activity {
         setTitle(getString(R.string.addNewPromotionTitle));
 
         InitializeComponent();
+        SetupEvent();
 
         if(getIntent().hasExtra("EXTRAS_PROMOTION_ID")) {
             setTitle(getString(R.string.updatePromotionTitle));
@@ -62,6 +63,7 @@ public class PromotionNewActivity extends Activity {
                 int discount = 0;
                 try {
                     discount = promotionToEdit.getDiscount();
+                    spnPromotionType.setSelection(1);
                 } catch(Exception ex) {
 
                 }
@@ -85,12 +87,13 @@ public class PromotionNewActivity extends Activity {
                 etAmount1.setText("" + amount1);
                 etAmount2.setText("" + amount2);
                 etTitle.setText(promotionToEdit.getPromotionName());
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
 
-        SetupEvent();
+
     }
 
     private void SetupEvent() {

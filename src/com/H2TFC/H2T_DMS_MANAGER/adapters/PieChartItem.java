@@ -1,4 +1,3 @@
-
 package com.H2TFC.H2T_DMS_MANAGER.adapters;
 
 import android.content.Context;
@@ -25,7 +24,8 @@ public class PieChartItem extends ChartItem {
 
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
     }
-    public PieChartItem(ChartData<?> cd, Context c,String description) {
+
+    public PieChartItem(ChartData<?> cd, Context c, String description) {
         super(cd);
 
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");

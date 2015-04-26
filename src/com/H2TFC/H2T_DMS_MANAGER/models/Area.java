@@ -47,7 +47,7 @@ public class Area extends ParseObject {
         return 0;
     }
 
-    public static enum AreaStatus {
+    public enum AreaStatus {
         MOI_TAO,
 
         DANG_KHAO_SAT,

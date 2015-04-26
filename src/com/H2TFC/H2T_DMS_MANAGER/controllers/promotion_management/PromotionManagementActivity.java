@@ -43,14 +43,13 @@ public class PromotionManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.promotionManagemenTitle));
 
-        if(ConnectUtils.hasConnectToInternet(PromotionManagementActivity.this)) {
-            DownloadUtils.DownloadParsePromotion(new SaveCallback() {
+            DownloadUtils.DownloadParsePromotion(PromotionManagementActivity.this,new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     promotionAdapter.loadObjects();
                 }
             });
-        }
+
 
         InitializeComponent();
         SetupListView();

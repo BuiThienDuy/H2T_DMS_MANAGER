@@ -14,7 +14,7 @@ import com.parse.ParseQuery;
  */
 @ParseClassName("Product")
 public class Product extends ParseObject {
-    public static enum ProductStatus {
+    public enum ProductStatus {
         KHOA
     }
 

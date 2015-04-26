@@ -44,11 +44,11 @@ public class ClearableAutoTextView extends AutoCompleteTextView implements OnTou
 	private OnFocusChangeListener f;
 
 	public interface DisplayStringInterface {
-		public String getDisplayString();
+		String getDisplayString();
 	}
 	
 	public interface AutoCompleteResponseParser {
-		 public ArrayList<DisplayStringInterface> 	parseAutoCompleteResponse(String response);
+		 ArrayList<DisplayStringInterface> 	parseAutoCompleteResponse(String response);
 	}
 	
 	public ClearableAutoTextView(Context context) {
