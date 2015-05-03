@@ -7,36 +7,42 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:orientation="horizontal">
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/fromDate"/>
         <com.beardedhen.androidbootstrap.BootstrapEditText
                 android:id="@+id/activity_attendance_management_et_from_date"
                 android:layout_width="0dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginEnd="50dp"
                 android:layout_height="wrap_content"
                 bootstrap:be_roundedCorners="true"
                 android:drawableLeft="@drawable/ic_action_go_to_today"
                 android:drawableStart="@drawable/ic_action_go_to_today"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:focusable="false"
                 android:hint="@string/fromDateHint"/>
+        </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/toDate"/>
         <com.beardedhen.androidbootstrap.BootstrapEditText
                 android:id="@+id/activity_attendance_management_et_to_date"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 bootstrap:be_roundedCorners="true"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_action_go_to_today"

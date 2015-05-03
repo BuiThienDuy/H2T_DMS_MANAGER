@@ -1,250 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="10dp">
-    <LinearLayout
-            android:layout_marginTop="10dp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:textAppearanceMedium"
-                android:text="@string/promotionTitle"
-                android:layout_marginRight="20dp"
-                android:layout_marginEnd="20dp"/>
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_new_et_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:lines="1"
-                android:maxLines="1"
-                android:layout_weight="1"/>
-    </LinearLayout>
+            android:layout_height="match_parent">
 
     <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="10dp">
+
+        <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:textAppearanceMedium"
+                    android:text="@string/promotionTitle"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_promotion_new_et_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/promotionType"/>
+
+            <Spinner
+                    android:id="@+id/activity_promotion_new_spn_promotion_type"
+                    android:layout_width="0dp"
+                    android:minWidth="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"/>
+        </LinearLayout>
+
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/promotionType"/>
-        <Spinner
-                android:id="@+id/activity_promotion_new_spn_promotion_type"
+                android:textStyle="bold"
+                android:text="@string/productPromotion1"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/productName1"/>
+
+            <Spinner
+                    android:id="@+id/activity_promotion_new_spn_1_product_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp">
+
+            </Spinner>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/productAmount1"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_promotion_new_et_1_product_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:maxLines="1"
+                    />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/activity_promotion_new_tv_san_pham_khuyen_mai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dialog"/>
+                android:textStyle="bold"
+                android:text="@string/productPromotion2"/>
+
+        <LinearLayout
+                android:id="@+id/activity_promotion_new_ll_san_pham_khuyen_mai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:weightSum="8">
+
+                <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                        android:text="@string/productName1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:singleLine="true"
+                        bootstrap:minTextSize="8sp"
+                        />
+
+                <Spinner
+                        android:id="@+id/activity_promotion_new_spn_2_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:spinnerMode="dialog">
+                </Spinner>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="@string/productAmount1"
+                        android:singleLine="true"
+                        bootstrap:minTextSize="8sp"/>
+
+                <com.beardedhen.androidbootstrap.BootstrapEditText
+                        android:id="@+id/activity_promotion_new_et_2_product_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:lines="1"
+                        android:maxLines="1"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/activity_promotion_tv_chiet_khau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/promotionChietKhau"/>
+
+        <LinearLayout
+                android:id="@+id/activity_promotion_new_ll_chiet_khau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="8"
+                >
+
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chietKhautv"
+                    android:layout_weight="3"
+                    android:singleLine="true"
+                    bootstrap:minTextSize="8sp"
+                    />
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_promotion_new_et_chiet_khau"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:spinnerMode="dialog"
+                    android:inputType="number">
+            </com.beardedhen.androidbootstrap.BootstrapEditText>
+
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/activity_promotion_tv_ap_dung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="3. Áp dụng:"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:weightSum="4">
+
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:singleLine="true"
+                    bootstrap:minTextSize="8sp"
+                    android:text="@string/fromDate"/>
+
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3">
+                <com.beardedhen.androidbootstrap.BootstrapEditText
+                        android:id="@+id/activity_promotion_management_et_from_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        bootstrap:be_roundedCorners="true"
+                        android:drawableLeft="@drawable/ic_action_go_to_today"
+                        android:drawableStart="@drawable/ic_action_go_to_today"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        android:hint="@string/fromDateHint"/>
+            </com.H2TFC.H2T_DMS_MANAGER.widget.AutofitLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:singleLine="true"
+                    bootstrap:minTextSize="8sp"
+                    android:text="@string/toDate"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_promotion_management_et_to_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    bootstrap:be_roundedCorners="true"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_action_go_to_today"
+                    android:drawableStart="@drawable/ic_action_go_to_today"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:hint="@string/toDateHint"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_promotion_new_btn_ok"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    bootstrap:bb_type="success"
+                    bootstrap:bb_roundedCorners="true"
+                    android:text="@string/approve"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_marginEnd="5dp">
+            </com.beardedhen.androidbootstrap.BootstrapButton>
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_promotion_new_btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    bootstrap:bb_type="danger"
+                    bootstrap:bb_roundedCorners="true"
+                    android:text="@string/cancel"
+                    android:focusable="false"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp">
+            </com.beardedhen.androidbootstrap.BootstrapButton>
+        </LinearLayout>
+
     </LinearLayout>
-
-
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/productPromotion1"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/productName1"/>
-        <Spinner
-                android:id="@+id/activity_promotion_new_spn_1_product_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:spinnerMode="dialog"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp">
-
-        </Spinner>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/productAmount1"/>
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_new_et_1_product_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:inputType="number"
-                android:singleLine="true"
-                android:lines="1"
-                android:maxLines="1"
-                />
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/activity_promotion_new_tv_san_pham_khuyen_mai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/productPromotion2"/>
-
-    <LinearLayout
-            android:id="@+id/activity_promotion_new_ll_san_pham_khuyen_mai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-                android:text="@string/productName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        <Spinner
-                android:id="@+id/activity_promotion_new_spn_2_product_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:spinnerMode="dialog"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp">
-
-        </Spinner>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/productAmount1"/>
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_new_et_2_product_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:inputType="number"
-                android:singleLine="true"
-                android:lines="1"
-                android:maxLines="1"
-                />
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/activity_promotion_tv_chiet_khau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/promotionChietKhau"/>
-
-    <LinearLayout
-            android:id="@+id/activity_promotion_new_ll_chiet_khau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/chietKhautv"
-                />
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_new_et_chiet_khau"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dialog"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:inputType="number">
-        </com.beardedhen.androidbootstrap.BootstrapEditText>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="%"
-                />
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/activity_promotion_tv_ap_dung"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="3. Áp dụng:"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/fromDate"/>
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_management_et_from_date"
-                android:layout_width="0dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_height="wrap_content"
-                bootstrap:be_roundedCorners="true"
-                android:drawableLeft="@drawable/ic_action_go_to_today"
-                android:drawableStart="@drawable/ic_action_go_to_today"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:focusable="false"
-                android:hint="@string/fromDateHint"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/toDate"/>
-        <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/activity_promotion_management_et_to_date"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                bootstrap:be_roundedCorners="true"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_action_go_to_today"
-                android:drawableStart="@drawable/ic_action_go_to_today"
-                android:inputType="none"
-                android:focusable="false"
-                android:hint="@string/toDateHint"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-        <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/activity_promotion_new_btn_ok"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                bootstrap:bb_type="success"
-                bootstrap:bb_roundedCorners="true"
-                android:text="@string/approve"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp">
-        </com.beardedhen.androidbootstrap.BootstrapButton>
-        <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/activity_promotion_new_btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                bootstrap:bb_type="danger"
-                bootstrap:bb_roundedCorners="true"
-                android:text="@string/cancel"
-                android:focusable="false"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp">
-        </com.beardedhen.androidbootstrap.BootstrapButton>
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

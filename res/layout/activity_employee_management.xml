@@ -66,10 +66,12 @@
                     android:layout_height="match_parent"
                     android:id="@+id/activity_employee_management_lvemployee"
                     android:choiceMode="singleChoice"/>
-            <TextView
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                     android:id="@+id/activity_employee_management_tv_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:padding="5dp"
                     android:text="@string/lvEmployeeManagementEmpty"
                     style="?android:textAppearanceMedium"
                     android:layout_gravity="center"

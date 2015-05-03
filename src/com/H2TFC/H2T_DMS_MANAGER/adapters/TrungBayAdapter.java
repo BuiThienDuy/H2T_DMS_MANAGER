@@ -7,7 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreImage;
 import com.H2TFC.H2T_DMS_MANAGER.widget.ViewImageFullScreen;
@@ -52,7 +52,7 @@ public class TrungBayAdapter extends ParseQueryAdapter<StoreImage> {
                             Intent intent = new Intent(context, ViewImageFullScreen.class);
                             intent.putExtra("EXTRA_IMAGE", ((BitmapDrawable) storePhoto.getDrawable()).getBitmap());
                             intent.putExtra("EXTRA_IMAGE_ID", object.getObjectId());
-                            ((Activity) context).startActivityForResult(intent, MyApplication.REQUEST_DELETE);
+                            ((Activity) context).startActivityForResult(intent, MyMainApplication.REQUEST_DELETE);
                         }
                     });
                 }

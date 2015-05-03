@@ -14,12 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.dialogs.ChangePasswordDialog;
-import com.H2TFC.H2T_DMS_MANAGER.models.Employee;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
@@ -88,7 +86,7 @@ public class UserInformationManagementActivity extends Activity {
             public void onClick(View v) {
                 try {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, MyApplication.REQUEST_TAKE_PHOTO);
+                    startActivityForResult(intent, MyMainApplication.REQUEST_TAKE_PHOTO);
                 } catch (ActivityNotFoundException ex) {
                     //display an error message
                     String errorMessage = getString(R.string.error_dont_have_camera);
@@ -314,7 +312,7 @@ public class UserInformationManagementActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == MyApplication.REQUEST_TAKE_PHOTO && data != null) {
+            if (requestCode == MyMainApplication.REQUEST_TAKE_PHOTO && data != null) {
                 //get the Uri for the captured image
                 Bitmap bm = (Bitmap) data.getExtras().get("data");
                 bm = getResizedBitmap(bm, 100, 100);

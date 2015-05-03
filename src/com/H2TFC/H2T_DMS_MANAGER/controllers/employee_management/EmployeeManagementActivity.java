@@ -1,23 +1,19 @@
 package com.H2TFC.H2T_DMS_MANAGER.controllers.employee_management;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
@@ -317,7 +313,7 @@ public class EmployeeManagementActivity extends Activity {
             }
             case R.id.actionbar_employee_lock_view: {
                 Intent intent = new Intent(EmployeeManagementActivity.this,EmployeeViewLockedActivity.class);
-                startActivityForResult(intent, MyApplication.REQUEST_EDIT);
+                startActivityForResult(intent, MyMainApplication.REQUEST_EDIT);
                 break;
             }
         }

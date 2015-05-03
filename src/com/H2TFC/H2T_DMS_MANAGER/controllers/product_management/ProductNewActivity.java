@@ -2,7 +2,6 @@ package com.H2TFC.H2T_DMS_MANAGER.controllers.product_management;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Toast;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
@@ -317,7 +316,7 @@ public class ProductNewActivity extends Activity {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Select File"),
-                MyApplication.REQUEST_CHOOSE_PHOTO);
+                MyMainApplication.REQUEST_CHOOSE_PHOTO);
     }
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -340,7 +339,7 @@ public class ProductNewActivity extends Activity {
 
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, MyApplication.REQUEST_TAKE_PHOTO);
+                startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
             }
         }
     }
@@ -374,7 +373,7 @@ public class ProductNewActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         Bitmap thumbnail;
-        if (requestCode == MyApplication.REQUEST_TAKE_PHOTO) {
+        if (requestCode == MyMainApplication.REQUEST_TAKE_PHOTO) {
             mImageToBeAttached = BitmapFactory.decodeFile(mImagePathToBeAttached);
             thumbnail = ImageUtils.thumbmailFromFile(mImagePathToBeAttached,
                         THUMBNAIL_SIZE_PX, THUMBNAIL_SIZE_PX);
@@ -385,7 +384,7 @@ public class ProductNewActivity extends Activity {
             mImagePathToBeAttached = null;
             ivPhoto.setImageBitmap(thumbnail);
             hasImage = true;
-        } else if (requestCode == MyApplication.REQUEST_CHOOSE_PHOTO) {
+        } else if (requestCode == MyMainApplication.REQUEST_CHOOSE_PHOTO) {
             try {
                 Uri uri = data.getData();
                 mImageToBeAttached = MediaStore.Images.Media.getBitmap(

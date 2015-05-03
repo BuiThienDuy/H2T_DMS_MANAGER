@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView
+    <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
             android:id="@+id/activity_trungbay_tv_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -12,6 +12,8 @@
             android:gravity="center"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
+            android:maxLines="2"
+            android:padding="20dp"
             style="?android:textAppearanceLarge"/>
 
     <ProgressBar

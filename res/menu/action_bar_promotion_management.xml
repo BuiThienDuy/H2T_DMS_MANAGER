@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_bar_promotion_management_new"
           android:icon="@drawable/ic_action_new"
-          android:title="Tạo"
+          android:title="@string/create"
           android:showAsAction="ifRoom"/>
 </menu>

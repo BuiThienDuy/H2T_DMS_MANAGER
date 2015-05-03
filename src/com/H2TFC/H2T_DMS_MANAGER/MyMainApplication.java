@@ -12,7 +12,7 @@ import com.parse.*;
  * buithienduy93@gmail.com
  * All rights reserved
  */
-public class MyApplication extends Application {
+public class MyMainApplication extends Application {
     public static final int REQUEST_ADD_NEW = 100;
     public static final int REQUEST_EDIT = 200;
     public static final int REQUEST_DELETE = 300;
@@ -35,19 +35,20 @@ public class MyApplication extends Application {
         ParseObject.registerSubclass(Invoice.class);
         ParseObject.registerSubclass(Promotion.class);
         ParseObject.registerSubclass(Attendance.class);
+        ParseObject.registerSubclass(ProductPurchase.class);
 
         // Parse local data store
         Parse.enableLocalDatastore(this);
 
         // Parse initialize
-        Parse.initialize(this, "GDqwS7Njj2jrD3CmbfrCZmFJ5X2Dw9yvTZVt6pEb", "kfor4yEebgGlrKQGBP12HM5KNlPyb7suo3aGacTT");
+        Parse.initialize(this,"GDqwS7Njj2jrD3CmbfrCZmFJ5X2Dw9yvTZVt6pEb","kfor4yEebgGlrKQGBP12HM5KNlPyb7suo3aGacTT");
         ParseACL defaultACL = new ParseACL();
         defaultACL.setPublicReadAccess(true);
         defaultACL.setPublicWriteAccess(true);
-        ParseACL.setDefaultACL(defaultACL, true);
+        ParseACL.setDefaultACL(defaultACL,true);
 
         // Register push notification
-        PushService.setDefaultPushCallback(this, LoginActivity.class);
+
         ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 

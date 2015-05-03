@@ -51,11 +51,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                                 android:id="@+id/list_product_tv_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/list_product_ex_name"
+                                android:singleLine="true"
                                 style="?android:textAppearanceLarge"
                                 android:textColor="#27657E"
                                 android:textStyle="bold"/>
@@ -65,11 +66,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical">
 
-                                <TextView
+                                <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                                         android:id="@+id/list_product_tv_unit"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textSize="16sp"
+                                        android:singleLine="true"
                                         android:layout_toLeftOf="@+id/list_product_iv_next"
                                         android:layout_toStartOf="@+id/list_product_iv_next"
                                         android:layout_alignParentLeft="true"
@@ -86,10 +88,11 @@
                                         android:layout_alignParentEnd="true"/>
                         </RelativeLayout>
 
-                        <TextView
+                        <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                                 android:id="@+id/list_product_tv_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:singleLine="true"
                                 android:text="@string/list_product_ex_price"/>
                 </LinearLayout>
         </LinearLayout>

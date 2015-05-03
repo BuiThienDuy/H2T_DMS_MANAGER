@@ -8,10 +8,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
     </ListView>
-    <TextView
+    <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
             android:id="@+id/activity_employee_locked_tv_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:padding="20dp"
             android:text="@string/lvEmptyEmployee"
             style="?android:textAppearanceMedium"
             android:layout_gravity="center"

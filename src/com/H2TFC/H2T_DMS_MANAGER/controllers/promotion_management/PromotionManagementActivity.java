@@ -9,13 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.adapters.ProductListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.PromotionListAdapter;
-import com.H2TFC.H2T_DMS_MANAGER.models.Product;
 import com.H2TFC.H2T_DMS_MANAGER.models.Promotion;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.*;
 
@@ -109,7 +106,7 @@ public class PromotionManagementActivity extends Activity {
                 if(position >=0 ) {
                     Intent intent = new Intent(PromotionManagementActivity.this,PromotionNewActivity.class);
                     intent.putExtra("EXTRAS_PROMOTION_ID",promotionAdapter.getItem(position).getObjectId());
-                    startActivityForResult(intent,MyApplication.REQUEST_EDIT);
+                    startActivityForResult(intent, MyMainApplication.REQUEST_EDIT);
                 }
             }
         });
@@ -170,7 +167,7 @@ public class PromotionManagementActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_bar_promotion_management_new: {
                 Intent intent = new Intent(PromotionManagementActivity.this,PromotionNewActivity.class);
-                startActivityForResult(intent, MyApplication.REQUEST_ADD_NEW);
+                startActivityForResult(intent, MyMainApplication.REQUEST_ADD_NEW);
                 break;
             }
 

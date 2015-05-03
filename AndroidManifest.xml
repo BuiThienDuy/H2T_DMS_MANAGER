@@ -45,11 +45,9 @@
             android:label="@string/app_name"
             android:icon="@drawable/ic_launcher"
             android:theme="@android:style/Theme.Holo.Light"
-            android:name=".MyApplication"
+            android:name=".MyMainApplication"
             android:allowBackup="true"
             >
-        <uses-library
-                android:name="com.google.android.maps" />
         <!-- push notification -->
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
@@ -70,7 +68,7 @@
                 <category android:name="com.H2TFC.H2T_DMS_MANAGER" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+        <receiver android:name="com.H2TFC.H2T_DMS_MANAGER.controllers.dialogs.Receiver" android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />

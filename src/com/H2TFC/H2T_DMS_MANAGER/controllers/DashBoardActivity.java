@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class DashBoardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         setTitle(getString(R.string.dashboardTitle));
-
+        Log.d("DashboardActivity", "I'm in");
         btnEmployeeManagement = (Button) findViewById(R.id.dashboard_btn_employee_management);
         btnStreetDivide = (Button) findViewById(R.id.dashboard_btn_street_divide);
         btnProductManagement = (Button) findViewById(R.id.dashboard_btn_product_management);
@@ -167,6 +168,6 @@ public class DashBoardActivity extends Activity {
             public void run() {
                 doubleBackToExitPressedOnce=false;
             }
-        }, 2000);
+        }, 3000);
     }
 }

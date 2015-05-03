@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductNewActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
@@ -85,7 +85,7 @@ public class ProductListAdapter extends ParseQueryAdapter<Product> {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProductNewActivity.class);
                 intent.putExtra("EDIT", object.getObjectId());
-                ((Activity) v.getContext()).startActivityForResult(intent, MyApplication.REQUEST_EDIT);
+                ((Activity) v.getContext()).startActivityForResult(intent, MyMainApplication.REQUEST_EDIT);
             }
         });
         return v;

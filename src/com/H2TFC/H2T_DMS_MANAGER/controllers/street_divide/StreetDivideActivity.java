@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.dialogs.ColorPickerDialog;
 import com.H2TFC.H2T_DMS_MANAGER.models.Area;
@@ -33,8 +33,6 @@ import com.google.maps.android.ui.IconGenerator;
 import com.mobisys.android.autocompletetextviewcomponent.ClearableAutoTextView;
 import com.mobisys.android.autocompletetextviewcomponent.SelectionListener;
 import com.parse.*;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -415,7 +413,7 @@ public class StreetDivideActivity extends Activity {
 
                 Context context = getApplicationContext();
                 try {
-                    startActivityForResult(builder.build(context), MyApplication.REQUEST_GOOGLE_PLACES);
+                    startActivityForResult(builder.build(context), MyMainApplication.REQUEST_GOOGLE_PLACES);
                 } catch (GooglePlayServicesRepairableException e) {
                     e.printStackTrace();
                 } catch (GooglePlayServicesNotAvailableException e) {
@@ -613,7 +611,7 @@ public class StreetDivideActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MyApplication.REQUEST_GOOGLE_PLACES) {
+        if (requestCode == MyMainApplication.REQUEST_GOOGLE_PLACES) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(

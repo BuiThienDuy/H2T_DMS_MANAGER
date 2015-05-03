@@ -3,7 +3,12 @@
                 xmlns:custom="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".DemoActivity" >
+                tools:context=".StoreManagementActivity" >
+    <RelativeLayout
+            android:id="@+id/activity_store_detail_dummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
                 <!-- MAIN CONTENT -->
                 <FrameLayout
                         android:layout_width="match_parent"
@@ -135,10 +140,12 @@
                 android:layout_height="match_parent"
                 android:background="#fff3f3f3">
         </ListView>
-        <TextView
+        <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                 android:id="@+id/activity_store_management_tv_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:maxLines="2"
                 android:text="@string/lvEmptyEmployee"
                 style="?android:textAppearanceMedium"
                 android:layout_gravity="center"
@@ -155,5 +162,5 @@
                 />
     </com.wunderlist.slidinglayer.SlidingLayer>
 
-
+</RelativeLayout>
 </RelativeLayout>

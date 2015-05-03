@@ -5,4 +5,5 @@
 	    <attr name="google_places_api_key" format="string"/>
 	    <attr name="input_key" format="string"/>
 	</declare-styleable>
+
 </resources>

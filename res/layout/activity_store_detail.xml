@@ -4,17 +4,16 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
         >
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="20dp">
         <!-- Tên cửa hàng -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_ten"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -40,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_ten"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -62,9 +60,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_ten_chu_cua_hang"
-                android:layout_below="@+id/activity_store_detail_layout_edit_ten"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -87,7 +82,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_ten_chu_cua_hang"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -109,9 +103,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_dia_chi"
-                android:layout_below="@+id/activity_store_detail_layout_edit_ten_chu_cua_hang"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -134,7 +125,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_dia_chi"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -156,9 +146,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_sdt"
-                android:layout_below="@+id/activity_store_detail_layout_edit_dia_chi"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -181,7 +168,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_sdt"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -204,9 +190,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_loai_cua_hang"
-                android:layout_below="@+id/activity_store_detail_layout_edit_sdt"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -229,7 +212,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_loai_cua_hang"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -246,9 +228,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_trung_bay"
-                android:layout_below="@+id/activity_store_detail_layout_edit_loai_cua_hang"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -271,9 +250,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_trung_bay"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                >
             <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/activity_store_detail_btn_trung_bay_quay_ke"
                     android:layout_width="wrap_content"
@@ -283,10 +261,9 @@
                     bootstrap:bb_roundedCorners="true"/>
             <TextView
                     android:id="@+id/activity_store_detail_tv_total_image"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/totalImageCapture"/>
         </LinearLayout>
 
@@ -295,9 +272,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_doanh_thu"
-                android:layout_below="@+id/activity_store_detail_layout_edit_trung_bay"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -320,7 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_doanh_thu"
+
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -343,9 +317,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_store_detail_layout_title_mat_hang_doi_thu_canh_tranh"
-                android:layout_below="@+id/activity_store_detail_layout_edit_doanh_thu"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -368,7 +339,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/activity_store_detail_layout_title_mat_hang_doi_thu_canh_tranh"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -385,12 +355,63 @@
                     bootstrap:be_state="default"/>
         </LinearLayout>
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_store_detail_layout_title_cong_no"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/debtStatus"
+                    android:id="@+id/activity_store_detail_tv_cong_no"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/activity_store_detail_layout_edit_cong_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                    android:id="@+id/activity_store_detail_et_cong_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/loadDebt"
+                    android:maxLines="3"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
+                    bootstrap:be_roundedCorners="true"
+                    bootstrap:be_state="default"/>
+            <ImageView
+                    android:id="@+id/activity_store_detail_iv_cong_no"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="#FF0000"
+                    android:contentDescription="@string/debtStatus"/>
+        </LinearLayout>
+
         <!-- Button đồng ý, hủy bỏ -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_below="@id/activity_store_detail_layout_edit_mat_hang_doi_thu_canh_tranh">
+                android:layout_marginTop="30dp">
             <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/activity_store_detail_btn_modifiy_debt"
                     android:layout_width="0dp"
@@ -417,5 +438,5 @@
 
 
 
-    </RelativeLayout>
+    </LinearLayout>
 </ScrollView>

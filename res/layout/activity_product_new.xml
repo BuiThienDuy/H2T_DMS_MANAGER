@@ -1,145 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp"
-                >
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Hình ảnh sản phẩm"
-                />
-
-        <View
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="10dp"
+            >
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#CCCCCC"
-                android:layout_gravity="bottom"/>
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/productPhoto"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
         <com.parse.ParseImageView
                 android:id="@+id/activity_product_new_iv_photo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="#CCCCCC"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/productName"/>
-
-        <View
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#CCCCCC"
-                android:layout_gravity="bottom"/>
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/productName"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
         <com.beardedhen.androidbootstrap.BootstrapEditText
-            android:id="@+id/activity_product_new_et_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
-            android:hint="@string/hintProductName"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Unit"/>
-
-        <View
+                android:id="@+id/activity_product_new_et_name"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#CCCCCC"
-                android:layout_gravity="bottom"/>
-    </LinearLayout>
-    <com.beardedhen.androidbootstrap.BootstrapEditText
-            android:id="@+id/activity_product_new_et_unit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintUnit"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Price"/>
-
-        <View
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:hint="@string/hintProductName"/>
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#CCCCCC"
-                android:layout_gravity="bottom"/>
-    </LinearLayout>
-    <com.beardedhen.androidbootstrap.BootstrapEditText
-            android:id="@+id/activity_product_new_et_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:inputType="numberDecimal"
-            android:hint="@string/priceVND"
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"/>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp">
-        <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/activity_product_new_btn_done"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                bootstrap:bb_type="success"
-                android:text="@string/addProduct"
-                bootstrap:bb_icon_left="fa-check-circle"
-                bootstrap:bb_roundedCorners="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"/>
-        <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/activity_product_new_btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                bootstrap:bb_type="danger"
-                bootstrap:bb_roundedCorners="true"
-                bootstrap:bb_icon_left="fa-sign-out"
-                android:text="@string/Cancel"/>
-    </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/Unit"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_product_new_et_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintUnit"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/Price"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_gravity="bottom"/>
+        </LinearLayout>
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/activity_product_new_et_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:inputType="numberDecimal"
+                android:hint="@string/priceVND"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_product_new_btn_done"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    bootstrap:bb_type="success"
+                    android:text="@string/addProduct"
+                    bootstrap:bb_icon_left="fa-check-circle"
+                    bootstrap:bb_roundedCorners="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/activity_product_new_btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    bootstrap:bb_type="danger"
+                    bootstrap:bb_roundedCorners="true"
+                    bootstrap:bb_icon_left="fa-sign-out"
+                    android:text="@string/Cancel"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

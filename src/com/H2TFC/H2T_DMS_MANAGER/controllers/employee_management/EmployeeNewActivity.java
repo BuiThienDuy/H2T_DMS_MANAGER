@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,9 +23,8 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Employee;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.ImageUtils;
@@ -43,7 +41,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import static com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils.hasConnectToInternet;
-import static com.H2TFC.H2T_DMS_MANAGER.utils.ImageUtils.getResizedBitmap;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -349,7 +346,7 @@ public class EmployeeNewActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap thumbnail;
-        if (requestCode == MyApplication.REQUEST_TAKE_PHOTO) {
+        if (requestCode == MyMainApplication.REQUEST_TAKE_PHOTO) {
             if(resultCode == RESULT_OK) {
                 mImageToBeAttached = BitmapFactory.decodeFile(mImagePathToBeAttached);
                 thumbnail = ImageUtils.thumbmailFromFile(mImagePathToBeAttached,
@@ -362,7 +359,7 @@ public class EmployeeNewActivity extends Activity {
                 ivPhoto.setImageBitmap(thumbnail);
                 hasImage = true;
             }
-        } else if (requestCode == MyApplication.REQUEST_CHOOSE_PHOTO) {
+        } else if (requestCode == MyMainApplication.REQUEST_CHOOSE_PHOTO) {
             try {
                 Uri uri = data.getData();
                 mImageToBeAttached = MediaStore.Images.Media.getBitmap(
@@ -406,7 +403,7 @@ public class EmployeeNewActivity extends Activity {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Select File"),
-                MyApplication.REQUEST_CHOOSE_PHOTO);
+                MyMainApplication.REQUEST_CHOOSE_PHOTO);
     }
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -437,7 +434,7 @@ public class EmployeeNewActivity extends Activity {
 
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, MyApplication.REQUEST_TAKE_PHOTO);
+                startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
             }
         }
     }

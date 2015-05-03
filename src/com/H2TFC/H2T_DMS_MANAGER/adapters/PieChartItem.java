@@ -11,7 +11,10 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendPosition;
 import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 
 public class PieChartItem extends ChartItem {
@@ -81,7 +84,6 @@ public class PieChartItem extends ChartItem {
 
         // set title
         holder.title.setText(description);
-
         return convertView;
     }
 

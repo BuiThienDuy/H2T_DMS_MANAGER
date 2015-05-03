@@ -19,13 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <TextView
+        <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
                 android:id="@+id/list_employee_locked_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:textSize="24sp"
+                android:singleLine="true"
                 android:textColor="@color/bbutton_primary"
                 android:text="@string/notFoundError"/>
         <TextView

@@ -1,15 +1,18 @@
 package com.H2TFC.H2T_DMS_MANAGER.controllers.feed_back_management;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAttendanceAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.FeedbackAdapter;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Feedback;
 import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
@@ -41,7 +44,7 @@ public class FeedbackManagementActivity extends Activity {
         setTitle(getString(R.string.viewFeedbackTitle));
 
 
-            DownloadUtils.DownloadParseFeedback(FeedbackManagementActivity.this,new SaveCallback() {
+            DownloadUtils.DownloadParseFeedback(FeedbackManagementActivity.this, new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     feedbackAdapter.loadObjects();
@@ -50,6 +53,18 @@ public class FeedbackManagementActivity extends Activity {
 
         InitializeComponent();
         SetupListView();
+
+        lvFeedback.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position >= 0) {
+                    Feedback feedback = feedbackAdapter.getItem(position);
+                    Intent intent = new Intent(FeedbackManagementActivity.this, StoreManagementActivity.class);
+                    intent.putExtra("EXTRAS_STORE_ID",feedback.getStoreId());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void InitializeComponent() {

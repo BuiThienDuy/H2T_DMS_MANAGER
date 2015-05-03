@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.ProductListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
-import com.beardedhen.androidbootstrap.BootstrapEditText;
-import com.daimajia.swipe.SwipeLayout;
 import com.parse.*;
 
 /*
@@ -139,7 +134,7 @@ public class ProductManagementActivity extends Activity {
                 }
             case R.id.actionbar_product_add: {
                 Intent intent = new Intent(ProductManagementActivity.this, ProductNewActivity.class);
-                startActivityForResult(intent, MyApplication.REQUEST_ADD_NEW);
+                startActivityForResult(intent, MyMainApplication.REQUEST_ADD_NEW);
                 break;
             }
         }

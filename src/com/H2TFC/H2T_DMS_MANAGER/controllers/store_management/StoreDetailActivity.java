@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.H2TFC.H2T_DMS_MANAGER.R;
+import com.H2TFC.H2T_DMS_MANAGER.models.Invoice;
 import com.H2TFC.H2T_DMS_MANAGER.models.Store;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreImage;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreType;
@@ -31,16 +34,17 @@ import java.util.Locale;
  */
 public class StoreDetailActivity extends Activity {
     BootstrapButton btnTrungBay, btnGiaHan, btnQuayVe;
-
+    BootstrapEditText etCongNo;
     BootstrapEditText etTenCuaHang, etTenChuCuaHang, etDiaChi, etSDT, etDoanhThu, etMatHangDoiThu;
-
+    ImageView ivCongNo;
     TextView tvBucAnhDaChup;
 
     Spinner spnLoaiCuaHang;
 
     String storeID, store_image_id;
-
+    LinearLayout layoutTitleCongNo, layoutEditCongNo, layoutButton;
     ArrayAdapter<String> storeTypeAdapter;
+    private double[] congNoMax;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,8 @@ public class StoreDetailActivity extends Activity {
         setContentView(R.layout.activity_store_detail);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        congNoMax = new double[1];
+        congNoMax[0] = 0;
         if (getIntent().hasExtra("EXTRAS_STORE_ID")) {
             storeID = getIntent().getStringExtra("EXTRAS_STORE_ID");
             if (ConnectUtils.hasConnectToInternet(StoreDetailActivity.this)) {
@@ -143,7 +148,7 @@ public class StoreDetailActivity extends Activity {
                             etSDT.setText(store.getPhoneNumber());
                             etDoanhThu.setText(String.format(Locale.CHINESE, "%1$,.0f", store.getIncome()));
                             etMatHangDoiThu.setText(store.getCompetitor());
-
+                            congNoMax[0] = store.getMaxDebt();
                             int itemPosition = -1;
                             for (int index = 0, count = storeTypeAdapter.getCount(); index < count; ++index) {
                                 if (storeTypeAdapter.getItem(index).equals(store.getStoreType())) {
@@ -152,6 +157,11 @@ public class StoreDetailActivity extends Activity {
                                 }
                             }
                             spnLoaiCuaHang.setSelection(itemPosition);
+                            if (store.getStatus().equals(Store.StoreStatus.BAN_HANG.name())) {
+                                layoutTitleCongNo.setVisibility(View.VISIBLE);
+                                layoutEditCongNo.setVisibility(View.VISIBLE);
+                                GetAndShowDebt(store);
+                            }
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -161,6 +171,53 @@ public class StoreDetailActivity extends Activity {
                 }
             });
         }
+    }
+
+    private void GetAndShowDebt(final Store store) {
+        final double[] congNoHienTai = new double[1];
+        congNoHienTai[0] = 0;
+
+        ParseQuery<Invoice> invoiceParseQuery = Invoice.getQuery();
+        invoiceParseQuery.whereEqualTo("storeId", store.getObjectId());
+        invoiceParseQuery.fromPin(DownloadUtils.PIN_INVOICE);
+        invoiceParseQuery.findInBackground(new FindCallback<Invoice>() {
+            @Override
+            public void done(List<Invoice> list, ParseException e) {
+                if (e == null) {
+                    for (Invoice invoice : list) {
+                        congNoHienTai[0] += invoice.getInvoicePrice();
+                    }
+
+
+                    ParseQuery<StoreType> storeTypeParseQuery = StoreType.getQuery();
+                    storeTypeParseQuery.whereEqualTo("store_type_name", store.getStoreType());
+                    storeTypeParseQuery.fromPin(DownloadUtils.PIN_STORE_TYPE);
+                    storeTypeParseQuery.getFirstInBackground(new GetCallback<StoreType>() {
+                        @Override
+                        public void done(StoreType storeType, ParseException e) {
+                            if (e == null) {
+                                if (congNoMax[0] == 0) {
+                                    congNoMax[0] = storeType.getDefaultDebt();
+                                }
+                                if (congNoHienTai[0] >= congNoMax[0]) {
+                                    ivCongNo.setBackgroundColor(Color.RED);
+                                } else if (congNoHienTai[0] < congNoMax[0] && congNoHienTai[0] >= congNoMax[0] * 2 / 3) {
+                                    ivCongNo.setBackgroundColor(Color.YELLOW);
+                                } else {
+                                    ivCongNo.setBackgroundColor(Color.GREEN);
+                                }
+
+
+                                etCongNo.setText(String.format(Locale.CHINESE, "%1$,.0f", congNoHienTai[0]) + "/" + String.format
+                                        (Locale.CHINESE, "%1$,.0f", congNoMax[0]) + " " + getString(R.string.VND));
+                            }
+                        }
+                    });
+
+
+                }
+            }
+        });
     }
 
     private void SetupEvent() {
@@ -257,6 +314,14 @@ public class StoreDetailActivity extends Activity {
         etDoanhThu.setEnabled(false);
         etMatHangDoiThu.setEnabled(false);
         spnLoaiCuaHang.setEnabled(false);
+        etCongNo = (BootstrapEditText) findViewById(R.id.activity_store_detail_et_cong_no);
+        etCongNo.setEnabled(false);
+
+        ivCongNo = (ImageView) findViewById(R.id.activity_store_detail_iv_cong_no);
+
+        layoutEditCongNo = (LinearLayout) findViewById(R.id.activity_store_detail_layout_edit_cong_no);
+        layoutTitleCongNo = (LinearLayout) findViewById(R.id.activity_store_detail_layout_title_cong_no);
+
     }
 
     @Override

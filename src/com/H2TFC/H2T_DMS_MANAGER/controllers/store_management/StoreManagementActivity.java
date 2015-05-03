@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,8 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
-import bolts.Task;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
@@ -84,6 +81,7 @@ public class StoreManagementActivity extends Activity {
     private boolean isDoneResizing = true;
     private float lastCircleX;
     private float lastCircleY;
+    SlidingLayer slidingLayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,13 +120,34 @@ public class StoreManagementActivity extends Activity {
                 }
             });
 
-            DownloadUtils.DownloadParseStoreType(StoreManagementActivity.this,new SaveCallback() {
+            DownloadUtils.DownloadParseStoreType(StoreManagementActivity.this, new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
 
                 }
             });
 
+        if(getIntent().hasExtra("EXTRAS_STORE_ID")) {
+            String storeId = getIntent().getStringExtra("EXTRAS_STORE_ID");
+            ParseQuery<Store> storeParseQuery = Store.getQuery();
+            storeParseQuery.whereEqualTo("objectId",storeId);
+            storeParseQuery.fromPin(DownloadUtils.PIN_STORE);
+            try {
+                Store store = storeParseQuery.getFirst();
+                ParseGeoPoint location = store.getLocationPoint();
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(location.getLatitude(), location.getLongitude()), 13));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                        .zoom(17)                                                                 // Sets the zoom
+                        .build();                                                                 // Creates a CameraPosition from the builder
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         InitializeComponent();
@@ -136,7 +155,8 @@ public class StoreManagementActivity extends Activity {
         SetupEvent();
         SetupMap();
 
-        SlidingLayer slidingLayer = (SlidingLayer) findViewById(R.id.activity_store_management_slidingLayer);
+
+        slidingLayer = (SlidingLayer) findViewById(R.id.activity_store_management_slidingLayer);
 
         slidingLayer.setShadowDrawable(R.drawable.sidebar_shadow);
         slidingLayer.setShadowSizeRes(R.dimen.shadow_size);
@@ -359,7 +379,7 @@ public class StoreManagementActivity extends Activity {
 
                 Context context = getApplicationContext();
                 try {
-                    startActivityForResult(builder.build(context), MyApplication.REQUEST_GOOGLE_PLACES);
+                    startActivityForResult(builder.build(context), MyMainApplication.REQUEST_GOOGLE_PLACES);
                 } catch (GooglePlayServicesRepairableException e) {
                     e.printStackTrace();
                 } catch (GooglePlayServicesNotAvailableException e) {
@@ -520,6 +540,9 @@ public class StoreManagementActivity extends Activity {
                 }
 
                 if (employeeSelectedPosition < 0) {
+                    if (!slidingLayer.isOpened()) {
+                        slidingLayer.openLayer(true);
+                    }
                     Toast.makeText(StoreManagementActivity.this, getString(R.string
                             .errorNotSelectEmployeeWhenDivideStore), Toast.LENGTH_SHORT).show();
                 } else if (selectedStorePoint.size() <= 0) {
@@ -959,7 +982,7 @@ public class StoreManagementActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MyApplication.REQUEST_GOOGLE_PLACES) {
+        if (requestCode == MyMainApplication.REQUEST_GOOGLE_PLACES) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(

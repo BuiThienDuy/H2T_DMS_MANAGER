@@ -21,22 +21,26 @@
     <orderEntry type="module" module-name="HoloColorPicker-master" />
     <orderEntry type="module" module-name="AndroidBootstrap" />
     <orderEntry type="library" name="google-play-services" level="project" />
-    <orderEntry type="library" name="android-maps-utils" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/Parse1.8.2/bolts-android-1.1.4.jar!/" />
-          <root url="jar://E:/Parse1.8.2/Parse-1.8.2.jar!/" />
-          <root url="jar://E:/Parse1.8.2/ParseCrashReporting-1.8.2.jar!/" />
+          <root url="jar://C:/Parse 1.9.1/bolts-android-1.2.0.jar!/" />
+          <root url="jar://C:/Parse 1.9.1/Parse-1.9.1.jar!/" />
+          <root url="jar://C:/Parse 1.9.1/ParseCrashReporting-1.9.1.jar!/" />
+          <root url="jar://C:/Parse 1.9.1/ParseFacebookUtilsV3-1.9.1.jar!/" />
+          <root url="jar://C:/Parse 1.9.1/ParseFacebookUtilsV4-1.9.1.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="file://E:/Parse1.8.2/Parse-1.8.2-javadoc" />
-          <root url="file://E:/Parse1.8.2/ParseCrashReporting-1.8.2-javadoc" />
-          <root url="jar://E:/Parse1.8.2/bolts-android-1.1.4-javadoc.jar!/" />
+          <root url="file://C:/Parse 1.9.1/Parse-1.9.1-javadoc" />
+          <root url="file://C:/Parse 1.9.1/ParseCrashReporting-1.9.1-javadoc" />
+          <root url="file://C:/Parse 1.9.1/ParseFacebookUtilsV3-1.9.1-javadoc" />
+          <root url="file://C:/Parse 1.9.1/ParseFacebookUtilsV4-1.9.1-javadoc" />
+          <root url="jar://C:/Parse 1.9.1/bolts-android-1.2.0-javadoc.jar!/" />
         </JAVADOC>
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="android-maps-utils" level="project" />
     <orderEntry type="module" module-name="SlidingPanel" />
     <orderEntry type="module-library">
       <library>

@@ -221,7 +221,7 @@
     <string name="emptyFeedback">Hiện không có phản hồi nào trong danh sách</string>
     <string name="viewFeedbackTitle">Xem thông tin phản hồi điểm cửa hàng</string>
     <string name="promotionTitle">Tiêu đề:</string>
-    <string name="promotionType">Loại hình khuyến mãi</string>
+    <string name="promotionType">Loại khuyến mãi</string>
     <string name="productPromotion1">1. Sản phẩm được khuyến mãi</string>
     <string name="productName1">Tên sản phẩm:</string>
     <string name="productAmount1">Số lượng:</string>
@@ -272,4 +272,8 @@
     <string name="invoiceStatusChart">Biểu đồ tình trạng đơn hàng</string>
     <string name="updateStoreTypeSuccess">Cập nhật thông tin loại cửa hàng thành công</string>
     <string name="updateStoreTypeFailed">Cập nhật thông tin loại cửa hàng thất bại:\n</string>
+    <string name="debtStatus">Tình trạng công nợ</string>
+    <string name="loadDebt">Đang tải dữ liệu công nợ...</string>
+    <string name="productPhoto">Hình ảnh sản phẩm</string>
+    <string name="create">Tạo</string>
 </resources>

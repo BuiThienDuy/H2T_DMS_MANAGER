@@ -11,7 +11,7 @@
     <dimen name="shadow_size">10dp</dimen>
     <dimen name="layer_size">300dp</dimen>
     <dimen name="preview_offset_distance">150dp</dimen>
-    <dimen name="offset_distance">10dp</dimen>
+    <dimen name="offset_distance">30dp</dimen>
 
     <dimen name="body_padding_medium">10dp</dimen>
     <dimen name="body_padding_large">10dp</dimen>

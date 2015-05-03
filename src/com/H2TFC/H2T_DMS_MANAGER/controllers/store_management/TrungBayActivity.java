@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.H2TFC.H2T_DMS_MANAGER.MyApplication;
+import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.TrungBayAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.models.StoreImage;
@@ -125,7 +125,7 @@ public class TrungBayActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == MyApplication.REQUEST_ADD_NEW && data != null) {
+            if (requestCode == MyMainApplication.REQUEST_ADD_NEW && data != null) {
                 Bitmap bm = (Bitmap) data.getExtras().get("data");
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -172,7 +172,7 @@ public class TrungBayActivity extends Activity {
                 });
 
             }
-            if (requestCode == MyApplication.REQUEST_DELETE) {
+            if (requestCode == MyMainApplication.REQUEST_DELETE) {
                 storeImageAdapter.loadObjects();
                 storeImageAdapter.notifyDataSetChanged();
                 gv_StoreImage.invalidateViews();

@@ -10,4 +10,5 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
