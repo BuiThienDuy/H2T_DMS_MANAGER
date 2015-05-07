@@ -54,46 +54,25 @@ public class StoreDetailActivity extends Activity {
 
         congNoMax = new double[1];
         congNoMax[0] = 0;
-        if (getIntent().hasExtra("EXTRAS_STORE_ID")) {
-            storeID = getIntent().getStringExtra("EXTRAS_STORE_ID");
-            if (ConnectUtils.hasConnectToInternet(StoreDetailActivity.this)) {
-                ParseQuery<StoreImage> query = StoreImage.getQuery();
-                query.whereEqualTo("store_id", storeID);
-                query.findInBackground(new FindCallback<StoreImage>() {
-                    @Override
-                    public void done(List<StoreImage> list, ParseException e) {
-                        if (e == null) {
-                            ParseObject.unpinAllInBackground(DownloadUtils.PIN_STORE_IMAGE);
-                            ParseObject.pinAllInBackground(DownloadUtils.PIN_STORE_IMAGE, list, new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    ParseQuery<StoreImage> imageQuery = StoreImage.getQuery();
-                                    imageQuery.fromPin(DownloadUtils.PIN_STORE_IMAGE);
-                                    imageQuery.whereEqualTo("store_id", store_image_id);
 
-                                    ParseQuery<StoreImage> localImageQuery = StoreImage.getQuery();
-                                    localImageQuery.fromPin("PIN_DRAFT_PHOTO");
-                                    localImageQuery.whereEqualTo("store_id", storeID);
-                                    try {
-                                        int totalImage = imageQuery.count() + localImageQuery.count();
-                                        tvBucAnhDaChup.setText(totalImage + getString(R.string.captureImage));
-                                    } catch (ParseException ex) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        }
-        if (getIntent().hasExtra("EXTRAS_STORE_IMAGE_ID")) {
-            store_image_id = getIntent().getStringExtra("EXTRAS_STORE_IMAGE_ID");
-        }
 
         InitializeComponent();
         GetAndShowStoreDetail();
         SetupEvent();
+
+        LoadImageCount();
+        if (getIntent().hasExtra("EXTRAS_STORE_ID")) {
+            storeID = getIntent().getStringExtra("EXTRAS_STORE_ID");
+            DownloadUtils.DownloadParseStoreImage(StoreDetailActivity.this, new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    LoadImageCount();
+                }
+            });
+        }
+        if (getIntent().hasExtra("EXTRAS_STORE_IMAGE_ID")) {
+            store_image_id = getIntent().getStringExtra("EXTRAS_STORE_IMAGE_ID");
+        }
 
         if(getIntent().hasExtra("EXTRAS_STORE_POINT")) {
             btnGiaHan.setVisibility(View.VISIBLE);
@@ -237,47 +216,47 @@ public class StoreDetailActivity extends Activity {
             public void onClick(View v) {
                 ParseQuery<Store> storeParseQuery = Store.getQuery();
                 storeParseQuery.fromPin(DownloadUtils.PIN_STORE);
-                storeParseQuery.whereEqualTo("objectId",storeID);
+                storeParseQuery.whereEqualTo("objectId", storeID);
                 storeParseQuery.getFirstInBackground(new GetCallback<Store>() {
                     @Override
                     public void done(final Store store, ParseException e) {
-                         if(e == null) {
-                             AlertDialog.Builder alert = new AlertDialog.Builder(StoreDetailActivity.this);
+                        if (e == null) {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(StoreDetailActivity.this);
 
-                             alert.setTitle(getString(R.string.modifiedDebtTitle));
-                             alert.setMessage(getString(R.string.modifiedDebtMessage));
+                            alert.setTitle(getString(R.string.modifiedDebtTitle));
+                            alert.setMessage(getString(R.string.modifiedDebtMessage));
 
-                             // Set an EditText view to get user input
-                             final EditText input = new EditText(StoreDetailActivity.this);
-                             input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                             alert.setView(input);
+                            // Set an EditText view to get user input
+                            final EditText input = new EditText(StoreDetailActivity.this);
+                            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            alert.setView(input);
 
-                             alert.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
-                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                     double value = Double.parseDouble(input.getText().toString());
-                                     store.setMaxDebt(value);
-                                     store.saveEventually();
-                                     store.pinInBackground(DownloadUtils.PIN_STORE,new SaveCallback() {
-                                         @Override
-                                         public void done(ParseException e) {
-                                             if (e == null) {
-                                                 Toast.makeText(StoreDetailActivity.this,getString(R.string
-                                                         .modifyDebtSuccess),Toast.LENGTH_LONG).show();
-                                             }
-                                         }
-                                     });
-                                 }
-                             });
+                            alert.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    double value = Double.parseDouble(input.getText().toString());
+                                    store.setMaxDebt(value);
+                                    store.saveEventually();
+                                    store.pinInBackground(DownloadUtils.PIN_STORE, new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            if (e == null) {
+                                                Toast.makeText(StoreDetailActivity.this, getString(R.string
+                                                        .modifyDebtSuccess), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
 
-                             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                     // Canceled.
-                                 }
-                             });
+                            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    // Canceled.
+                                }
+                            });
 
-                             alert.show();
+                            alert.show();
 
-                         }
+                        }
                     }
                 });
             }
@@ -342,6 +321,9 @@ public class StoreDetailActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    private void LoadImageCount() {
         ParseQuery<StoreImage> imageQuery = StoreImage.getQuery();
         imageQuery.fromPin(DownloadUtils.PIN_STORE_IMAGE);
         imageQuery.whereEqualTo("store_id", store_image_id);
@@ -349,12 +331,24 @@ public class StoreDetailActivity extends Activity {
         ParseQuery<StoreImage> localImageQuery = StoreImage.getQuery();
         localImageQuery.fromPin("PIN_DRAFT_PHOTO");
         localImageQuery.whereEqualTo("store_id", storeID);
+
+        int imageCount = 0;
+        int localImageCount = 0;
+
         try {
-            int totalImage = imageQuery.count() + localImageQuery.count();
-            tvBucAnhDaChup.setText(totalImage + getString(R.string.captureImage));
+            imageCount = imageQuery.count();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        try {
+            localImageCount = localImageQuery.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        int totalImage = imageCount + localImageCount;
+        tvBucAnhDaChup.setText(totalImage + getString(R.string.captureImage));
     }
 
     private String ValidateInput() {
