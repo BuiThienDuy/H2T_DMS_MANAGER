@@ -1,12 +1,16 @@
 package com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.H2TFC.H2T_DMS_MANAGER.R;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Product;
 import com.H2TFC.H2T_DMS_MANAGER.models.Promotion;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
@@ -30,6 +34,8 @@ public class PromotionNewActivity extends Activity {
     BootstrapButton btnOk, btnCancel;
     BootstrapEditText etTitle, etAmount1, etAmount2, etDiscount, etApplyFromDate, etApplyToDate;
     Spinner spnProductName1, spnProductName2, spnPromotionType;
+    MyEditDatePicker edpFromDate,edpToDate;
+    SimpleDateFormat simpleDateFormat;
 
     int selectedPromotiontypePosition = 0;
 
@@ -50,6 +56,7 @@ public class PromotionNewActivity extends Activity {
         InitializeComponent();
         SetupEvent();
 
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         if(getIntent().hasExtra("EXTRAS_PROMOTION_ID")) {
             setTitle(getString(R.string.updatePromotionTitle));
             promotionIdEdit = getIntent().getStringExtra("EXTRAS_PROMOTION_ID");
@@ -97,14 +104,48 @@ public class PromotionNewActivity extends Activity {
     }
 
     private void SetupEvent() {
+        etApplyToDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    Date fromDate = simpleDateFormat.parse(etApplyFromDate.getText().toString());
+                    Date toDate = simpleDateFormat.parse(etApplyToDate.getText().toString());
+                    edpFromDate.setMaxDate(fromDate);
+                    if(fromDate.after(toDate) || fromDate.equals(toDate)) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(toDate);
+                        cal.add(Calendar.DATE, -1);
+                        toDate = cal.getTime();
+                        etApplyFromDate.setText(simpleDateFormat.format(toDate));
+                    }
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = etTitle.getText().toString();
                 final String productName1 = spnProductName1.getSelectedItem().toString();
                 final String productName2 = spnProductName2.getSelectedItem().toString();
-                int amount1 = Integer.parseInt(etAmount1.getText().toString());
+                int amount1 = 0;
                 int amount2 = 0;
+                try {
+                    amount1 = Integer.parseInt(etAmount1.getText().toString());
+                    amount2 = Integer.parseInt(etAmount2.getText().toString());
+                } catch(Exception ex){};
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date applyFromDate = null;
                 Date applyToDate = null;
@@ -115,94 +156,144 @@ public class PromotionNewActivity extends Activity {
                     e.printStackTrace();
                 }
 
+                // check error
+                boolean error_existed = false;
+                StringBuilder error_msg = new StringBuilder("");
+                if(productName1.trim().length() == 0 || productName2.trim().length() == 0) {
+                    Toast.makeText(PromotionNewActivity.this,getString(R.string.emptyProductPromotion),Toast
+                            .LENGTH_LONG).show();
+                    Intent intent = new Intent(PromotionNewActivity.this, ProductManagementActivity.class);
+                    startActivity(intent);
+                }
+
                 if (selectedPromotiontypePosition == 0) {
-                    amount2 = Integer.parseInt(etAmount2.getText().toString());
-                    Promotion promotion = null;
-                    if(promotionIdEdit == null) {
-                        promotion = new Promotion();
-                    } else {
-                        promotion = promotionToEdit;
+                    if(title.trim().length() == 0) {
+                        error_existed = true;
+                        error_msg.append(getString(R.string.blankPromotionTitle));
                     }
-                    assert promotion != null;
-                    promotion.setPromotionName(title);
-                    promotion.setQuantityGift(amount1);
-                    promotion.setQuantityGifted(amount2);
-                    promotion.setPromotionApplyFrom(applyFromDate);
-                    promotion.setPromotionApplyTo(applyToDate);
-
-                    final ParseQuery<Product> productParseQuery = Product.getQuery();
-                    productParseQuery.whereEqualTo("name", productName1);
-                    productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
-                    final Promotion finalPromotion = promotion;
-                    productParseQuery.getFirstInBackground(new GetCallback<Product>() {
-                        @Override
-                        public void done(Product product, ParseException e) {
-                            if (e == null) {
-                                finalPromotion.setProductGift(product);
-                                ParseQuery<Product> productParseQuery2 = Product.getQuery();
-                                productParseQuery2.whereEqualTo("name", productName2);
-                                productParseQuery2.fromPin(DownloadUtils.PIN_PRODUCT);
-                                productParseQuery2.getFirstInBackground(new GetCallback<Product>() {
-                                    @Override
-                                    public void done(Product product, ParseException e) {
-                                        finalPromotion.setProductGifted(product);
-
-                                        finalPromotion.saveEventually();
-                                        finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
-                                            @Override
-                                            public void done(ParseException e) {
-                                                if (e == null) {
-                                                    Toast.makeText(PromotionNewActivity.this, getString(R.string
-                                                            .addNewPromotionSuccess), Toast.LENGTH_LONG).show();
-                                                    finish();
-                                                }
-                                            }
-                                        });
-                                    }
-                                });
-                            }
+                    if(amount1 < 1) {
+                        if(!error_existed) {
+                            error_existed = true;
+                            error_msg.append(getString(R.string.blankPromotionAmount1));
                         }
-                    });
+                    }
+                    if(amount2 < 1) {
+                        if(!error_existed) {
+                            error_existed = true;
+                            error_msg.append(getString(R.string.blankPromotionAmount2));
+                        }
+                    }
+
+                    if(error_existed) {
+                        Toast.makeText(PromotionNewActivity.this,error_msg.toString(),Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Promotion promotion = null;
+                        if (promotionIdEdit == null) {
+                            promotion = new Promotion();
+                        } else {
+                            promotion = promotionToEdit;
+                        }
+                        assert promotion != null;
+                        promotion.setPromotionName(title);
+                        promotion.setQuantityGift(amount1);
+                        promotion.setQuantityGifted(amount2);
+                        promotion.setPromotionApplyFrom(applyFromDate);
+                        promotion.setPromotionApplyTo(applyToDate);
+
+                        final ParseQuery<Product> productParseQuery = Product.getQuery();
+                        productParseQuery.whereEqualTo("name", productName1);
+                        productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
+                        final Promotion finalPromotion = promotion;
+                        productParseQuery.getFirstInBackground(new GetCallback<Product>() {
+                            @Override
+                            public void done(Product product, ParseException e) {
+                                if (e == null) {
+                                    finalPromotion.setProductGift(product);
+                                    ParseQuery<Product> productParseQuery2 = Product.getQuery();
+                                    productParseQuery2.whereEqualTo("name", productName2);
+                                    productParseQuery2.fromPin(DownloadUtils.PIN_PRODUCT);
+                                    productParseQuery2.getFirstInBackground(new GetCallback<Product>() {
+                                        @Override
+                                        public void done(Product product, ParseException e) {
+                                            finalPromotion.setProductGifted(product);
+
+                                            finalPromotion.saveEventually();
+                                            finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
+                                                @Override
+                                                public void done(ParseException e) {
+                                                    if (e == null) {
+                                                        Toast.makeText(PromotionNewActivity.this, getString(R.string
+                                                                .addNewPromotionSuccess), Toast.LENGTH_LONG).show();
+                                                        finish();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
                 } else {
                     int discount = Integer.parseInt(etDiscount.getText().toString());
-
-                    Promotion promotion = null;
-                    if(promotionIdEdit == null) {
-                        promotion = new Promotion();
-                    } else {
-                        promotion = promotionToEdit;
+                    if(title.trim().length() == 0) {
+                        error_existed = true;
+                        error_msg.append(getString(R.string.blankPromotionTitle));
                     }
-                    promotion.setPromotionName(title);
-                    promotion.setQuantityGift(amount1);
-                    promotion.setDiscount(discount);
-                    promotion.setPromotionApplyFrom(applyFromDate);
-                    promotion.setPromotionApplyTo(applyToDate);
-
-                    final ParseQuery<Product> productParseQuery = Product.getQuery();
-                    productParseQuery.whereEqualTo("name", productName1);
-                    productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
-                    final Promotion finalPromotion = promotion;
-                    productParseQuery.getFirstInBackground(new GetCallback<Product>() {
-                        @Override
-                        public void done(Product product, ParseException e) {
-                            if (e == null) {
-                                finalPromotion.setProductGift(product);
-
-                                finalPromotion.saveEventually();
-                                finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if (e == null) {
-                                            Toast.makeText(PromotionNewActivity.this, getString(R.string
-                                                    .addNewPromotionSuccess), Toast.LENGTH_LONG).show();
-                                            finish();
-
-                                        }
-                                    }
-                                });
-                            }
+                    if(amount1 < 1) {
+                        if(!error_existed) {
+                            error_existed = true;
+                            error_msg.append(getString(R.string.blankPromotionAmount1));
                         }
-                    });
+                    }
+                    if(discount < 1) {
+                        if(!error_existed) {
+                            error_existed = true;
+                            error_msg.append(getString(R.string.blankDiscountPromotion));
+                        }
+                    }
+
+                    if(error_existed) {
+                        Toast.makeText(PromotionNewActivity.this, error_msg.toString(), Toast.LENGTH_SHORT).show();
+                        Promotion promotion = null;
+                        if (promotionIdEdit == null) {
+                            promotion = new Promotion();
+                        } else {
+                            promotion = promotionToEdit;
+                        }
+                        promotion.setPromotionName(title);
+                        promotion.setQuantityGift(amount1);
+                        promotion.setDiscount(discount);
+                        promotion.setPromotionApplyFrom(applyFromDate);
+                        promotion.setPromotionApplyTo(applyToDate);
+
+                        final ParseQuery<Product> productParseQuery = Product.getQuery();
+                        productParseQuery.whereEqualTo("name", productName1);
+                        productParseQuery.fromPin(DownloadUtils.PIN_PRODUCT);
+                        final Promotion finalPromotion = promotion;
+                        productParseQuery.getFirstInBackground(new GetCallback<Product>() {
+                            @Override
+                            public void done(Product product, ParseException e) {
+                                if (e == null) {
+                                    finalPromotion.setProductGift(product);
+
+                                    finalPromotion.saveEventually();
+                                    finalPromotion.pinInBackground(DownloadUtils.PIN_PROMOTION, new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            if (e == null) {
+                                                Toast.makeText(PromotionNewActivity.this, getString(R.string
+                                                        .addNewPromotionSuccess), Toast.LENGTH_LONG).show();
+                                                finish();
+
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -270,7 +361,7 @@ public class PromotionNewActivity extends Activity {
         int day = c.get(Calendar.DATE);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpFromDate = new MyEditDatePicker(PromotionNewActivity.this, R.id
+        edpFromDate = new MyEditDatePicker(PromotionNewActivity.this, R.id
                 .activity_promotion_management_et_from_date,day,month,
                 year);
 
@@ -278,7 +369,7 @@ public class PromotionNewActivity extends Activity {
         day = c.get(Calendar.DATE);
         month = c.get(Calendar.MONTH);
         year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpToDate =new MyEditDatePicker(PromotionNewActivity.this, R.id
+        edpToDate =new MyEditDatePicker(PromotionNewActivity.this, R.id
                 .activity_promotion_management_et_to_date,day,month,
                 year);
 

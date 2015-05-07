@@ -11,6 +11,7 @@ import android.graphics.Point;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -82,6 +83,7 @@ public class StoreManagementActivity extends Activity {
     private float lastCircleX;
     private float lastCircleY;
     SlidingLayer slidingLayer;
+    Store currentStore = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,71 +92,32 @@ public class StoreManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.storeManagementTitle));
 
-        if (ConnectUtils.hasConnectToInternet(StoreManagementActivity.this)) {
-            ParseQuery<Area> query = Area.getQuery();
-            query.whereEqualTo("employee_id", ParseUser.getCurrentUser().getObjectId());
-            query.findInBackground(new FindCallback<Area>() {
-                @Override
-                public void done(List<Area> list, ParseException e) {
-                    if (e == null) {
-                        ParseObject.unpinAllInBackground(DownloadUtils.PIN_AREA);
-                        ParseObject.pinAllInBackground(DownloadUtils.PIN_AREA, list, new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                DrawManageArea();
-                            }
-                        });
-                    }
-                }
-            });
-        }
-            DownloadUtils.DownloadParseEmployee(StoreManagementActivity.this,new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    DownloadUtils.DownloadParseStore(StoreManagementActivity.this,new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            DrawStorePoint();
-                        }
-                    });
-                }
-            });
+        DownloadUtils.DownloadParseEmployee(StoreManagementActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
 
-            DownloadUtils.DownloadParseStoreType(StoreManagementActivity.this, new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-
-                }
-            });
-
-        if(getIntent().hasExtra("EXTRAS_STORE_ID")) {
-            String storeId = getIntent().getStringExtra("EXTRAS_STORE_ID");
-            ParseQuery<Store> storeParseQuery = Store.getQuery();
-            storeParseQuery.whereEqualTo("objectId",storeId);
-            storeParseQuery.fromPin(DownloadUtils.PIN_STORE);
-            try {
-                Store store = storeParseQuery.getFirst();
-                ParseGeoPoint location = store.getLocationPoint();
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(location.getLatitude(), location.getLongitude()), 13));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                        .zoom(17)                                                                 // Sets the zoom
-                        .build();                                                                 // Creates a CameraPosition from the builder
-                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-            } catch (ParseException e) {
-                e.printStackTrace();
             }
-        }
+        });
 
+        DownloadUtils.DownloadParseStoreType(StoreManagementActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
 
+            }
+        });
         InitializeComponent();
+        SetupMap();
         SetupListView();
         SetupEvent();
-        SetupMap();
 
+        DownloadUtils.DownloadParseStore(StoreManagementActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                DrawStorePoint();
+            }
+        });
+
+        DrawStorePoint();
 
         slidingLayer = (SlidingLayer) findViewById(R.id.activity_store_management_slidingLayer);
 
@@ -166,15 +129,30 @@ public class StoreManagementActivity extends Activity {
         slidingLayer.setChangeStateOnTap(true);
         slidingLayer.setSlidingFromShadowEnabled(true);
 
-        // Event
-        lvEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                employeeSelectedPosition = position;
-                view.setSelected(true);
-            }
-        });
+        if(getIntent().hasExtra("EXTRAS_STORE_ID")) {
+            String storeId = getIntent().getStringExtra("EXTRAS_STORE_ID");
+            ParseQuery<Store> storeParseQuery = Store.getQuery();
+            storeParseQuery.whereEqualTo("objectId", storeId);
+            storeParseQuery.fromPin(DownloadUtils.PIN_STORE);
+            try {
+                Store store = storeParseQuery.getFirst();
+                if(store != null) {
+                    ParseGeoPoint location = store.getLocationPoint();
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
 
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(lat, lng))      // Sets the center of the map to location user
+                            .zoom(17)                                                                 // Sets the zoom
+                            .build();                                                                 // Creates a CameraPosition from the builder
+                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                    currentStore = store;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -218,6 +196,9 @@ public class StoreManagementActivity extends Activity {
                                 markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
 
                                 Marker marker = map.addMarker(markerOptions);
+                                if(currentStore == store) {
+                                    marker.showInfoWindow();
+                                }
                                 myMapMarker.put(marker, store);
                             }
                         }
@@ -227,32 +208,6 @@ public class StoreManagementActivity extends Activity {
         });
 
 
-    }
-
-    private void DrawManageArea() {
-        ParseQuery<Area> areaQuery = Area.getQuery();
-        areaQuery.whereEqualTo("employee_id", ParseUser.getCurrentUser().getObjectId());
-        areaQuery.fromPin(DownloadUtils.PIN_AREA);
-        areaQuery.findInBackground(new FindCallback<Area>() {
-            @Override
-            public void done(List<Area> list, ParseException e) {
-                for (Area employeeArea : list) {
-                    // get list of Parse geopoint then make a polygon
-                    ArrayList<ParseGeoPoint> listGeoPoint = (ArrayList<ParseGeoPoint>) employeeArea.getNodeList();
-                    if (listGeoPoint.size() > 0) {
-                        PolygonOptions polygonOptions = new PolygonOptions();
-                        for (ParseGeoPoint geoPoint : listGeoPoint) {
-                            polygonOptions.add(new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude()));
-                        }
-
-                        // polygon setting
-                        polygonOptions.fillColor(employeeArea.getFillColor());
-                        polygonOptions.strokeWidth(2);
-                        map.addPolygon(polygonOptions);
-                    }
-                }
-            }
-        });
     }
 
     public void InitializeComponent() {
@@ -363,8 +318,12 @@ public class StoreManagementActivity extends Activity {
                                         iconGenerator.setTextAppearance(R.style.iconGenText_WHITE);
                                     }
 
-                                    Bitmap bitmap = iconGenerator.makeIcon(title);
-                                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                    try {
+                                        Bitmap bitmap = iconGenerator.makeIcon(title);
+                                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+                                    } catch(IllegalArgumentException ex) {
+
+                                    }
                                 }
                             }
                         });
@@ -385,6 +344,14 @@ public class StoreManagementActivity extends Activity {
                 } catch (GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        lvEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                employeeSelectedPosition = position;
+                view.setSelected(true);
             }
         });
 

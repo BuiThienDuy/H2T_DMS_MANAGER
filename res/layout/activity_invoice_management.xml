@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:baselineAligned="true">
+    
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="1dp"
+            android:orientation="vertical">
+        <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invoiceSearchStatus"
+                style="?android:textAppearanceLarge"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:gravity="center_horizontal"/>
+        <View
+              android:background="#CCCCCC"
+              android:layout_width="match_parent"
+              android:layout_height="1px"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/activity_invoice_management_lv_invoice"/>
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:id="@+id/activity_invoice_tv_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="2"
+                    android:text="@string/invoiceEmpty"
+                    style="?android:textAppearanceLarge"
+                    android:gravity="center"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

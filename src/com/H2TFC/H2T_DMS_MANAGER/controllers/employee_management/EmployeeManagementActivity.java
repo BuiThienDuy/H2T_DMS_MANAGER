@@ -14,6 +14,7 @@ import com.H2TFC.H2T_DMS_MANAGER.MyMainApplication;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.LoginActivity;
+import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
@@ -263,51 +264,60 @@ public class EmployeeManagementActivity extends Activity {
             }
 
             case R.id.actionbar_employee_lock: {
-                AlertDialog.Builder confirmDialog= new AlertDialog.Builder(EmployeeManagementActivity.this);
-                confirmDialog.setTitle(getString(R.string.lockThisEmployee));
-                confirmDialog.setMessage(getString(R.string.confirmLockUser));
-                confirmDialog.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final ParseUser selectedEmployeeFromList = (ParseUser) (lvEmployee.getItemAtPosition(selectedItemIndex));
+                if(selectedItemIndex >= 0) {
+                    AlertDialog.Builder confirmDialog = new AlertDialog.Builder(EmployeeManagementActivity.this);
+                    confirmDialog.setTitle(getString(R.string.lockThisEmployee));
+                    confirmDialog.setMessage(getString(R.string.confirmLockUser));
+                    confirmDialog.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (ConnectUtils.hasConnectToInternet(EmployeeManagementActivity.this)) {
+                                final ParseUser selectedEmployeeFromList = (ParseUser) (lvEmployee.getItemAtPosition(selectedItemIndex));
 
-                        HashMap<String, Object> params = new HashMap<String, Object>();
-                        params.put("username", selectedEmployeeFromList.getUsername());
-                        params.put("locked", true);
+                                HashMap<String, Object> params = new HashMap<String, Object>();
+                                params.put("username", selectedEmployeeFromList.getUsername());
+                                params.put("locked", true);
 
-                        ParseCloud.callFunctionInBackground("modifyUser", params, new FunctionCallback<Object>() {
-                            @Override
-                            public void done(Object o, ParseException e) {
-                                if (e == null) {
-                                    Toast.makeText(EmployeeManagementActivity.this,getString(R.string.lockEmployeeSuccess),Toast
-                                            .LENGTH_LONG)
-                                            .show();
-                                    selectedEmployeeFromList.put("locked", true);
-                                    selectedEmployeeFromList.pinInBackground(DownloadUtils.PIN_EMPLOYEE, new SaveCallback() {
-                                        @Override
-                                        public void done(ParseException e) {
-                                            if(e == null) {
-                                                employeeListAdapter.loadObjects();
-                                                layout_employee_detail.setVisibility(View.INVISIBLE);
-                                            }
+                                ParseCloud.callFunctionInBackground("modifyUser", params, new FunctionCallback<Object>() {
+                                    @Override
+                                    public void done(Object o, ParseException e) {
+                                        if (e == null) {
+                                            Toast.makeText(EmployeeManagementActivity.this, getString(R.string.lockEmployeeSuccess), Toast
+                                                    .LENGTH_LONG)
+                                                    .show();
+                                            selectedEmployeeFromList.put("locked", true);
+                                            selectedEmployeeFromList.pinInBackground(DownloadUtils.PIN_EMPLOYEE, new SaveCallback() {
+                                                @Override
+                                                public void done(ParseException e) {
+                                                    if (e == null) {
+                                                        employeeListAdapter.loadObjects();
+                                                        layout_employee_detail.setVisibility(View.INVISIBLE);
+                                                    }
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(EmployeeManagementActivity.this, e.getMessage(), Toast.LENGTH_LONG)
+                                                    .show();
                                         }
-                                    });
-                                } else {
-                                    Toast.makeText(EmployeeManagementActivity.this,e.getMessage(),Toast.LENGTH_LONG)
-                                            .show();
-                                }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(EmployeeManagementActivity.this, getString(R.string
+                                        .requiredInternetForFunction), Toast.LENGTH_LONG).show();
                             }
-                        });
-                    }
-                });
-                confirmDialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    confirmDialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
+                        }
+                    });
 
-                confirmDialog.show();
+                    confirmDialog.show();
+                } else {
+                    Toast.makeText(EmployeeManagementActivity.this,getString(R.string.pleaseChooseEmployeeToLock),Toast.LENGTH_LONG).show();
+                }
 
                 break;
             }

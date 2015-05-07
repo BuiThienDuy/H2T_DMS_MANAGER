@@ -10,17 +10,12 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
-import com.H2TFC.H2T_DMS_MANAGER.adapters.EmployeeListAttendanceAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.adapters.FeedbackAdapter;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.Feedback;
-import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
-import com.H2TFC.H2T_DMS_MANAGER.widget.MyEditDatePicker;
-import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
 
-import java.util.Calendar;
 import java.util.List;
 
 /*
@@ -44,12 +39,18 @@ public class FeedbackManagementActivity extends Activity {
         setTitle(getString(R.string.viewFeedbackTitle));
 
 
-            DownloadUtils.DownloadParseFeedback(FeedbackManagementActivity.this, new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    feedbackAdapter.loadObjects();
-                }
-            });
+        DownloadUtils.DownloadParseStore(FeedbackManagementActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                DownloadUtils.DownloadParseFeedback(FeedbackManagementActivity.this, new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        feedbackAdapter.loadObjects();
+                    }
+                });
+            }
+        });
+
 
         InitializeComponent();
         SetupListView();
@@ -57,10 +58,10 @@ public class FeedbackManagementActivity extends Activity {
         lvFeedback.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position >= 0) {
+                if (position >= 0) {
                     Feedback feedback = feedbackAdapter.getItem(position);
                     Intent intent = new Intent(FeedbackManagementActivity.this, StoreManagementActivity.class);
-                    intent.putExtra("EXTRAS_STORE_ID",feedback.getStoreId());
+                    intent.putExtra("EXTRAS_STORE_ID", feedback.getStoreId());
                     startActivity(intent);
                 }
             }

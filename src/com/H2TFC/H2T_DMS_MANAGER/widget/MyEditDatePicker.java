@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
  * thanhduongpham4293@gmail.com
@@ -20,6 +23,7 @@ public class MyEditDatePicker implements View.OnClickListener, DatePickerDialog.
     private int _month;
     private int _birthYear;
     private Context _context;
+    private Date _maxDate;
 
     public MyEditDatePicker(Context context, int editTextViewID, int _day, int _month, int _birthYear)
     {
@@ -43,8 +47,15 @@ public class MyEditDatePicker implements View.OnClickListener, DatePickerDialog.
     @Override
     public void onClick(View v) {
         DatePickerDialog dialog =  new DatePickerDialog(_context, this, _birthYear, _month, _day);
+        try {
+            dialog.getDatePicker().setMaxDate(_maxDate.getTime());
+        } catch(Exception ex) {}
         dialog.show();
 
+    }
+
+    public void setMaxDate(Date date) {
+        _maxDate = date;
     }
 
     // updates the date in the birth date EditText

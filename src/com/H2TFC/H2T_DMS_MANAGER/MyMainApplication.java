@@ -19,6 +19,7 @@ public class MyMainApplication extends Application {
     public static final int REQUEST_TAKE_PHOTO = 400;
     public static final int REQUEST_CHOOSE_PHOTO = 401;
     public static final int REQUEST_GOOGLE_PLACES  = 500;
+    public static final int REQUEST_SEARCH = 600;
 
     @Override
     public void onCreate() {

@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.models.Feedback;
 import com.H2TFC.H2T_DMS_MANAGER.models.Store;
+import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -55,7 +56,8 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
         tvStatus.setText(" " + status);
 
         ParseQuery<Store> query = Store.getQuery()
-                .whereEqualTo("objectId", object.getStoreId());
+                .whereEqualTo("objectId", object.getStoreId())
+                .fromPin(DownloadUtils.PIN_STORE);
         query.getFirstInBackground(new GetCallback<Store>() {
             @Override
             public void done(Store store, ParseException e) {
@@ -68,7 +70,11 @@ public class FeedbackAdapter extends ParseQueryAdapter<Feedback> {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         tvCreatedDate.setText(" " + dateFormat.format(object.getCreatedAt()));
 
-        tvContent.setText(object.getDescription());
+        String content = object.getDescription();
+        if(content.length() > 140) {
+            content = content.substring(0,137) + "...";
+        }
+        tvContent.setText(content);
 
         return v;
     }

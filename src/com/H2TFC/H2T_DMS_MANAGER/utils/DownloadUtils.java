@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.view.ContextThemeWrapper;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice.InvoiceDetailActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.*;
 import com.parse.*;
 
@@ -29,31 +30,33 @@ public class DownloadUtils {
     public static final String PIN_ATTENDANCE = "PIN_ATTENDANCE_DOWNLOAD";
     public static final String PIN_FEEDBACK = "PIN_FEEDBACK_DOWNLOAD";
     public static final String PIN_PROMOTION = "PIN_PROMOTION_DOWNLOAD";
-
+    public static final String PIN_PRODUCT_PURCHASE = "PIN_PRODUCT_PURCHASE_DOWNLOAD";
 
 
     public static void DownloadParseArea(final Context context, final SaveCallback saveCallback) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Date myDate = new Date(preferences.getLong("LAST_DOWNLOAD" + PIN_AREA, 0));
-        long diff = Math.abs(myDate.getTime() - new Date().getTime());
-        if(diff/1000 > 5) {
-            ParseQuery<Area> query = Area.getQuery();
-            query.findInBackground(new FindCallback<Area>() {
-                @Override
-                public void done(List<Area> list, ParseException e) {
-                    if (e == null) {
-                        ParseObject.unpinAllInBackground(PIN_AREA);
-                        ParseObject.pinAllInBackground(PIN_AREA, list, saveCallback);
+        if(ConnectUtils.hasConnectToInternet(context)) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            Date myDate = new Date(preferences.getLong("LAST_DOWNLOAD" + PIN_AREA, 0));
+            long diff = Math.abs(myDate.getTime() - new Date().getTime());
+            if (diff / 1000 > 5) {
+                ParseQuery<Area> query = Area.getQuery();
+                query.findInBackground(new FindCallback<Area>() {
+                    @Override
+                    public void done(List<Area> list, ParseException e) {
+                        if (e == null) {
+                            ParseObject.unpinAllInBackground(PIN_AREA);
+                            ParseObject.pinAllInBackground(PIN_AREA, list, saveCallback);
 
-                        // Save last download time
-                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        Date dt = new Date();
-                        editor.putLong("LAST_DOWNLOAD" + PIN_AREA, dt.getTime());
-                        editor.apply();
+                            // Save last download time
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            Date dt = new Date();
+                            editor.putLong("LAST_DOWNLOAD" + PIN_AREA, dt.getTime());
+                            editor.apply();
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -293,6 +296,33 @@ public class DownloadUtils {
                             SharedPreferences.Editor editor = preferences.edit();
                             Date dt = new Date();
                             editor.putLong("LAST_DOWNLOAD" + PIN_PROMOTION, dt.getTime());
+                            editor.apply();
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    public static void DownloadParseProductPurchase(final Context context,final SaveCallback saveCallback) {
+        if(ConnectUtils.hasConnectToInternet(context)) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            Date myDate = new Date(preferences.getLong("LAST_DOWNLOAD" + PIN_PRODUCT_PURCHASE, 0));
+            long diff = Math.abs(myDate.getTime() - new Date().getTime());
+            if (diff / 1000 > 5) {
+                ParseQuery<ProductPurchase> query = ProductPurchase.getQuery();
+                query.findInBackground(new FindCallback<ProductPurchase>() {
+                    @Override
+                    public void done(List<ProductPurchase> list, ParseException e) {
+                        if(e==null) {
+                            ParseObject.unpinAllInBackground(PIN_PRODUCT_PURCHASE);
+                            ParseObject.pinAllInBackground(PIN_PRODUCT_PURCHASE, list, saveCallback);
+
+                            // Save last download time
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            Date dt = new Date();
+                            editor.putLong("LAST_DOWNLOAD" + PIN_PRODUCT_PURCHASE, dt.getTime());
                             editor.apply();
                         }
                     }

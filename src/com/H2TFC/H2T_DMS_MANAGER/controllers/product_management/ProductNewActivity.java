@@ -334,7 +334,7 @@ public class ProductNewActivity extends Activity {
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
-                Log.e("ProductNewActivity->dispatchTakePhotoIntent()", "Cannot create a temp image file", e);
+                e.printStackTrace();
             }
 
             if (photoFile != null) {
@@ -396,9 +396,9 @@ public class ProductNewActivity extends Activity {
                 ivPhoto.setImageBitmap(thumbnail);
                 hasImage = true;
             } catch (IOException e) {
-                Log.e("ProductNewActivity->OnActivityResult", "Cannot get a selected photo from the gallery.", e);
+                e.printStackTrace();
             } catch (Exception e) {
-                Log.e("ProductNewActivity->OnActivityResult", "Cannot get a selected photo from the gallery.", e);
+                e.printStackTrace();
             }
         }
 

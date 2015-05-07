@@ -14,6 +14,7 @@ import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management.AttendanceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.employee_management.EmployeeManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.feed_back_management.FeedbackManagementActivity;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice.InvoiceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management.PromotionManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementActivity;
@@ -32,7 +33,8 @@ import com.parse.ParseUser;
  */
 public class DashBoardActivity extends Activity {
     Button btnEmployeeManagement, btnStreetDivide, btnProductManagement, btnStoreManagement,
-           btnPromotionMangement, btnUserInformation, btnLogOut, btnViewReport, btnAttendance,btnViewFeedBack;
+           btnPromotionMangement, btnUserInformation, btnLogOut, btnViewReport, btnAttendance,btnViewFeedBack,
+            btnInvoice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class DashBoardActivity extends Activity {
         btnViewReport = (Button) findViewById(R.id.dashboard_btn_view_report);
         btnAttendance = (Button) findViewById(R.id.dashboard_btn_employee_attendance);
         btnViewFeedBack = (Button) findViewById(R.id.dashboard_btn_view_feedback);
+        btnInvoice = (Button) findViewById(R.id.dashboard_btn_invoice_management);
 
         btnEmployeeManagement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +71,6 @@ public class DashBoardActivity extends Activity {
         btnProductManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-//                        .show();
                 NavigateIntent(ProductManagementActivity.class);
             }
         });
@@ -85,8 +86,6 @@ public class DashBoardActivity extends Activity {
             @Override
             public void onClick(View v) {
                 NavigateIntent(PromotionManagementActivity.class);
-//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-//                        .show();
             }
         });
 
@@ -121,8 +120,6 @@ public class DashBoardActivity extends Activity {
         btnViewReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-//                        .show();
                 NavigateIntent(ViewReportActivity.class);
             }
         });
@@ -131,17 +128,20 @@ public class DashBoardActivity extends Activity {
             @Override
             public void onClick(View v) {
                 NavigateIntent(AttendanceManagementActivity.class);
-//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-//                        .show();
             }
         });
 
         btnViewFeedBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(DashBoardActivity.this,getString(R.string.currentFeatureNotImplement),Toast.LENGTH_LONG)
-//                        .show();
                 NavigateIntent(FeedbackManagementActivity.class);
+            }
+        });
+
+        btnInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavigateIntent(InvoiceManagementActivity.class);
             }
         });
     }

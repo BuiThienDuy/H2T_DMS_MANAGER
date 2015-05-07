@@ -53,17 +53,20 @@ import java.util.*;
 public class ViewReportActivity extends Activity {
     ListView lvChart;
     BootstrapEditText etFromDate,etToDate;
+    MyEditDatePicker edpToDate,edpFromDate;
+    SimpleDateFormat simpleDateFormat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_report);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         InitializeComponent();
         LoadReport();
 
-        DownloadUtils.DownloadParseInvoice(ViewReportActivity.this,new SaveCallback() {
+        DownloadUtils.DownloadParseInvoice(ViewReportActivity.this, new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 DownloadUtils.DownloadParseStore(getApplicationContext(), new SaveCallback() {
@@ -88,7 +91,7 @@ public class ViewReportActivity extends Activity {
         int day = c.get(Calendar.DATE);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpFromDate = new MyEditDatePicker(ViewReportActivity.this, R.id
+        edpFromDate = new MyEditDatePicker(ViewReportActivity.this, R.id
                 .activity_view_report_et_from_date,day,month,
                 year);
 
@@ -96,7 +99,7 @@ public class ViewReportActivity extends Activity {
         day = c.get(Calendar.DATE);
         month = c.get(Calendar.MONTH);
         year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpToDate =new MyEditDatePicker(ViewReportActivity.this, R.id
+        edpToDate =new MyEditDatePicker(ViewReportActivity.this, R.id
                 .activity_view_report_et_to_date,day,month,
                 year);
 
@@ -131,6 +134,20 @@ public class ViewReportActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    Date fromDate = simpleDateFormat.parse(etFromDate.getText().toString());
+                    Date toDate = simpleDateFormat.parse(etToDate.getText().toString());
+                    edpFromDate.setMaxDate(fromDate);
+                    if (fromDate.after(toDate) || fromDate.equals(toDate)) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(toDate);
+                        cal.add(Calendar.DATE, -1);
+                        toDate = cal.getTime();
+                        etFromDate.setText(simpleDateFormat.format(toDate));
+                    }
+                } catch(java.text.ParseException ex) {
+
+                }
                 LoadReport();
             }
 

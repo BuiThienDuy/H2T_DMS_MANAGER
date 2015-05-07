@@ -38,13 +38,15 @@ public class ProductManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.productManagementTitle));
 
-            DownloadUtils.DownloadParseProduct(ProductManagementActivity.this,new SaveCallback() {
+            DownloadUtils.DownloadParseProduct(ProductManagementActivity.this, new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     tvEmptyProduct.setVisibility(View.VISIBLE);
                     productListAdapter.loadObjects();
                 }
             });
+
+
 
         ParseQueryAdapter.QueryFactory<Product> factory = new ParseQueryAdapter.QueryFactory<Product>() {
             @Override

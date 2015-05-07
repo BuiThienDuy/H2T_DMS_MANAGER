@@ -18,17 +18,19 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp">
 
-            <TextView
+            <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:textAppearanceMedium"
                     android:textStyle="bold"
-                    android:text="@string/storeNameDescription"/>
+                    android:text="@string/storeNameDescription"/>-->
 
-            <TextView
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:singleLine="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:textAppearanceMedium"
+                    android:textStyle="bold"
                     android:id="@+id/list_feedback_tv_store"
                     />
         </LinearLayout>
@@ -39,16 +41,17 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp">
 
-            <TextView
+            <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:textAppearanceSmall"
-                    android:text="@string/createdDate"/>
+                    android:text="@string/createdDate"/>-->
 
-            <TextView
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:singleLine="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
+                    style="?android:textAppearanceSmall"
                     android:id="@+id/list_feedback_tv_created_date"
                     />
         </LinearLayout>
@@ -68,20 +71,21 @@
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical">
             <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_circle_selection"/>
-            <TextView
+            <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:textAppearanceSmall"
-                    android:text="@string/titleDescription"/>
+                    android:text="@string/titleDescription"/>-->
 
-            <TextView
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:singleLine="true"
                     android:id="@+id/list_feedback_tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
+                    style="?android:textAppearanceSmall"
                     />
 
         </LinearLayout>
@@ -92,16 +96,17 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp">
 
-            <TextView
+            <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:textAppearanceSmall"
-                    android:text="@string/statusDescription"/>
+                    android:text="@string/statusDescription"/>-->
 
-            <TextView
+            <com.H2TFC.H2T_DMS_MANAGER.widget.AutofitTextView
+                    android:singleLine="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
+                    style="?android:textAppearanceSmall"
                     android:id="@+id/list_feedback_tv_status"/>
         </LinearLayout>
     </LinearLayout>

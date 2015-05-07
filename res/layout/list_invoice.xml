@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rowselector"
+            android:padding="3dp"
+            android:divider="@drawable/list_divide"
+            >
+
+        <LinearLayout
+                android:id="@+id/list_invoice_ll_product"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:background="#FF0000">
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/list_invoice_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invoice"
+                    style="?android:textAppearanceLarge"
+                    android:textColor="#27657E"
+                    android:singleLine="true"
+                    android:textStyle="bold"/>
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                <TextView
+                        android:id="@+id/list_invoice_tv_employee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:singleLine="true"
+                        android:text="@string/invoiceOwner"/>
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/list_invoice_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/invoiceTotalPrice"/>
+
+            <TextView
+                    android:id="@+id/list_invoice_tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"/>
+            <TextView
+                    android:id="@+id/list_invoice_tv_date_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invoiceCreateDate"/>
+        </LinearLayout>
+    </LinearLayout>

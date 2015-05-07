@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_invoice_history_lv_invoice"/>
+    <TextView
+            android:id="@+id/activity_invoice_history_tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/invoiceEmpty"
+            style="?android:textAppearanceLarge"
+            android:gravity="center"/>
+</LinearLayout>

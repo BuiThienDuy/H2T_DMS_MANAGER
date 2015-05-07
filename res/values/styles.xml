@@ -48,4 +48,10 @@
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
+    <declare-styleable name="FlowLayout">
+        <attr name="android:gravity" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_Layout">
+        <attr name="android:layout_gravity" />
+    </declare-styleable>
 </resources>

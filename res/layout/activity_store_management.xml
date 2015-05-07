@@ -24,8 +24,8 @@
                 </FrameLayout>
         <ImageView
             android:id="@+id/activity_store_management_iv_crosshair"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:src="@drawable/ic_circle_selection"
             android:layout_gravity="center_vertical"
             android:layout_centerInParent="true"

@@ -78,17 +78,15 @@
                 android:id="@+id/dashboard_btn_employee_management"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-
         <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:drawableTop="@drawable/image_dashboard_view_report"
-                android:text="@string/viewReport"
+                android:drawableTop="@drawable/image_dashboard_attendance"
+                android:text="@string/attendanceManagement"
                 android:layout_weight="1"
-                android:id="@+id/dashboard_btn_view_report"
+                android:id="@+id/dashboard_btn_employee_attendance"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -99,23 +97,21 @@
         <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:drawableTop="@drawable/image_dashboard_attendance"
-                android:text="@string/attendanceManagement"
-                android:layout_weight="1"
-                android:id="@+id/dashboard_btn_employee_attendance"
-                android:background="#FFFFFF"
-                style="@style/DashboardButton"/>
-
-        <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:drawableTop="@drawable/image_dashboard_feedback"
                 android:text="@string/viewFeedback"
                 android:layout_weight="1"
                 android:id="@+id/dashboard_btn_view_feedback"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/image_dashboard_view_report"
+                android:text="@string/viewReport"
+                android:layout_weight="1"
+                android:id="@+id/dashboard_btn_view_report"
+                android:background="#FFFFFF"
+                style="@style/DashboardButton"/>
     </LinearLayout>
 
     <LinearLayout
@@ -132,6 +128,24 @@
                 android:id="@+id/dashboard_btn_user_information"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
+
+
+        <Button
+                android:id="@+id/dashboard_btn_invoice_management"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/image_viengtham_dashboard_invoice_management"
+                android:text="@string/invoiceManagement"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                style="@style/DashboardButton"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            >
+
 
 
         <Button

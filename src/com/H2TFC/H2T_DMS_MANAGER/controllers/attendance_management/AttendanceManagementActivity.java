@@ -17,8 +17,11 @@ import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.H2TFC.H2T_DMS_MANAGER.widget.MyEditDatePicker;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
+import com.parse.ParseException;
 
+import java.text.*;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -34,6 +37,8 @@ public class AttendanceManagementActivity extends Activity {
     ListView lvEmployee;
     ProgressBar progressBar;
     TextView tvEmptyView;
+    MyEditDatePicker edpFromDate,edpToDate;
+    SimpleDateFormat simpleDateFormat;
 
 
     @Override
@@ -43,6 +48,7 @@ public class AttendanceManagementActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.attendanceManagementTitle));
 
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
         userQuery.fromPin(DownloadUtils.PIN_EMPLOYEE);
         try {
@@ -103,6 +109,20 @@ public class AttendanceManagementActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    Date fromDate = simpleDateFormat.parse(etFromDate.getText().toString());
+                    Date toDate = simpleDateFormat.parse(etToDate.getText().toString());
+                    edpFromDate.setMaxDate(fromDate);
+                    if(fromDate.after(toDate) || fromDate.equals(toDate)) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(toDate);
+                        cal.add(Calendar.DATE, -1);
+                        toDate = cal.getTime();
+                        etFromDate.setText(simpleDateFormat.format(toDate));
+                    }
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
                 attendanceAdapter.loadObjects();
             }
 
@@ -139,7 +159,7 @@ public class AttendanceManagementActivity extends Activity {
         int day = c.get(Calendar.DATE);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpFromDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
+        edpFromDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
                 .activity_attendance_management_et_from_date, day, month,
                 year);
 
@@ -147,13 +167,19 @@ public class AttendanceManagementActivity extends Activity {
         day = c.get(Calendar.DATE);
         month = c.get(Calendar.MONTH);
         year = c.get(Calendar.YEAR);
-        MyEditDatePicker edpToDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
+        edpToDate = new MyEditDatePicker(AttendanceManagementActivity.this, R.id
                 .activity_attendance_management_et_to_date, day, month,
                 year);
 
 
         edpFromDate.updateDisplay();
         edpToDate.updateDisplay();
+
+        try {
+            edpFromDate.setMaxDate(simpleDateFormat.parse(etToDate.getText().toString()));
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
