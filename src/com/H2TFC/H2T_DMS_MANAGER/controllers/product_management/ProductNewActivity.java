@@ -27,10 +27,12 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.parse.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -155,45 +157,32 @@ public class ProductNewActivity extends Activity {
                     product.setPrice(Double.parseDouble(price));
                     product.setStatus("");
 
-                    if(hasImage) {
-                        byte[] bitmapdata  = ImageUtils.bitmapToByteArray(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+                    String uuid = UUID.randomUUID().toString();
+                    Bitmap bm = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
+                    ImageUtils.SaveImage(bm, "product-" + uuid);
+                    product.setPhotoTitle("product-" + uuid);
 
-                        final ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo"  + "" +
-                                ".png",bitmapdata);
-                        file.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    product.setPhoto(file);
-                                    product.saveEventually();
-                                    progressDialog.dismiss();
-                                    product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
-                                        @Override
-                                        public void done(ParseException e) {
-                                            Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
-                                                    .show();
-                                            finish();
-                                        }
-                                    });
-                                } else {
-                                    e.printStackTrace();
-                                }
+                    product.saveEventually(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Bitmap photoOnSdCard = ImageUtils.getPhotoSaved(product.getPhotoTitle
+                                    ());
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            photoOnSdCard.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] bitmapdata = stream.toByteArray();
 
+                            ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo" + ".png", bitmapdata);
+                            try {
+                                file.save();
+                                product.setPhoto(file);
+                                product.setPhotoSynched(true);
+                                product.saveEventually();
+
+                            } catch (ParseException ex) {
+                                ex.printStackTrace();
                             }
-                        }, new ProgressCallback() {
-                            @Override
-                            public void done(Integer integer) {
-                               if(integer == 100) {
-                                   progressDialog.dismiss();
-                               } else {
-                                   progressDialog.setMessage("Ðang t?i: " + integer);
-                               }
-                            }
-                        });
-
-
-                    } else {
-                        product.saveEventually();
+                        }
+                    });
                         progressDialog.dismiss();
                         product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
                             @Override
@@ -203,7 +192,7 @@ public class ProductNewActivity extends Activity {
                                 finish();
                             }
                         });
-                    }
+
 
 
                 } catch (ParseException e) {
@@ -273,24 +262,38 @@ public class ProductNewActivity extends Activity {
                     return;
                 }
 
-
-                Product productToAdd = new Product();
+                final Product productToAdd = new Product();
                 productToAdd.setName(name);
                 productToAdd.setUnit(unit);
                 productToAdd.setPrice(Double.parseDouble(price));
+                productToAdd.setPhotoSynched(false);
 
-                byte[] bitmapdata  = ImageUtils.bitmapToByteArray(((BitmapDrawable) ivPhoto.getDrawable()).getBitmap());
+                String uuid = UUID.randomUUID().toString();
+                Bitmap bm = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
+                ImageUtils.SaveImage(bm,"product-" + uuid);
+                productToAdd.setPhotoTitle("product-" + uuid);
 
-                ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo" + ".png",bitmapdata);
-                try {
-                    file.save();
-                    productToAdd.setPhoto(file);
+                productToAdd.saveEventually(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                            Bitmap photoOnSdCard = ImageUtils.getPhotoSaved(productToAdd.getPhotoTitle
+                                    ());
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            photoOnSdCard.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] bitmapdata = stream.toByteArray();
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                            ParseFile file = new ParseFile(ParseUser.getCurrentUser().getUsername() + "photo" + ".png", bitmapdata);
+                            try {
+                                file.save();
+                                productToAdd.setPhoto(file);
+                                productToAdd.setPhotoSynched(true);
+                                productToAdd.saveEventually();
 
-                productToAdd.saveEventually();
+                            } catch (ParseException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                });
                 productToAdd.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

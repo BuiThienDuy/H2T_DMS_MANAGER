@@ -50,4 +50,20 @@ public class StoreImage extends ParseObject {
         put("store_id", storeId);
     }
 
+    public void setPhotoTitle(String photo) {
+        put("photo_title",photo);
+    }
+
+    public String getPhotoTitle() {
+        return getString("photo_title");
+    }
+
+    public boolean getPhotoSynched() {
+        return getBoolean("photo_synched");
+    }
+
+    public void setPhotoSynched(boolean photoSynched) {
+        put("photo_synched",photoSynched);
+    }
+
 }
