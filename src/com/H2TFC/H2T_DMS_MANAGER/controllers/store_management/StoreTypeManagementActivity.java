@@ -67,8 +67,6 @@ public class StoreTypeManagementActivity extends Activity {
         lvStoreType = (ListView) findViewById(R.id.activity_store_type_management_listview);
         tvEmpty = (TextView) findViewById(R.id.activity_store_type_management_tv_empty);
         progressBar = (ProgressBar) findViewById(R.id.activity_store_type_management_progressbar);
-
-
     }
 
     public void SetupListView() {
@@ -78,6 +76,7 @@ public class StoreTypeManagementActivity extends Activity {
             public ParseQuery<StoreType> create() {
                 ParseQuery<StoreType> query = StoreType.getQuery();
                 query.orderByDescending("createdAt");
+                query.whereNotEqualTo("locked",true);
                 query.fromPin(DownloadUtils.PIN_STORE_TYPE);
                 return query;
             }
@@ -187,7 +186,8 @@ public class StoreTypeManagementActivity extends Activity {
         confirmDialog.setPositiveButton(getString(R.string.approve), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                storeType.deleteEventually();
+                storeType.setLocked(true);
+                storeType.saveEventually();
                 storeType.unpinInBackground(DownloadUtils.PIN_STORE_TYPE, new DeleteCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -201,7 +201,12 @@ public class StoreTypeManagementActivity extends Activity {
                 });
             }
         });
-        confirmDialog.setNegativeButton(getString(R.string.cancel), null);
+        confirmDialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
         confirmDialog.show();
     }

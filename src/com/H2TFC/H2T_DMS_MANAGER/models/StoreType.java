@@ -32,4 +32,12 @@ public class StoreType extends ParseObject {
     public void setDefaultDebt(Double defaultDebt) {
         put("default_debt",defaultDebt);
     }
+
+    public void setLocked(boolean locked) {
+        put("locked",locked);
+    }
+
+    public boolean getLocked() {
+        return getBoolean("locked");
+    }
 }
