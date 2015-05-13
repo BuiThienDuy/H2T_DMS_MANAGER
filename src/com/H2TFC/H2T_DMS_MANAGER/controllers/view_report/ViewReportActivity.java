@@ -79,6 +79,18 @@ public class ViewReportActivity extends Activity {
             }
         });
 
+        DownloadUtils.DownloadParseEmployee(ViewReportActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                DownloadUtils.DownloadParseStore(getApplicationContext(), new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        LoadReport();
+                    }
+                });
+            }
+        });
+
         SetupEvent();
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice.InvoiceDetailActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.*;
@@ -64,8 +65,10 @@ public class DownloadUtils {
         if(ConnectUtils.hasConnectToInternet(context)) {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             Date myDate = new Date(preferences.getLong("LAST_DOWNLOAD" + PIN_EMPLOYEE, 0));
+
             long diff = Math.abs(myDate.getTime() - new Date().getTime());
-            if (diff / 1000 > 5) {
+            Log.e("diff", "" + diff);
+            if (diff / 1000 > 10) {
                 ParseQuery<ParseUser> query = ParseUser.getQuery();
                 query.findInBackground(new FindCallback<ParseUser>() {
                     @Override
@@ -309,7 +312,7 @@ public class DownloadUtils {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             Date myDate = new Date(preferences.getLong("LAST_DOWNLOAD" + PIN_PRODUCT_PURCHASE, 0));
             long diff = Math.abs(myDate.getTime() - new Date().getTime());
-            if (diff / 1000 > 5) {
+            if (diff / 1000 > 10) {
                 ParseQuery<ProductPurchase> query = ProductPurchase.getQuery();
                 query.findInBackground(new FindCallback<ProductPurchase>() {
                     @Override

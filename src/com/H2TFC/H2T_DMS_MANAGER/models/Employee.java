@@ -105,7 +105,7 @@ public class Employee extends ParseUser {
         put("locked", locked);
     }
 
-    // TODO: 11. Chi tieu
+    //  11. Chi tieu
     public double getRevenueGoal() {
         return getDouble("revenue_goal");
     }

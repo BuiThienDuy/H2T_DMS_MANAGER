@@ -82,6 +82,7 @@ public class StoreDetailActivity extends Activity {
 
     private void GetAndShowStoreDetail() {
         ParseQuery<StoreType> storeTypeParseQuery = StoreType.getQuery();
+        storeTypeParseQuery.whereNotEqualTo("locked",true);
         storeTypeParseQuery.fromPin(DownloadUtils.PIN_STORE_TYPE);
         try {
             List<StoreType> storeTypeList = storeTypeParseQuery.find();

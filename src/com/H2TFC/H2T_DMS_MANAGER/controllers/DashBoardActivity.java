@@ -22,7 +22,10 @@ import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.EmployeeChooseActivit
 import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.StreetDivideActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.user_information_management.UserInformationManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.view_report.ViewReportActivity;
+import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
+import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 /*
  * Copyright (C) 2015 H2TFC Team, LLC
@@ -41,7 +44,12 @@ public class DashBoardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         setTitle(getString(R.string.dashboardTitle));
-        Log.d("DashboardActivity", "I'm in");
+        DownloadUtils.DownloadParseProductPurchase(DashBoardActivity.this, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+
+            }
+        });
         btnEmployeeManagement = (Button) findViewById(R.id.dashboard_btn_employee_management);
         btnStreetDivide = (Button) findViewById(R.id.dashboard_btn_street_divide);
         btnProductManagement = (Button) findViewById(R.id.dashboard_btn_product_management);
