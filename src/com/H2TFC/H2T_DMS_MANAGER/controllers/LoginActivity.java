@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 import com.H2TFC.H2T_DMS_MANAGER.R;
+import com.H2TFC.H2T_DMS_MANAGER.models.Employee;
 import com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -39,7 +40,10 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle(getString(R.string.loginTitle));
-        Log.d("LoginActivity", "I'm in");
+
+
+
+
         if (ParseUser.getCurrentUser() != null) {
             Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -56,7 +60,7 @@ public class LoginActivity extends Activity {
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String tenDangNhap = etTenDangNhap.getText().toString();                      //username
+                final String tenDangNhap = etTenDangNhap.getText().toString().toLowerCase();                      //username
                 final String matKhau = etMatKhau.getText().toString();                              //password
 
                 boolean loiXuatHien = false;                                                        //error_exist

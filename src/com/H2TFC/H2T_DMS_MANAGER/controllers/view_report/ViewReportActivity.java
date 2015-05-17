@@ -107,7 +107,7 @@ public class ViewReportActivity extends Activity {
                 .activity_view_report_et_from_date,day,month,
                 year);
 
-        c.add(Calendar.DATE,1);
+        c.add(Calendar.DATE, 1);
         day = c.get(Calendar.DATE);
         month = c.get(Calendar.MONTH);
         year = c.get(Calendar.YEAR);
@@ -157,7 +157,7 @@ public class ViewReportActivity extends Activity {
                         toDate = cal.getTime();
                         etFromDate.setText(simpleDateFormat.format(toDate));
                     }
-                } catch(java.text.ParseException ex) {
+                } catch (java.text.ParseException ex) {
 
                 }
                 LoadReport();
@@ -188,6 +188,7 @@ public class ViewReportActivity extends Activity {
             e.printStackTrace();
         }
 
+
         list.add(new PieChartItem(generateDataPie_Tong_ThuNhap(fromDate, toDate), getApplicationContext(), getString(R.string
                 .totalIncomeChart)));
         list.add(new BarChartItem(generateDataBar_DoanhThu_Nhanvien(fromDate, toDate), getApplicationContext(), getString(R
@@ -196,8 +197,10 @@ public class ViewReportActivity extends Activity {
         list.add(new PieChartItem(generateDataPie_diem_cua_hang(fromDate, toDate),getApplicationContext()
                 ,getString(R
                 .string.storePointChart)));
-        list.add(new PieChartItem(generateDataPie_TinhTrang_DonHang(fromDate, toDate),getApplicationContext()
-                ,getString(R.string.invoiceStatusChart)));
+        if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL")) {
+            list.add(new PieChartItem(generateDataPie_TinhTrang_DonHang(fromDate, toDate), getApplicationContext()
+                    , getString(R.string.invoiceStatusChart)));
+        }
 
 
 
@@ -239,7 +242,28 @@ public class ViewReportActivity extends Activity {
         int thucThu = 0;
 
         ParseQuery<Invoice> invoiceParseQuery = Invoice.getQuery();
-        invoiceParseQuery.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL")) {
+            invoiceParseQuery.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        } else {
+            if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL_V")) {
+                String employeeSearch = "";
+                try {
+                    List<ParseUser> employeeList = ParseUser.getQuery().fromPin(DownloadUtils.PIN_EMPLOYEE)
+                                                    .whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId()).find();
+
+                    for(int i = 0 ; i < employeeList.size(); i++) {
+                        if(i == employeeList.size() - 1) {
+                            employeeSearch += "(" + employeeList.get(i) + ")" + "|";
+                        } else {
+                            employeeSearch += "(" + employeeList.get(i) + ")";
+                        }
+                    }
+                    invoiceParseQuery.whereMatches("manager_id",employeeSearch);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         invoiceParseQuery.whereGreaterThan("createdAt", fromDate);
         invoiceParseQuery.whereLessThan("createdAt", toDate);
         invoiceParseQuery.fromPin(DownloadUtils.PIN_INVOICE);
@@ -275,7 +299,28 @@ public class ViewReportActivity extends Activity {
 
     private BarData generateDataBar_DoanhThu_Nhanvien(Date fromDate,Date toDate) {
         ParseQuery<ParseUser> userParseQuery = ParseUser.getQuery();
-        userParseQuery.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL")) {
+            userParseQuery.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        } else {
+            if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL_V")) {
+                String employeeSearch = "";
+                try {
+                    List<ParseUser> employeeList = ParseUser.getQuery().fromPin(DownloadUtils.PIN_EMPLOYEE)
+                            .whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId()).find();
+
+                    for(int i = 0 ; i < employeeList.size(); i++) {
+                        if(i == employeeList.size() - 1) {
+                            employeeSearch += "(" + employeeList.get(i) + ")" + "|";
+                        } else {
+                            employeeSearch += "(" + employeeList.get(i) + ")";
+                        }
+                    }
+                    userParseQuery.whereMatches("manager_id",employeeSearch);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         userParseQuery.fromPin(DownloadUtils.PIN_EMPLOYEE);
         List<ParseUser> userList = null;
         ArrayList<String> userNameList = new ArrayList<String>();

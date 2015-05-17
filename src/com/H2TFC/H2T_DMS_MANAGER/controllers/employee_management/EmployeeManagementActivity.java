@@ -338,7 +338,6 @@ public class EmployeeManagementActivity extends Activity {
             if (requestCode == REQUEST_ADD_NEW_EMPLOYEE) {
                 employeeListAdapter.notifyDataSetChanged();
                 employeeListAdapter.loadObjects();
-
                 lvEmployee.invalidateViews();
             }
         }

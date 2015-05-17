@@ -3,10 +3,7 @@ package com.H2TFC.H2T_DMS_MANAGER.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.provider.CalendarContract;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice.InvoiceDetailActivity;
 import com.H2TFC.H2T_DMS_MANAGER.models.*;
 import com.parse.*;
 

@@ -70,7 +70,7 @@ public class UserInformationManagementActivity extends Activity {
         InitializeComponent();
         SetupEvent();
 
-            DownloadUtils.DownloadParseEmployee(getApplicationContext(),new SaveCallback() {
+            DownloadUtils.DownloadParseEmployee(getApplicationContext(), new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
 
@@ -241,13 +241,18 @@ public class UserInformationManagementActivity extends Activity {
         });
         etHoVaTen.setText(curUser.getString("name"));
         etSoDienThoai.setText(curUser.getString("phone_number"));
-        etDiaChi.setText(curUser.getString("address"));
-        if (curUser.getString("gender").equals("Nam")) {
+        try {
+            etDiaChi.setText(curUser.getString("address"));
+            if (curUser.getString("gender").equals("Nam")) {
+                rbNam.setChecked(true);
+                rbNu.setChecked(false);
+            } else {
+                rbNam.setChecked(false);
+                rbNu.setChecked(true);
+            }
+        }catch(Exception ex) {
             rbNam.setChecked(true);
             rbNu.setChecked(false);
-        } else {
-            rbNam.setChecked(false);
-            rbNu.setChecked(true);
         }
 
         if (curUser.getDate("date_of_birth") != null) {

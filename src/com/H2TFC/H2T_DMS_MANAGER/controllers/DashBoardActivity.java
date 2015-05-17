@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,12 +13,11 @@ import com.H2TFC.H2T_DMS_MANAGER.R;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.attendance_management.AttendanceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.employee_management.EmployeeManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.feed_back_management.FeedbackManagementActivity;
-import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice.InvoiceManagementActivity;
+import com.H2TFC.H2T_DMS_MANAGER.controllers.invoice_management.InvoiceManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.product_management.ProductManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.promotion_management.PromotionManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.store_management.StoreManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.EmployeeChooseActivity;
-import com.H2TFC.H2T_DMS_MANAGER.controllers.street_divide.StreetDivideActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.user_information_management.UserInformationManagementActivity;
 import com.H2TFC.H2T_DMS_MANAGER.controllers.view_report.ViewReportActivity;
 import com.H2TFC.H2T_DMS_MANAGER.utils.DownloadUtils;
@@ -50,18 +48,11 @@ public class DashBoardActivity extends Activity {
 
             }
         });
-        btnEmployeeManagement = (Button) findViewById(R.id.dashboard_btn_employee_management);
-        btnStreetDivide = (Button) findViewById(R.id.dashboard_btn_street_divide);
-        btnProductManagement = (Button) findViewById(R.id.dashboard_btn_product_management);
-        btnStoreManagement = (Button) findViewById(R.id.dashboard_btn_store_management);
-        btnPromotionMangement = (Button) findViewById(R.id.dashboard_btn_promotion_management);
-        btnUserInformation = (Button) findViewById(R.id.dashboard_btn_user_information);
-        btnLogOut = (Button) findViewById(R.id.dashboard_btn_log_out);
-        btnViewReport = (Button) findViewById(R.id.dashboard_btn_view_report);
-        btnAttendance = (Button) findViewById(R.id.dashboard_btn_employee_attendance);
-        btnViewFeedBack = (Button) findViewById(R.id.dashboard_btn_view_feedback);
-        btnInvoice = (Button) findViewById(R.id.dashboard_btn_invoice_management);
+        InitializeComponent();
+        SetupEvent();
+    }
 
+    private void SetupEvent() {
         btnEmployeeManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +143,30 @@ public class DashBoardActivity extends Activity {
                 NavigateIntent(InvoiceManagementActivity.class);
             }
         });
+    }
+
+    private void InitializeComponent() {
+        btnEmployeeManagement = (Button) findViewById(R.id.dashboard_btn_employee_management);
+        btnStreetDivide = (Button) findViewById(R.id.dashboard_btn_street_divide);
+        btnProductManagement = (Button) findViewById(R.id.dashboard_btn_product_management);
+        btnStoreManagement = (Button) findViewById(R.id.dashboard_btn_store_management);
+        btnPromotionMangement = (Button) findViewById(R.id.dashboard_btn_promotion_management);
+        btnUserInformation = (Button) findViewById(R.id.dashboard_btn_user_information);
+        btnLogOut = (Button) findViewById(R.id.dashboard_btn_log_out);
+        btnViewReport = (Button) findViewById(R.id.dashboard_btn_view_report);
+        btnAttendance = (Button) findViewById(R.id.dashboard_btn_employee_attendance);
+        btnViewFeedBack = (Button) findViewById(R.id.dashboard_btn_view_feedback);
+        btnInvoice = (Button) findViewById(R.id.dashboard_btn_invoice_management);
+
+        if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL_V")) {
+            btnAttendance.setVisibility(View.GONE);
+            btnViewFeedBack.setVisibility(View.GONE);
+            btnInvoice.setVisibility(View.GONE);
+        } else if(ParseUser.getCurrentUser().getString("role_name").equals("GDKD")) {
+            btnAttendance.setVisibility(View.GONE);
+            btnViewFeedBack.setVisibility(View.GONE);
+            btnInvoice.setVisibility(View.GONE);
+        }
     }
 
     private void NavigateIntent(Class<?> activity) {

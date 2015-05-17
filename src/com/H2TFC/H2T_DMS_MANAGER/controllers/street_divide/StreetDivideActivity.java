@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.location.*;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -29,6 +31,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
+import com.google.maps.android.PolyUtil;
 import com.google.maps.android.ui.IconGenerator;
 import com.mobisys.android.autocompletetextviewcomponent.ClearableAutoTextView;
 import com.mobisys.android.autocompletetextviewcomponent.SelectionListener;
@@ -70,6 +73,8 @@ public class StreetDivideActivity extends Activity {
     private float pressedX;
     private float pressedY;
 
+    ArrayList<Polygon> myPolygon;
+
     ArrayList<Polygon> mapPolygon;
     ArrayList<Marker> mapMarker;
 
@@ -95,18 +100,16 @@ public class StreetDivideActivity extends Activity {
             employee_id = getIntent().getExtras().getString("EMPLOYEE_ID");
         }
 
-        if(employee_id != null) {
-            String roleName = ParseUser.getCurrentUser().get("role_name").toString();
+        String roleName = ParseUser.getCurrentUser().get("role_name").toString();
 
-            if (roleName.equals("NVQL")) {
-                setTitle(getString(R.string.streetDivide_NVQL_Title));
-            }
-            if (roleName.equals("NVQL_V")) {
-                setTitle(getString(R.string.streetDivide_NVQL_V_Title));
-            }
-            if (roleName.equals("GDKD")) {
-                setTitle(getString(R.string.streetDivide_GDKD_Title));
-            }
+        if (roleName.equals("NVQL")) {
+            setTitle(getString(R.string.streetDivide_NVQL_Title));
+        }
+        if (roleName.equals("NVQL_V")) {
+            setTitle(getString(R.string.streetDivide_NVQL_V_Title));
+        }
+        if (roleName.equals("GDKD")) {
+            setTitle(getString(R.string.streetDivide_GDKD_Title));
         }
 
         mapPolygon = new ArrayList<Polygon>();
@@ -145,33 +148,79 @@ public class StreetDivideActivity extends Activity {
 
         if (gpsTracker.canGetLocation())
         {
-            Location location = gpsTracker.getLocation();
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(location.getLatitude(), location.getLongitude()), 13));
+            try {
+                Location location = gpsTracker.getLocation();
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                    .zoom(17)                                                                 // Sets the zoom
-                    .build();                                                                 // Creates a CameraPosition from the builder
-            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                        .zoom(17)                                                                 // Sets the zoom
+                        .build();                                                                 // Creates a CameraPosition from the builder
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            } catch(NullPointerException ex) {
+
+            }
         } else {
             gpsTracker.showSettingsAlert();
         }
 
         map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            LatLng historyPos = null;
             @Override
             public void onMarkerDragStart(Marker marker) {
-                connectAllMarker();
+                boolean isInPolygon = false;
+                for(Polygon polygon : myPolygon) {
+                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
+                    for(LatLng latLng : polygon.getPoints()) {
+                        polygonList.add(latLng);
+                    }
+                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
+                        isInPolygon = true;
+                    }
+                }
+                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
+                    connectAllMarker();
+                }
             }
 
             @Override
             public void onMarkerDrag(Marker marker) {
-                connectAllMarker();
+                boolean isInPolygon = false;
+                for(Polygon polygon : myPolygon) {
+                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
+                    for(LatLng latLng : polygon.getPoints()) {
+                        polygonList.add(latLng);
+                    }
+                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
+                        isInPolygon = true;
+                    }
+                }
+                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
+                    connectAllMarker();
+                    historyPos = marker.getPosition();
+                } else {
+                    marker.setPosition(historyPos);
+                }
             }
 
             @Override
             public void onMarkerDragEnd(Marker marker) {
-                connectAllMarker();
+                boolean isInPolygon = false;
+                for(Polygon polygon : myPolygon) {
+                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
+                    for(LatLng latLng : polygon.getPoints()) {
+                        polygonList.add(latLng);
+                    }
+                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
+                        isInPolygon = true;
+                    }
+                }
+                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
+                    connectAllMarker();
+                } else {
+                    marker.setPosition(historyPos);
+                }
             }
         });
     }
@@ -387,17 +436,33 @@ public class StreetDivideActivity extends Activity {
 
                             LatLng centerImagePoint = projection.fromScreenLocation(new Point(centerX, centerY));
 
-                            IconGenerator iconFactory = new IconGenerator(StreetDivideActivity.this);
-                            Bitmap iconBitmap = iconFactory.makeIcon(Integer.toString(markerOptionsList.size() + 1));
+                            boolean isInPolygon = false;
+                            for(Polygon polygon : myPolygon) {
+                                ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
+                                for(LatLng latLng : polygon.getPoints()) {
+                                    polygonList.add(latLng);
+                                }
+                                if (PolyUtil.containsLocation(centerImagePoint,polygonList,true)) {
+                                    isInPolygon = true;
+                                }
+                            }
+                            if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
 
-                            markerOptions.position(centerImagePoint);
-                            markerOptions.title(centerImagePoint.toString());
-                            markerOptions.draggable(true);
-                            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconBitmap));
+                                IconGenerator iconFactory = new IconGenerator(StreetDivideActivity.this);
+                                Bitmap iconBitmap = iconFactory.makeIcon(Integer.toString(markerOptionsList.size() + 1));
 
-                            markerOptionsList.add(map.addMarker(markerOptions));
+                                markerOptions.position(centerImagePoint);
+                                markerOptions.title(centerImagePoint.toString());
+                                markerOptions.draggable(true);
+                                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconBitmap));
 
-                            connectAllMarker();
+                                markerOptionsList.add(map.addMarker(markerOptions));
+
+                                connectAllMarker();
+                            } else {
+                                Toast.makeText(StreetDivideActivity.this,getString(R.string
+                                        .streetDivideOutsideOfArea),Toast.LENGTH_LONG).show();
+                            }
                         }
                         break;
                     default:
@@ -464,7 +529,7 @@ public class StreetDivideActivity extends Activity {
         // AutoCompleteTextView
         tvSearchMap = (ClearableAutoTextView) findViewById(R.id.activity_street_divide_tv_search);
 
-
+        myPolygon = new ArrayList<Polygon>();
     }
 
     @Override
@@ -481,6 +546,31 @@ public class StreetDivideActivity extends Activity {
         for(Polygon polygon : mapPolygon) {
             polygon.remove();
         }
+
+        for(Polygon polygon : myPolygon) {
+            polygon.remove();
+        }
+
+        // Draw current area survey
+        ParseQuery<Area> areaParseQuery = Area.getQuery();
+        areaParseQuery.whereEqualTo("employee_id",ParseUser.getCurrentUser().getObjectId());
+        areaParseQuery.fromPin(DownloadUtils.PIN_AREA);
+        areaParseQuery.findInBackground(new FindCallback<Area>() {
+            @Override
+            public void done(List<Area> list, ParseException e) {
+                for(Area area : list) {
+                    PolygonOptions polygonOptions = new PolygonOptions();
+                    polygonOptions.fillColor(Color.argb(16, 155, 48, 255));
+                    polygonOptions.strokeColor(Color.YELLOW);
+                    polygonOptions.strokeWidth(5);
+                    for(ParseGeoPoint point : area.getNodeList()) {
+                        polygonOptions.add(new LatLng(point.getLatitude(),point.getLongitude()));
+                    }
+
+                    myPolygon.add(map.addPolygon(polygonOptions));
+                }
+            }
+        });
 
         ParseQuery<ParseUser> queryEmployee = ParseUser.getQuery();
         queryEmployee.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());

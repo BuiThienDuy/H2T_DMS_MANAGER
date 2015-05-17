@@ -129,6 +129,7 @@
                     android:singleLine="true"
                     android:lines="1"
                     android:maxLines="1"
+                    android:inputType="textCapSentences"
                     />
 
             <com.parse.ParseImageView
@@ -236,6 +237,7 @@
                     android:singleLine="true"
                     android:lines="1"
                     android:maxLines="1"
+                    android:inputType="textCapSentences"
                     />
         </LinearLayout>
 

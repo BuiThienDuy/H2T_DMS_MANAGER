@@ -1,4 +1,4 @@
-package com.H2TFC.H2T_DMS_MANAGER.controllers.invoice;
+package com.H2TFC.H2T_DMS_MANAGER.controllers.invoice_management;
 
 import android.app.Activity;
 import android.content.Intent;

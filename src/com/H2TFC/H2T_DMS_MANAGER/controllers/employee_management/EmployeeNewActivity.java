@@ -147,7 +147,7 @@ public class EmployeeNewActivity extends Activity {
                     progressDialog.show();
 
                     // Get field input
-                    String username = etUsername.getText().toString();
+                    String username = etUsername.getText().toString().toLowerCase();
                     String password = etPassword.getText().toString();
                     String confirm_password = etPasswordConfirm.getText().toString();
                     String ho_va_ten = etHoVaTen.getText().toString();

@@ -1,130 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-        <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-        android:background="#FFFFFF">
-<LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:background="#FFFFFF"
-        >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-
+    <com.H2TFC.H2T_DMS_MANAGER.widget.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center_horizontal"
             >
 
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_streetdivide"
                 android:text="@string/btnStreetDivide"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_street_divide"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
 
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_storetype_management"
                 android:text="@string/storePointManagement"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_store_management"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="140dp"
-        >
 
-    <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/image_dashboard_product_management"
-            android:text="@string/productManagement"
-            android:layout_weight="1"
-            android:id="@+id/dashboard_btn_product_management"
-            android:background="#FFFFFF"
-            style="@style/DashboardButton"/>
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:drawableTop="@drawable/image_dashboard_product_management"
+                android:text="@string/productManagement"
+                android:id="@+id/dashboard_btn_product_management"
+                android:background="#FFFFFF"
+                style="@style/DashboardButton"/>
+
+        <Button
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_promotion_management"
                 android:text="@string/promotionManagement"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_promotion_management"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
 
-</LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            >
+
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_usermanagement"
                 android:text="@string/btnEmployeeManagement"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_employee_management"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
+
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_attendance"
                 android:text="@string/attendanceManagement"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_employee_attendance"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-    </LinearLayout>
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            >
+
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_feedback"
                 android:text="@string/viewFeedback"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_view_feedback"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
+
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_view_report"
                 android:text="@string/viewReport"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_view_report"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-    </LinearLayout>
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            >
         <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_user_information"
                 android:text="@string/userInformationManagement"
-                android:layout_weight="1"
                 android:id="@+id/dashboard_btn_user_information"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
@@ -132,31 +98,21 @@
 
         <Button
                 android:id="@+id/dashboard_btn_invoice_management"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_viengtham_dashboard_invoice_management"
                 android:text="@string/invoiceManagement"
-                android:layout_weight="1"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            >
-
-
 
         <Button
                 android:id="@+id/dashboard_btn_log_out"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:drawableTop="@drawable/image_dashboard_log_out"
                 android:text="@string/logOut"
-                android:layout_weight="1"
                 android:background="#FFFFFF"
                 style="@style/DashboardButton"/>
-    </LinearLayout>
-</LinearLayout>
+
+    </com.H2TFC.H2T_DMS_MANAGER.widget.FlowLayout>
 </ScrollView>

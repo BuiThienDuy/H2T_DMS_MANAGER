@@ -87,7 +87,6 @@ public class EmployeeChooseActivity extends Activity {
         employeeListAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseUser>() {
             @Override
             public void onLoading() {
-                tvEmptyView.setText("");
                 progressBar.setVisibility(View.VISIBLE);
             }
 

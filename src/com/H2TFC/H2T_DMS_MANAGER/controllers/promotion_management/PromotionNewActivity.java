@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
@@ -333,6 +334,7 @@ public class PromotionNewActivity extends Activity {
 
     private void InitializeComponent() {
         etTitle = (BootstrapEditText) findViewById(R.id.activity_promotion_new_et_title);
+        etTitle.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         etAmount1 = (BootstrapEditText) findViewById(R.id.activity_promotion_new_et_1_product_amount);
         etAmount2 = (BootstrapEditText) findViewById(R.id.activity_promotion_new_et_2_product_amount);
         etDiscount = (BootstrapEditText) findViewById(R.id.activity_promotion_new_et_chiet_khau);

@@ -119,15 +119,17 @@ public class StoreManagementActivity extends Activity {
 
         DrawStorePoint();
 
-        slidingLayer = (SlidingLayer) findViewById(R.id.activity_store_management_slidingLayer);
+        if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL")) {
+            slidingLayer = (SlidingLayer) findViewById(R.id.activity_store_management_slidingLayer);
 
-        slidingLayer.setShadowDrawable(R.drawable.sidebar_shadow);
-        slidingLayer.setShadowSizeRes(R.dimen.shadow_size);
-        slidingLayer.setOffsetDistanceRes(R.dimen.offset_distance);
-        slidingLayer.setPreviewOffsetDistanceRes(R.dimen.preview_offset_distance);
-        slidingLayer.setStickTo(SlidingLayer.STICK_TO_LEFT);
-        slidingLayer.setChangeStateOnTap(true);
-        slidingLayer.setSlidingFromShadowEnabled(true);
+            slidingLayer.setShadowDrawable(R.drawable.sidebar_shadow);
+            slidingLayer.setShadowSizeRes(R.dimen.shadow_size);
+            slidingLayer.setOffsetDistanceRes(R.dimen.offset_distance);
+            slidingLayer.setPreviewOffsetDistanceRes(R.dimen.preview_offset_distance);
+            slidingLayer.setStickTo(SlidingLayer.STICK_TO_LEFT);
+            slidingLayer.setChangeStateOnTap(true);
+            slidingLayer.setSlidingFromShadowEnabled(true);
+        }
 
         if(getIntent().hasExtra("EXTRAS_STORE_ID")) {
             String storeId = getIntent().getStringExtra("EXTRAS_STORE_ID");
@@ -163,51 +165,69 @@ public class StoreManagementActivity extends Activity {
         }
 
         ParseQuery<ParseUser> queryUser = ParseUser.getQuery();
-        queryUser.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+          if (!ParseUser.getCurrentUser().getString("role_name").equals("GDKD")) {
+              queryUser.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        }
         queryUser.fromPin(DownloadUtils.PIN_EMPLOYEE);
         queryUser.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> list, ParseException e) {
-                for (final ParseUser employee : list) {
-                    ParseQuery<Store> queryStore = Store.getQuery();
-                    queryStore.whereEqualTo("employee_id", employee.getObjectId());
-                    queryStore.fromPin(DownloadUtils.PIN_STORE);
-                    queryStore.findInBackground(new FindCallback<Store>() {
+                if(ParseUser.getCurrentUser().getString("role_name").equals("NVQL_V")) {
+                    ParseQuery<ParseUser> queryUser = ParseUser.getQuery();
+                    queryUser.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+                    queryUser.fromPin(DownloadUtils.PIN_EMPLOYEE);
+                    queryUser.findInBackground(new FindCallback<ParseUser>() {
                         @Override
-                        public void done(List<Store> list, ParseException e) {
-                            for (final Store store : list) {
-                                MarkerOptions markerOptions = new MarkerOptions();
-                                markerOptions.position(new LatLng(store.getLocationPoint().getLatitude(), store.getLocationPoint
-                                        ().getLongitude()));
-                                markerOptions.title(getString(R.string.store) + " " + store.getName());
-                                markerOptions.snippet(getString(R.string.clickToViewStoreDetail));
-                                IconGenerator iconGenerator = new IconGenerator(StoreManagementActivity.this);
-
-                                iconGenerator.setColor(Store.getStatusColor(Store.StoreStatus.valueOf
-                                        (store
-                                                .getStatus())));
-                                if (store.getStatus().equals(Store.StoreStatus.TIEM_NANG.name()) ||
-                                        store.getStatus().equals(Store.StoreStatus.KHONG_DU_TIEU_CHUAN.name()) ||
-                                        store.getStatus().equals(Store.StoreStatus.CHO_CAP_TREN.name())) {
-                                    iconGenerator.setTextAppearance(R.style.iconGenText_WHITE);
-                                }
-
-                                Bitmap bitmap = iconGenerator.makeIcon((String) employee.get("name"));
-                                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
-
-                                Marker marker = map.addMarker(markerOptions);
-                                if(currentStore == store) {
-                                    marker.showInfoWindow();
-                                }
-                                myMapMarker.put(marker, store);
-                            }
+                        public void done(List<ParseUser> list, ParseException e) {
+                            DrawStorePointUserList(list);
                         }
                     });
+                } else {
+                    DrawStorePointUserList(list);
                 }
             }
         });
 
 
+    }
+
+    private void DrawStorePointUserList(List<ParseUser> list) {
+        for (final ParseUser employee : list) {
+            ParseQuery<Store> queryStore = Store.getQuery();
+            queryStore.whereEqualTo("employee_id", employee.getObjectId());
+            queryStore.fromPin(DownloadUtils.PIN_STORE);
+            queryStore.findInBackground(new FindCallback<Store>() {
+                @Override
+                public void done(List<Store> list, ParseException e) {
+                    for (final Store store : list) {
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(new LatLng(store.getLocationPoint().getLatitude(), store.getLocationPoint
+                                ().getLongitude()));
+                        markerOptions.title(getString(R.string.store) + " " + store.getName());
+                        markerOptions.snippet(getString(R.string.clickToViewStoreDetail));
+                        IconGenerator iconGenerator = new IconGenerator(StoreManagementActivity.this);
+
+                        iconGenerator.setColor(Store.getStatusColor(Store.StoreStatus.valueOf
+                                (store
+                                        .getStatus())));
+                        if (store.getStatus().equals(Store.StoreStatus.TIEM_NANG.name()) ||
+                                store.getStatus().equals(Store.StoreStatus.KHONG_DU_TIEU_CHUAN.name()) ||
+                                store.getStatus().equals(Store.StoreStatus.CHO_CAP_TREN.name())) {
+                            iconGenerator.setTextAppearance(R.style.iconGenText_WHITE);
+                        }
+
+                        Bitmap bitmap = iconGenerator.makeIcon((String) employee.get("name"));
+                        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+
+                        Marker marker = map.addMarker(markerOptions);
+                        if(currentStore == store) {
+                            marker.showInfoWindow();
+                        }
+                        myMapMarker.put(marker, store);
+                    }
+                }
+            });
+        }
     }
 
     public void InitializeComponent() {
@@ -236,6 +256,15 @@ public class StoreManagementActivity extends Activity {
         // Other
         myMapMarker = new HashMap<Marker, Store>();
         selectedMarker = new ArrayList<Marker>();
+
+        if(!ParseUser.getCurrentUser().getString("role_name").equals("NVQL")) {
+            btn_tao.setVisibility(View.GONE);
+            btn_discard.setVisibility(View.GONE);
+            btn_redo.setVisibility(View.GONE);
+            btn_undo.setVisibility(View.GONE);
+            btn_search.setVisibility(View.GONE);
+            ivCrosshair.setVisibility(View.GONE);
+        }
     }
 
     public void SetupMap() {

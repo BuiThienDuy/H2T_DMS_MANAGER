@@ -1,4 +1,4 @@
-package com.H2TFC.H2T_DMS_MANAGER.controllers.invoice;
+package com.H2TFC.H2T_DMS_MANAGER.controllers.invoice_management;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -79,7 +79,6 @@ public class InvoiceManagementActivity extends Activity {
             @Override
             public ParseQuery<Invoice> create() {
                 ParseQuery<Invoice> query = Invoice.getQuery();
-
                 query.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
                 query.orderByDescending("updatedAt");
                 query.fromPin(DownloadUtils.PIN_INVOICE);
