@@ -319,4 +319,5 @@
     <string name="blankDiscountPromotion"><![CDATA[Mức chiết khẩu phải > 0]]></string>
     <string name="blankPromotionAmount2"><![CDATA[Số lượng sản phẩm khuyến mãi phải > 0]]></string>
     <string name="streetDivideOutsideOfArea">Vui lòng tạo điểm ở trong vùng/khu vực mà bạn quản lý</string>
+    <string name="cannotCreateTempImage">Không thể tạo ảnh mới vào máy</string>
 </resources>

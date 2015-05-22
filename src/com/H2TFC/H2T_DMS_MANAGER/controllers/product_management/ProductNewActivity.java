@@ -183,16 +183,15 @@ public class ProductNewActivity extends Activity {
                             }
                         }
                     });
-                        progressDialog.dismiss();
-                        product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
-                                        .show();
-                                finish();
-                            }
-                        });
-
+                    progressDialog.dismiss();
+                    product.pinInBackground(DownloadUtils.PIN_PRODUCT, new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(ProductNewActivity.this, getString(R.string.updateProductInfomationSuccess), Toast.LENGTH_LONG)
+                                    .show();
+                            finish();
+                        }
+                    });
 
 
                 } catch (ParseException e) {
@@ -332,19 +331,7 @@ public class ProductNewActivity extends Activity {
 
     private void dispatchTakePhotoIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(ProductNewActivity.this.getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
-            }
-        }
+        startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
     }
 
 
@@ -377,15 +364,12 @@ public class ProductNewActivity extends Activity {
 
         Bitmap thumbnail;
         if (requestCode == MyMainApplication.REQUEST_TAKE_PHOTO) {
-            mImageToBeAttached = BitmapFactory.decodeFile(mImagePathToBeAttached);
-            thumbnail = ImageUtils.thumbmailFromFile(mImagePathToBeAttached,
-                        THUMBNAIL_SIZE_PX, THUMBNAIL_SIZE_PX);
-
-            // Delete the temporary image file
-            File file = new File(mImagePathToBeAttached);
-            file.delete();
-            mImagePathToBeAttached = null;
+            Bitmap bm = (Bitmap) data.getExtras().get("data");
+            mImageToBeAttached = bm;
+            thumbnail = ImageUtils.getResizedBitmap(bm,
+                    THUMBNAIL_SIZE_PX, THUMBNAIL_SIZE_PX);
             ivPhoto.setImageBitmap(thumbnail);
+            mImagePathToBeAttached = null;
             hasImage = true;
         } else if (requestCode == MyMainApplication.REQUEST_CHOOSE_PHOTO) {
             try {

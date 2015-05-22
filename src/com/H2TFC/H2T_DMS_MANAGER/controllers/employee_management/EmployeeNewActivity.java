@@ -347,16 +347,13 @@ public class EmployeeNewActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap thumbnail;
         if (requestCode == MyMainApplication.REQUEST_TAKE_PHOTO) {
-            if(resultCode == RESULT_OK) {
-                mImageToBeAttached = BitmapFactory.decodeFile(mImagePathToBeAttached);
-                thumbnail = ImageUtils.thumbmailFromFile(mImagePathToBeAttached,
+            if(resultCode == RESULT_OK && data != null) {
+                Bitmap bm = (Bitmap) data.getExtras().get("data");
+                mImageToBeAttached = bm;
+                thumbnail = ImageUtils.getResizedBitmap(bm,
                         THUMBNAIL_SIZE_PX, THUMBNAIL_SIZE_PX);
-
-                // Delete the temporary image file
-                File file = new File(mImagePathToBeAttached);
-                file.delete();
-                mImagePathToBeAttached = null;
                 ivPhoto.setImageBitmap(thumbnail);
+                mImagePathToBeAttached = null;
                 hasImage = true;
             }
         } else if (requestCode == MyMainApplication.REQUEST_CHOOSE_PHOTO) {
@@ -408,8 +405,11 @@ public class EmployeeNewActivity extends Activity {
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = "H2T_DMS_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        String root = Environment.getExternalStorageDirectory().toString();
+        File storageDir = new File(root + "/saved_images");
+        storageDir.mkdirs();
         File image = File.createTempFile(fileName, ".jpg", storageDir);
+
         mImagePathToBeAttached = image.getAbsolutePath();
         return image;
     }
@@ -424,19 +424,7 @@ public class EmployeeNewActivity extends Activity {
 
     private void dispatchTakePhotoIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(EmployeeNewActivity.this.getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException e) {
-                Log.e("EmployeeNewActivity->dispatchTakePhotoIntent()", "Cannot create a temp image file", e);
-            }
-
-            if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
-            }
-        }
+        startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
     }
 
 }
