@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,7 +50,6 @@ import static com.H2TFC.H2T_DMS_MANAGER.utils.ConnectUtils.hasConnectToInternet;
  */
 public class EmployeeNewActivity extends Activity {
     //Keep track of camera capture intent
-    final int CAMERA_CAPTURE = 1;
 
     // UI initial
     BootstrapButton btnXong, btnHuy;
@@ -159,54 +157,10 @@ public class EmployeeNewActivity extends Activity {
 
                     boolean gioi_tinh = rbNam.isChecked(); // true = nam - false = nu
 
-                    boolean error_exist = false;
-                    String error_msg = "";
-
-                    if (cmnd.trim().length() <= 0) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankCMND);
-                    }
-
-                    try {
-                        convertedDate = dateFormat.parse(tvNgaySinh.getText().toString());
-                    } catch (java.text.ParseException e) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankBirthDate);
-                    }
-
-                    if (dia_chi.trim().length() <= 0) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankAddress);
-                    }
-
-                    if (so_dien_thoai.trim().length() <= 0) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankPhoneNumber);
-                    }
-
-                    if (!hasImage) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankEmployeePhoto);
-                    }
-
-                    // Blank first name and last name
-                    if (ho_va_ten.trim().length() <= 0) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankFirstNameLastName);
-                    }
-
-                    // Blank password or mismatch password or passworn length not match
-                    if (password.trim().length() < 6 || password.trim().length() > 50 || !confirm_password.equals
-                            (password)) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorMismatchPassword);
-                    }
-
-                    // Blank username or password length of username not match
-                    if (username.trim().length() < 4 || username.trim().length() > 50) {
-                        error_exist = true;
-                        error_msg = getString(R.string.errorBlankUsername);
-                    }
+                    CheckInput checkInput = new CheckInput(username, password, confirm_password, ho_va_ten, so_dien_thoai, dia_chi, cmnd, dateFormat, convertedDate).invoke();
+                    boolean error_exist = checkInput.isError_exist();
+                    String error_msg = checkInput.getError_msg();
+                    convertedDate = checkInput.getConvertedDate();
 
 
                     // if error exist then display error message
@@ -215,91 +169,7 @@ public class EmployeeNewActivity extends Activity {
                         progressDialog.dismiss();
                         Toast.makeText(EmployeeNewActivity.this, error_msg, Toast.LENGTH_LONG).show();
                     } else {
-                        final Employee employee = new Employee();
-                        employee.setUsername(username);
-                        employee.setPassword(password);
-                        employee.setName(ho_va_ten);
-                        employee.setPhoneNumber(so_dien_thoai);
-                        employee.setGender(gioi_tinh ? getString(R.string.male) : getString(R.string.female));
-                        employee.setAddress(dia_chi);
-                        employee.setIdCard(cmnd);
-                        employee.setLock(false);
-                        employee.setDateOfBirth(convertedDate);
-
-                        // Set role name
-                        String roleName = ParseUser.getCurrentUser().get("role_name").toString();
-                        if (roleName.equals("NVQL")) {
-                            employee.setRoleName("NVKD");
-                        }
-                        if (roleName.equals("NVQL_V")) {
-                            employee.setRoleName("NVQL");
-                        }
-                        if (roleName.equals("GDKD")) {
-                            employee.setRoleName("NVQL_V");
-                        }
-
-                        // Set photo
-                        if (ivPhoto.getDrawable() != null) {
-                            // Get bytedata from bitmap
-                            Bitmap bitmap = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            byte[] bitmapdata = stream.toByteArray();
-                            // upload photo
-                            final ParseFile file = new ParseFile(username + "_photo.png", bitmapdata);
-                            try {
-                                file.save();
-                                employee.setPhoto(file);
-
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        employee.setManagerId(ParseUser.getCurrentUser().getObjectId());
-
-                        // Sign up a new user
-                        employee.signUpInBackground(new SignUpCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                // if no error exist then continue add employee
-                                // else display error message
-                                if (e == null) {
-                                    Toast.makeText(EmployeeNewActivity.this, getString(R.string.notifyAddNewEmployeeSuccess),
-                                            Toast.LENGTH_LONG).show();
-                                    employee.pinInBackground(DownloadUtils.PIN_EMPLOYEE, new SaveCallback() {
-                                        @Override
-                                        public void done(ParseException e) {
-                                            if(e == null) {
-                                                // log out sign up user
-                                                ParseUser.logOut();
-
-                                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
-                                                        (EmployeeNewActivity.this);
-                                                String username = preferences.getString("Username", "");
-                                                String password = preferences.getString("Password", "");
-                                                ParseUser.logInInBackground(username, password, new LogInCallback() {
-                                                    @Override
-                                                    public void done(ParseUser parseUser, ParseException e) {
-                                                        if (e == null) {
-                                                            //
-                                                            progressDialog.dismiss();
-
-                                                            setResult(RESULT_OK);
-                                                            finish();
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    });
-
-                                } else {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(EmployeeNewActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-
+                        SaveEmployee(progressDialog, username, password, ho_va_ten, so_dien_thoai, dia_chi, cmnd, convertedDate, gioi_tinh);
                     }
                 }
             }
@@ -311,6 +181,93 @@ public class EmployeeNewActivity extends Activity {
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
                 finish();
+            }
+        });
+    }
+
+    private void SaveEmployee(final ProgressDialog progressDialog, String username, String password, String ho_va_ten, String so_dien_thoai, String dia_chi, String cmnd, Date convertedDate, boolean gioi_tinh) {
+        final Employee employee = new Employee();
+        employee.setUsername(username);
+        employee.setPassword(password);
+        employee.setName(ho_va_ten);
+        employee.setPhoneNumber(so_dien_thoai);
+        employee.setGender(gioi_tinh ? getString(R.string.male) : getString(R.string.female));
+        employee.setAddress(dia_chi);
+        employee.setIdCard(cmnd);
+        employee.setLock(false);
+        employee.setDateOfBirth(convertedDate);
+
+        // Set role name
+        String roleName = ParseUser.getCurrentUser().get("role_name").toString();
+        if (roleName.equals("NVQL")) {
+            employee.setRoleName("NVKD");
+        }
+        if (roleName.equals("NVQL_V")) {
+            employee.setRoleName("NVQL");
+        }
+        if (roleName.equals("GDKD")) {
+            employee.setRoleName("NVQL_V");
+        }
+
+        // Set photo
+        if (ivPhoto.getDrawable() != null) {
+            // Get bytedata from bitmap
+            Bitmap bitmap = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] bitmapdata = stream.toByteArray();
+            // upload photo
+            final ParseFile file = new ParseFile(username + "_photo.png", bitmapdata);
+            try {
+                file.save();
+                employee.setPhoto(file);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        employee.setManagerId(ParseUser.getCurrentUser().getObjectId());
+
+        // Sign up a new user
+        employee.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                // if no error exist then continue add employee
+                // else display error message
+                if (e == null) {
+                    Toast.makeText(EmployeeNewActivity.this, getString(R.string.notifyAddNewEmployeeSuccess),
+                            Toast.LENGTH_LONG).show();
+                    employee.pinInBackground(DownloadUtils.PIN_EMPLOYEE, new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e == null) {
+                                // log out sign up user
+                                ParseUser.logOut();
+
+                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
+                                        (EmployeeNewActivity.this);
+                                String username = preferences.getString("Username", "");
+                                String password = preferences.getString("Password", "");
+                                ParseUser.logInInBackground(username, password, new LogInCallback() {
+                                    @Override
+                                    public void done(ParseUser parseUser, ParseException e) {
+                                        if (e == null) {
+                                            //
+                                            progressDialog.dismiss();
+
+                                            setResult(RESULT_OK);
+                                            finish();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(EmployeeNewActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -368,9 +325,9 @@ public class EmployeeNewActivity extends Activity {
                 ivPhoto.setImageBitmap(thumbnail);
                 hasImage = true;
             } catch (IOException e) {
-                Log.e("EmployeeNewActivity->OnActivityResult", "Cannot get a selected photo from the gallery.", e);
+                Log.e("OnActivityResult", "Cannot get a selected photo from the gallery.", e);
             } catch (Exception e) {
-                Log.e("EmployeeNewActivity->OnActivityResult", "Cannot get a selected photo from the gallery.", e);
+                Log.e("OnActivityResult", "Cannot get a selected photo from the gallery.", e);
             }
         }
     }
@@ -427,4 +384,93 @@ public class EmployeeNewActivity extends Activity {
         startActivityForResult(takePictureIntent, MyMainApplication.REQUEST_TAKE_PHOTO);
     }
 
+    private class CheckInput {
+        private String username;
+        private String password;
+        private String confirm_password;
+        private String ho_va_ten;
+        private String so_dien_thoai;
+        private String dia_chi;
+        private String cmnd;
+        private SimpleDateFormat dateFormat;
+        private Date convertedDate;
+        private boolean error_exist;
+        private String error_msg;
+
+        public CheckInput(String username, String password, String confirm_password, String ho_va_ten, String so_dien_thoai, String dia_chi, String cmnd, SimpleDateFormat dateFormat, Date convertedDate) {
+            this.username = username;
+            this.password = password;
+            this.confirm_password = confirm_password;
+            this.ho_va_ten = ho_va_ten;
+            this.so_dien_thoai = so_dien_thoai;
+            this.dia_chi = dia_chi;
+            this.cmnd = cmnd;
+            this.dateFormat = dateFormat;
+            this.convertedDate = convertedDate;
+        }
+
+        public Date getConvertedDate() {
+            return convertedDate;
+        }
+
+        public boolean isError_exist() {
+            return error_exist;
+        }
+
+        public String getError_msg() {
+            return error_msg;
+        }
+
+        public CheckInput invoke() {
+            error_exist = false;
+            error_msg = "";
+
+            if (cmnd.trim().length() <= 0) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankCMND);
+            }
+
+            try {
+                convertedDate = dateFormat.parse(tvNgaySinh.getText().toString());
+            } catch (java.text.ParseException e) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankBirthDate);
+            }
+
+            if (dia_chi.trim().length() <= 0) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankAddress);
+            }
+
+            if (so_dien_thoai.trim().length() <= 0) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankPhoneNumber);
+            }
+
+            if (!hasImage) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankEmployeePhoto);
+            }
+
+            // Blank first name and last name
+            if (ho_va_ten.trim().length() <= 0) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankFirstNameLastName);
+            }
+
+            // Blank password or mismatch password or passworn length not match
+            if (password.trim().length() < 6 || password.trim().length() > 10 || !confirm_password.equals
+                    (password)) {
+                error_exist = true;
+                error_msg = getString(R.string.errorMismatchPassword);
+            }
+
+            // Blank username or password length of username not match
+            if (username.trim().length() < 6 || username.trim().length() > 10) {
+                error_exist = true;
+                error_msg = getString(R.string.errorBlankUsername);
+            }
+            return this;
+        }
+    }
 }

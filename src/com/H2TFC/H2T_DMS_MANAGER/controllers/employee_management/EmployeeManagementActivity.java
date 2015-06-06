@@ -74,32 +74,7 @@ public class EmployeeManagementActivity extends Activity {
                 view.setSelected(true);
                 //lvEmployee.setItemChecked(position,true);
                 selectedItemIndex = position;
-                ParseUser selectedFromList = (ParseUser) (lvEmployee.getItemAtPosition(position));
-                ivPhoto.setParseFile(selectedFromList.getParseFile("photo"));
-                ivPhoto.loadInBackground(new GetDataCallback() {
-                    @Override
-                    public void done(byte[] bytes, ParseException e) {
-
-                    }
-                });
-                etHoVaTen.setText(selectedFromList.getString("name"));
-                etSoDienThoai.setText(selectedFromList.getString("phone_number"));
-                etDiaChi.setText(selectedFromList.getString("address"));
-                if (selectedFromList.getString("gender").equals("Nam")) {
-                    rbNam.setChecked(true);
-                    rbNu.setChecked(false);
-                } else {
-                    rbNam.setChecked(false);
-                    rbNu.setChecked(true);
-                }
-
-                if (selectedFromList.getDate("date_of_birth") != null) {
-                    String myFormat = "dd/MM/yy"; //Format for date time
-                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                    tvNgaySinh.setText(sdf.format(selectedFromList.getDate("date_of_birth")));
-                }
-
-                etCMND.setText(selectedFromList.getString("identify_card_number"));
+                GetEmployeeFromListAndShowDetail(position);
 
             }
         });
@@ -111,38 +86,17 @@ public class EmployeeManagementActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(etSearch.getText().toString().length() != 0) {
-                    ParseQueryAdapter.QueryFactory<ParseUser> factory = new ParseQueryAdapter.QueryFactory<ParseUser>() {
-                        @Override
-                        public ParseQuery<ParseUser> create() {
-                            ParseQuery<ParseUser> query1 = ParseUser.getQuery();
-                            query1.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId())
-                                    .whereEqualTo("locked",false)
-                                 .whereContains("username", etSearch.getText().toString());
-                            query1.orderByDescending("createdAt");
-                            query1.fromPin(DownloadUtils.PIN_EMPLOYEE);
-
-
-                            return query1;
-                        }
-                    };
-                    employeeListAdapter = new EmployeeListAdapter(EmployeeManagementActivity.this,factory);
-                    lvEmployee.setAdapter(employeeListAdapter);
-                    employeeListAdapter.notifyDataSetChanged();
-                    layout_employee_detail.setVisibility(View.INVISIBLE);
+                if (etSearch.getText().toString().length() != 0) {
+                    SearchEmployee(etSearch.getText().toString());
                 } else {
                     ParseQueryAdapter.QueryFactory<ParseUser> factory = new ParseQueryAdapter.QueryFactory<ParseUser>() {
                         @Override
                         public ParseQuery<ParseUser> create() {
-                            ParseQuery<ParseUser> query1 = ParseUser.getQuery();
-                            query1.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
-                            query1.whereEqualTo("locked",false);
-                            query1.orderByDescending("createdAt");
-                            query1.fromPin(DownloadUtils.PIN_EMPLOYEE);
+                            ParseQuery<ParseUser> query1 = GetEmployeeList();
                             return query1;
                         }
                     };
-                    employeeListAdapter = new EmployeeListAdapter(EmployeeManagementActivity.this,factory);
+                    employeeListAdapter = new EmployeeListAdapter(EmployeeManagementActivity.this, factory);
                     lvEmployee.setAdapter(employeeListAdapter);
                     employeeListAdapter.notifyDataSetChanged();
                     layout_employee_detail.setVisibility(View.INVISIBLE);
@@ -157,16 +111,62 @@ public class EmployeeManagementActivity extends Activity {
 
     }
 
+    private void GetEmployeeFromListAndShowDetail(int position) {
+        ParseUser selectedFromList = (ParseUser) (lvEmployee.getItemAtPosition(position));
+        ivPhoto.setParseFile(selectedFromList.getParseFile("photo"));
+        ivPhoto.loadInBackground(new GetDataCallback() {
+            @Override
+            public void done(byte[] bytes, ParseException e) {
+
+            }
+        });
+        etHoVaTen.setText(selectedFromList.getString("name"));
+        etSoDienThoai.setText(selectedFromList.getString("phone_number"));
+        etDiaChi.setText(selectedFromList.getString("address"));
+        if (selectedFromList.getString("gender").equals("Nam")) {
+            rbNam.setChecked(true);
+            rbNu.setChecked(false);
+        } else {
+            rbNam.setChecked(false);
+            rbNu.setChecked(true);
+        }
+
+        if (selectedFromList.getDate("date_of_birth") != null) {
+            String myFormat = "dd/MM/yy"; //Format for date time
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            tvNgaySinh.setText(sdf.format(selectedFromList.getDate("date_of_birth")));
+        }
+
+        etCMND.setText(selectedFromList.getString("identify_card_number"));
+    }
+
+    private void SearchEmployee(final String name) {
+        ParseQueryAdapter.QueryFactory<ParseUser> factory = new ParseQueryAdapter.QueryFactory<ParseUser>() {
+            @Override
+            public ParseQuery<ParseUser> create() {
+                ParseQuery<ParseUser> query1 = ParseUser.getQuery();
+                query1.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId())
+                        .whereEqualTo("locked",false)
+                        .whereContains("username", name);
+                query1.orderByDescending("createdAt");
+                query1.fromPin(DownloadUtils.PIN_EMPLOYEE);
+
+
+                return query1;
+            }
+        };
+        employeeListAdapter = new EmployeeListAdapter(EmployeeManagementActivity.this,factory);
+        lvEmployee.setAdapter(employeeListAdapter);
+        employeeListAdapter.notifyDataSetChanged();
+        layout_employee_detail.setVisibility(View.INVISIBLE);
+    }
+
     private void SetupListView() {
         // Query data from local data store
         ParseQueryAdapter.QueryFactory<ParseUser> factory = new ParseQueryAdapter.QueryFactory<ParseUser>() {
             @Override
             public ParseQuery<ParseUser> create() {
-                ParseQuery<ParseUser> query = ParseUser.getQuery();
-                query.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
-                query.whereEqualTo("locked",false);
-                query.orderByDescending("createdAt");
-                query.fromPin(DownloadUtils.PIN_EMPLOYEE);
+                ParseQuery<ParseUser> query = GetEmployeeList();
                 return query;
             }
         };
@@ -191,6 +191,19 @@ public class EmployeeManagementActivity extends Activity {
             }
         });
 
+        ShowEmployeeList();
+    }
+
+    private ParseQuery<ParseUser> GetEmployeeList() {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("manager_id", ParseUser.getCurrentUser().getObjectId());
+        query.whereEqualTo("locked",false);
+        query.orderByDescending("createdAt");
+        query.fromPin(DownloadUtils.PIN_EMPLOYEE);
+        return query;
+    }
+
+    private void ShowEmployeeList() {
         lvEmployee.setEmptyView(tvEmptyView);
         lvEmployee.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         lvEmployee.setAdapter(employeeListAdapter);

@@ -165,64 +165,7 @@ public class StreetDivideActivity extends Activity {
             gpsTracker.showSettingsAlert();
         }
 
-        map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            LatLng historyPos = null;
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-                boolean isInPolygon = false;
-                for(Polygon polygon : myPolygon) {
-                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
-                    for(LatLng latLng : polygon.getPoints()) {
-                        polygonList.add(latLng);
-                    }
-                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
-                        isInPolygon = true;
-                    }
-                }
-                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
-                    connectAllMarker();
-                }
-            }
 
-            @Override
-            public void onMarkerDrag(Marker marker) {
-                boolean isInPolygon = false;
-                for(Polygon polygon : myPolygon) {
-                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
-                    for(LatLng latLng : polygon.getPoints()) {
-                        polygonList.add(latLng);
-                    }
-                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
-                        isInPolygon = true;
-                    }
-                }
-                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
-                    connectAllMarker();
-                    historyPos = marker.getPosition();
-                } else {
-                    marker.setPosition(historyPos);
-                }
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                boolean isInPolygon = false;
-                for(Polygon polygon : myPolygon) {
-                    ArrayList<LatLng> polygonList =new ArrayList<LatLng>();
-                    for(LatLng latLng : polygon.getPoints()) {
-                        polygonList.add(latLng);
-                    }
-                    if (PolyUtil.containsLocation(marker.getPosition(),polygonList,true)) {
-                        isInPolygon = true;
-                    }
-                }
-                if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
-                    connectAllMarker();
-                } else {
-                    marker.setPosition(historyPos);
-                }
-            }
-        });
     }
 
     private void SetupEvent() {
@@ -446,14 +389,13 @@ public class StreetDivideActivity extends Activity {
                                     isInPolygon = true;
                                 }
                             }
-                            if(!ParseUser.getCurrentUser().getString("role_name").equals("GDKD") && isInPolygon) {
-
+                            if(isInPolygon || ParseUser.getCurrentUser().getString("role_name").equals("GDKD")) {
                                 IconGenerator iconFactory = new IconGenerator(StreetDivideActivity.this);
                                 Bitmap iconBitmap = iconFactory.makeIcon(Integer.toString(markerOptionsList.size() + 1));
 
                                 markerOptions.position(centerImagePoint);
                                 markerOptions.title(centerImagePoint.toString());
-                                markerOptions.draggable(true);
+                                markerOptions.draggable(false);
                                 markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconBitmap));
 
                                 markerOptionsList.add(map.addMarker(markerOptions));
